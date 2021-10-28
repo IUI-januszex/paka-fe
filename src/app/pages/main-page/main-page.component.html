@@ -1,0 +1,47 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container">
+        <div class="navbar-wrapper">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/logo.jpg" class="d-inline-block align-top logo" alt="">
+                Januszex
+              </a>
+
+            <button type="button" class="bttn">Send</button>
+            <button type="button" class="bttn">Prices</button>
+            <button type="button" class="bttn">Contact</button>
+            <button type="button" class="bttn on-right" (click)="open(content)">Log in</button>
+        </div>
+    </div>
+</nav>  
+  
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title text" id="modal-basic-title">Log in</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <login-page></login-page>
+     <p>Don`t have an account? </p><button type="button" class="btn btn-outline-dark" (click)="modal.close('register'); open(register)">Register here</button>
+    </div>
+  </ng-template>
+
+  <ng-template #register let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title text" id="register">Register</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <register-page></register-page>
+    </div>
+  </ng-template>
+
+<tracker></tracker>
+<size-info></size-info>
+
+<footer></footer>

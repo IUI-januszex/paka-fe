@@ -1,0 +1,73 @@
+.logo{
+    height: 8vh;
+}
+
+.navbar-brand{
+    font-size: x-large;
+}
+
+.navbar-wrapper{
+    width: 80%;
+    margin: auto;
+    height: 8vh;
+    z-index: 4;
+    justify-content: center;
+    font-size: x-large;
+
+}
+
+.main-container { 
+    position   : fixed; 
+    top        : 0; 
+    left       : 0; 
+    width      : 100%; 
+    min-height     : 100%;
+    height: auto; 
+    background : #000; 
+    opacity    : 0.6; 
+    filter     : alpha(opacity=60); 
+    z-index    : 5;
+    display    :none;
+} 
+
+.bttn{
+    width: 10%;
+    height: inherit;
+    border: none;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    transition: 0s background-color;
+}
+
+.bttn:hover{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+    transition-delay: 3s;
+}
+
+.on-left{
+    float: left;
+}
+
+.on-right{
+    float: right;
+display:block;
+}
+
+
+.fixed{
+    position: fixed;
+    transition: 0.1s linear;
+    width: 100%;
+    top: 0px;
+}
+
+.nofixed{
+    transition: 0.1s linear;
+    position: static;
+    top: -50px;
+}
+
+
+
+/* LOGIN FORM CSS */
