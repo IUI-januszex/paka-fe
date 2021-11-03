@@ -1,1 +1,24 @@
-<p>warehouse-page works!</p>
+<div class="warehouse-container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container">
+        <div class="navbar-wrapper">
+            <button type="button" class="bttn bttn-big" (click)="open(content)">Add warehouse</button>
+            <button type="button" class="bttn">Delete</button>
+            <button type="button" class="bttn on-right">Log out</button>
+        </div>
+    </div>
+</nav>  
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title text" id="add-warehouse">Add warehouse</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <new-global-warehouse></new-global-warehouse>
+     
+    </div>
+  </ng-template>
+</div>

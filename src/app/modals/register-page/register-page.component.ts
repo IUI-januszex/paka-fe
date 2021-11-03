@@ -13,6 +13,8 @@ export class RegisterPageComponent implements OnInit {
   constructor(private formBuilder:FormBuilder) {
     this.registerForm = this.formBuilder.group({
       email: formBuilder.control(''),
+      username: formBuilder.control(''),
+      phone: formBuilder.control(''),
       password: formBuilder.control('')
     })
    }

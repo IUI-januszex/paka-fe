@@ -12,7 +12,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder) {
     this.loginForm = this.formBuilder.group({
-      email: formBuilder.control(''),
+      username: formBuilder.control(''),
       password: formBuilder.control('')
     })
    }

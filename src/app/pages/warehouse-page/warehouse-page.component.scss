@@ -27,6 +27,10 @@
     transition: 0s background-color;
 }
 
+.bttn-big{
+    width: 20% !important;
+}
+
 .bttn:hover{
     background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
     transition-delay: 3s;
