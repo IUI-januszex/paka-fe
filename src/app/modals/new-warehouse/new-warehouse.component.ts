@@ -27,5 +27,5 @@ export class NewWarehouseComponent implements OnInit {
 
   onSubmit(){
 
-  }
+  } 
 }
