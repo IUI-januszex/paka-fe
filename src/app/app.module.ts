@@ -16,6 +16,7 @@ import { WarehousePageComponent } from './pages/warehouse-page/warehouse-page.co
 import { NewWarehouseComponent } from './modals/new-warehouse/new-warehouse.component';
 import { NewGlobalWarehouseComponent } from './modals/new-global-warehouse/new-global-warehouse.component';
 import { DeleteWarehouseComponent } from './modals/delete-warehouse/delete-warehouse.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { DeleteWarehouseComponent } from './modals/delete-warehouse/delete-wareh
     ReactiveFormsModule,
     FontAwesomeModule,
     NgbModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: MainPageComponent},
       {path: 'warehouse', component: WarehousePageComponent}
