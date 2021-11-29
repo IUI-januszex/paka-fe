@@ -17,6 +17,7 @@ import { NewWarehouseComponent } from './modals/new-warehouse/new-warehouse.comp
 import { NewGlobalWarehouseComponent } from './modals/new-global-warehouse/new-global-warehouse.component';
 import { DeleteWarehouseComponent } from './modals/delete-warehouse/delete-warehouse.component';
 import {HttpClientModule} from '@angular/common/http';
+import { TrackingInfoComponent } from './tracking-info/tracking-info/tracking-info.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HttpClientModule} from '@angular/common/http';
     WarehousePageComponent,
     NewWarehouseComponent,
     NewGlobalWarehouseComponent,
-    DeleteWarehouseComponent
+    DeleteWarehouseComponent,
+    TrackingInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: MainPageComponent},
-      {path: 'warehouse', component: WarehousePageComponent}
+      {path: 'warehouse', component: WarehousePageComponent},
+      {path: 'tracker-info',component: TrackingInfoComponent}
     ])
     
   ],
