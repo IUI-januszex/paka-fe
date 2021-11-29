@@ -17,7 +17,8 @@ import { NewWarehouseComponent } from './modals/new-warehouse/new-warehouse.comp
 import { NewGlobalWarehouseComponent } from './modals/new-global-warehouse/new-global-warehouse.component';
 import { DeleteWarehouseComponent } from './modals/delete-warehouse/delete-warehouse.component';
 import {HttpClientModule} from '@angular/common/http';
-import { TrackingInfoComponent } from './tracking-info/tracking-info/tracking-info.component';
+import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
+import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TrackingInfoComponent } from './tracking-info/tracking-info/tracking-in
     NewWarehouseComponent,
     NewGlobalWarehouseComponent,
     DeleteWarehouseComponent,
-    TrackingInfoComponent
+    TrackingInfoComponent,
+    LocalWarehouseComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 .tracking-container{
-    width: 80%;
+    width: 80vw;
     height: 40vh;
     position: relative;
     margin: auto;
@@ -34,9 +34,21 @@ margin: -35px 0 0 -35px;
       grid-area: logo; 
     margin-top: -75px;
     }
+
+svg{
+  width: 30vh;
+}
   
   .parcel { grid-area: parcel;
 text-align: center; }
   
-  .arrival { grid-area: arrival; }
+  .arrival { 
+  grid-area: arrival; 
+
+  width:inherit}
+
+  .bttn{
+    position:relative;
+    float:right;
+  }
   
