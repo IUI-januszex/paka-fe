@@ -19,6 +19,7 @@ import { DeleteWarehouseComponent } from './modals/delete-warehouse/delete-wareh
 import {HttpClientModule} from '@angular/common/http';
 import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
+import {NgxPaginationModule} from 'ngx-pagination'
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-wareh
     FontAwesomeModule,
     NgbModule,
     HttpClientModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       {path: '', component: MainPageComponent},
       {path: 'warehouse', component: WarehousePageComponent},
