@@ -19,7 +19,8 @@ import { DeleteWarehouseComponent } from './modals/delete-warehouse/delete-wareh
 import {HttpClientModule} from '@angular/common/http';
 import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
-import {NgxPaginationModule} from 'ngx-pagination'
+import {NgxPaginationModule} from 'ngx-pagination';
+import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {NgxPaginationModule} from 'ngx-pagination'
     NewGlobalWarehouseComponent,
     DeleteWarehouseComponent,
     TrackingInfoComponent,
-    LocalWarehouseComponent
+    LocalWarehouseComponent,
+    GlobalWarehouseComponent
   ],
   imports: [
     BrowserModule,
@@ -45,12 +47,7 @@ import {NgxPaginationModule} from 'ngx-pagination'
     NgbModule,
     HttpClientModule,
     NgxPaginationModule,
-    RouterModule.forRoot([
-      {path: '', component: MainPageComponent},
-      {path: 'warehouse', component: WarehousePageComponent},
-      {path: 'tracker-info',component: TrackingInfoComponent}
-    ])
-    
+    RouterModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

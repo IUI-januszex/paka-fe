@@ -1,9 +1,9 @@
 export interface ILocalWarehouse{
-    idGlobalWarehouse: number,
+    idWarehouse: number,
     city: string,
     street: string,
     number: number,
     postalCode: string,
     active:boolean,
-    globalWarehouseId: number
+    idGlobalWarehouse: number
   }

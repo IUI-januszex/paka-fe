@@ -10,7 +10,7 @@ export class LocalWarehouseService {
 
   constructor(private http:HttpClient) {}
 
-  getData(): Observable<any>{
-    return this.http.get<any>("localhost:8080/api/warehouse/local")
+  getData(): Observable<ILocalWarehouse[]>{
+    return this.http.get<ILocalWarehouse[]>("https://localhost:8080/api/warehouse/local")
   }
 }

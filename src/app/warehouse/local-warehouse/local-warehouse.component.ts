@@ -10,24 +10,26 @@ import { ILocalWarehouse } from 'src/app/interface/warehouse/localwarehouse';
 export class LocalWarehouseComponent implements OnInit {
   
   data: Array<ILocalWarehouse>
-  totalRecords: Number = 0
-  page:Number = 1
+  page: number = 1
   
   constructor(private localWarehouseService:LocalWarehouseService) {
       this.data = new Array<ILocalWarehouse>()
-      this.getLocalWarehouses()
-   }
-
-   getLocalWarehouses(){
-     this.localWarehouseService.getData().subscribe((data) => {
-       this.data = data.results
-       this.totalRecords = data.results.lenght
-     })
-   }
-
-  
-  ngOnInit(): void {
+    }
+    
+    getLocalWarehouses(){
+      this.localWarehouseService.getData().subscribe((data: ILocalWarehouse[]) => {        
+        console.log(data)
+        this.data = data
+        console.log(this.data);
+        
+      })
+    }
+    
+    
+    ngOnInit(): void {
+    this.getLocalWarehouses()
   }
+
 
 }
 
