@@ -1,12 +1,12 @@
 <div class="table-containter">
     <div class="content">
         <div class="d-flex justify-content-center">
-            <button class="btn btn-primary">Add </button>
+            <button class="btn btn-primary" (click)="open(add)">Add </button>
         </div>
         <table>
           <tr>
             <th>ID</th>
-            <th>GlobalID</th>
+            <th>Global ID</th>
             <th>City</th>
             <th>Street</th>
             <th>Number</th>
@@ -29,10 +29,10 @@
                   <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-                      <button ngbDropdownItem>Edit</button>
-                      <button ngbDropdownItem>{{ gl.active == true ? 'Deactive' : 'Active' }}</button>
+                      <button ngbDropdownItem (click)="open(add)" >Edit</button>
+                      <button ngbDropdownItem (click)="stateChange(gl)">{{ gl.active == true ? 'Deactive' : 'Active' }}</button>
                       <div class="dropdown-divider"></div>
-                      <button ngbDropdownItem>Delete</button>
+                      <button ngbDropdownItem (click)="open(delete); setWarehouse(gl)">Delete</button>
                     </div>
                   </div>
 
@@ -44,3 +44,29 @@
         </div>
       </div>
 </div>
+
+<ng-template #add let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text" id="add-warehouse">Add warehouse</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <new-warehouse (added)="posted($event)"></new-warehouse>
+   
+  </div>
+</ng-template>
+
+<ng-template #delete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text" id="add-warehouse">Delete warehouse</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <delete-warehouse [warehouse]="warehouse"></delete-warehouse>
+   
+  </div>
+</ng-template>

@@ -10,7 +10,7 @@ import { SizeInfoComponent } from './size-info/size-info.component';
 import { TrackerComponent } from './tracker/tracker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterPageComponent } from './modals/register-page/register-page.component';
 import { WarehousePageComponent } from './pages/warehouse-page/warehouse-page.component';
 import { NewWarehouseComponent } from './modals/new-warehouse/new-warehouse.component';
@@ -49,7 +49,7 @@ import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-wa
     NgxPaginationModule,
     RouterModule    
   ],
-  providers: [],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

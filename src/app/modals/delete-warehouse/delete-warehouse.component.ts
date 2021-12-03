@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'delete-warehouse',
@@ -8,16 +8,10 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class DeleteWarehouseComponent implements OnInit {
 
-  warehouses: any = ['local','global'];
-
-  deleteForm: FormGroup;
-
-  constructor(private formBuilder:FormBuilder) { 
-     this.deleteForm = this.formBuilder.group({
-      id: formBuilder.control(''),
-      selected: formBuilder.control('')
-    })
-
+  @Input() warehouse = '';
+  
+  constructor() { 
+ 
   }
 
   ngOnInit(): void {

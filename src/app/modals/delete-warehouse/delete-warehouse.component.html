@@ -1,23 +1,7 @@
 <div class="delete-warehouse-containter">
-    <form [formGroup]="deleteForm" (ngSubmit)="onSubmit()">
-        <div class="data">
-            <label for="id">Werehouse ID</label>
-            <input type="text" formControlName="id" id="id" class="form-control" required>
-        </div>
 
-        <div class="data">
-            <label for="selected">Type</label>
-            <div class="for-select">
-                <select formControlName="selected" class="form-select-lg" >
-                    <option *ngFor="let warehouse of warehouses" [ngValue]="warehouse">{{warehouse}}</option>
-                </select>
-            </div>
-
-
-        </div>
-  
-
+        <p>{{warehouse}}</p>
         <button class="btn btn-danger btn-lg" type="submit">Delete</button>
-    </form>
+    
 
 </div>

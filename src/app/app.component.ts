@@ -11,6 +11,7 @@ export class AppComponent {
   user = 'client';
 
   constructor(private modalService: NgbModal) {}
+  
   ngOnInit(): void {
 
   }
