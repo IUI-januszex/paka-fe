@@ -10,7 +10,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LocalWarehouseComponent implements OnInit {
   
-  warehouse: any
+  warehouse: ILocalWarehouse | null = null;
   data: Array<ILocalWarehouse>
   page: number = 1
   
@@ -20,30 +20,38 @@ export class LocalWarehouseComponent implements OnInit {
       this.data = new Array<ILocalWarehouse>()
     }
 
-  
     open(content: any) {
       this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
     }
 
-    posted(data:any){
-      if(data==true){
-      this.getLocalWarehouses()
-      this.modal.close()
-      }
+    openDelete(content: any,localWarehouse: ILocalWarehouse) {
+      this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
     }
     
     getLocalWarehouses(){
       this.localWarehouseService.getData().subscribe((data: ILocalWarehouse[]) => {        
-        console.log(data)
-        this.data = data
-        console.log(this.data);
-        
+        this.data = data        
       })
+    }
+  
+
+    deleteWarehouse(id: number){
+      console.log("powinienem usunac " + id);
+      this.localWarehouseService.deleteData(id).subscribe(()=>{
+        this.modal.close();
+        this.getLocalWarehouses();
+      }
+      );
     }
 
     stateChange(data: ILocalWarehouse){
       data.active = !data.active
       this.localWarehouseService.putData(data).subscribe()
+    }
+
+    onWarehouseAdd(localwarehouse: ILocalWarehouse){
+      this.modal.close();
+      this.getLocalWarehouses()
     }
 
     setWarehouse(warehouse: ILocalWarehouse){

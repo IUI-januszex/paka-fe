@@ -15,7 +15,6 @@ import { RegisterPageComponent } from './modals/register-page/register-page.comp
 import { WarehousePageComponent } from './pages/warehouse-page/warehouse-page.component';
 import { NewWarehouseComponent } from './modals/new-warehouse/new-warehouse.component';
 import { NewGlobalWarehouseComponent } from './modals/new-global-warehouse/new-global-warehouse.component';
-import { DeleteWarehouseComponent } from './modals/delete-warehouse/delete-warehouse.component';
 import {HttpClientModule} from '@angular/common/http';
 import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
@@ -34,7 +33,6 @@ import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-wa
     WarehousePageComponent,
     NewWarehouseComponent,
     NewGlobalWarehouseComponent,
-    DeleteWarehouseComponent,
     TrackingInfoComponent,
     LocalWarehouseComponent,
     GlobalWarehouseComponent

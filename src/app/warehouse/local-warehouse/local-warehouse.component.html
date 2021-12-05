@@ -53,7 +53,7 @@
     </button>
   </div>
   <div class="modal-body">
-   <new-warehouse (added)="posted($event)"></new-warehouse>
+   <new-warehouse (succes)="onWarehouseAdd($event)"></new-warehouse>
    
   </div>
 </ng-template>
@@ -66,7 +66,11 @@
     </button>
   </div>
   <div class="modal-body">
-   <delete-warehouse [warehouse]="warehouse"></delete-warehouse>
-   
+    <div *ngIf="warehouse">
+      <img src="assets/img/delete.gif" alt="" class="gif">
+      <p>to delete local warehouse with ID: {{warehouse.idWarehouse}}</p>
+      <button class="btn btn-danger btn-lg" (click)="deleteWarehouse(warehouse.idWarehouse)">Delete</button>
+    </div>
   </div>
 </ng-template>
+

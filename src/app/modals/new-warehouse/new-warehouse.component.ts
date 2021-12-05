@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ILocalWarehouse } from 'src/app/interface/warehouse/localwarehouse';
 import { ILocalWarehouseRequest } from 'src/app/interface/warehouse/localwarehouserequest';
 import { LocalWarehouseService } from 'src/app/services/local-warehouse.service';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'new-warehouse',
@@ -12,7 +13,9 @@ import { EventEmitter } from '@angular/core';
 })
 export class NewWarehouseComponent implements OnInit {
 
-  @Output() added = new EventEmitter<boolean>()
+  @Output()
+  succes = new EventEmitter<ILocalWarehouse>();
+
 
   warehouseForm: FormGroup;
 
@@ -33,8 +36,8 @@ export class NewWarehouseComponent implements OnInit {
   onSubmit(instance: ILocalWarehouseRequest){
     console.log(instance);
     
-    this.localhostService.postData(instance).subscribe(()=>{
-      this.added.emit(true)
-    },() => this.added.emit(false))
+    this.localhostService.postData(instance).subscribe((e)=>{
+      this.succes.emit(e);
+    })
   } 
 }
