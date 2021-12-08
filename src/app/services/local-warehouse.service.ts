@@ -22,6 +22,10 @@ export class LocalWarehouseService {
     return this.http.put<ILocalWarehouse>(this.localUrl + `/${localwarehouse.idWarehouse}`,localwarehouse)
   }
 
+  putDataEdit(localwarehouse: ILocalWarehouseRequest,id: number): Observable<ILocalWarehouse>{
+    return this.http.put<ILocalWarehouse>(this.localUrl + `/${id}`,localwarehouse)
+  }
+
   postData(localwarehouse:ILocalWarehouseRequest): Observable<ILocalWarehouse>{
     console.log(localwarehouse);
     return this.http.post<ILocalWarehouse>(this.localUrl,localwarehouse)

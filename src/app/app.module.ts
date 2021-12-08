@@ -19,7 +19,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component'
+import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component';
+import { EditWarehouseComponent } from './modals/edit-warehouse/edit-warehouse.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-wa
     NewGlobalWarehouseComponent,
     TrackingInfoComponent,
     LocalWarehouseComponent,
-    GlobalWarehouseComponent
+    GlobalWarehouseComponent,
+    EditWarehouseComponent
   ],
   imports: [
     BrowserModule,

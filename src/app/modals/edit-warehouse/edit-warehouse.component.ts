@@ -1,17 +1,15 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ILocalWarehouse } from 'src/app/interface/warehouse/localwarehouse';
 import { ILocalWarehouseRequest } from 'src/app/interface/warehouse/localwarehouserequest';
 import { LocalWarehouseService } from 'src/app/services/local-warehouse.service';
-import { EventEmitter, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'new-warehouse',
-  templateUrl: './new-warehouse.component.html',
-  styleUrls: ['./new-warehouse.component.scss']
+  selector: 'edit-warehouse',
+  templateUrl: './edit-warehouse.component.html',
+  styleUrls: ['./edit-warehouse.component.scss']
 })
-export class NewWarehouseComponent implements OnInit {
+export class EditWarehouseComponent implements OnInit {
 
   @Output()
   succes = new EventEmitter<ILocalWarehouse>();
@@ -36,10 +34,12 @@ export class NewWarehouseComponent implements OnInit {
   }
 
   onSubmit(instance: ILocalWarehouseRequest){
-    console.log(instance);
-    this.localhostService.postData(instance).subscribe((e)=>{
+    if(this.warehouseData != null){
+      console.log(this.warehouseData);
+      
+    this.localhostService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
       this.succes.emit(e);
     })
-  
+  }
   } 
 }

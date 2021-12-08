@@ -54,6 +54,11 @@ export class LocalWarehouseComponent implements OnInit {
       this.getLocalWarehouses()
     }
 
+    onWarehouseEdit(localwarehouse: ILocalWarehouse){
+      this.modal.close();
+      this.getLocalWarehouses()
+    }
+
     setWarehouse(warehouse: ILocalWarehouse){
       this.warehouse = warehouse;
     }
