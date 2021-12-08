@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LocalWarehouseService } from 'src/app/services/local-warehouse.service';
 import { ILocalWarehouse } from 'src/app/interface/warehouse/localwarehouse';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IGlobalWarehouse } from 'src/app/interface/warehouse/globalwarehouse';
+import { GlobalWarehouseService } from 'src/app/services/global-warehouse.service';
 
 @Component({
   selector: 'local-warehouse',
@@ -11,12 +13,13 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class LocalWarehouseComponent implements OnInit {
   
   warehouse: ILocalWarehouse | null = null;
+  globalWarehouse: IGlobalWarehouse | null = null;
   data: Array<ILocalWarehouse>
   page: number = 1
   
   
   constructor(private localWarehouseService:LocalWarehouseService,private modalService: NgbModal,
-    private modal: NgbActiveModal) {
+    private modal: NgbActiveModal,private globalService:GlobalWarehouseService) {
       this.data = new Array<ILocalWarehouse>()
     }
 
@@ -42,6 +45,13 @@ export class LocalWarehouseComponent implements OnInit {
         this.getLocalWarehouses();
       }
       );
+    }
+
+    setGlobalWarehouse(id: number,content: any){
+      this.globalService.getDataById(id).subscribe((data) => {
+        this.globalWarehouse = data
+        this.modal = this.modalService.open(content)
+      })
     }
 
     stateChange(data: ILocalWarehouse){

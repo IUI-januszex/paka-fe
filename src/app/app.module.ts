@@ -21,7 +21,7 @@ import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-wareh
 import {NgxPaginationModule} from 'ngx-pagination';
 import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component';
 import { EditWarehouseComponent } from './modals/edit-warehouse/edit-warehouse.component';
-import { EditGlobalWarehouseComponent } from './modals/edit-global-warehouse/edit-global-warehouse.component'
+import { EditGlobalWarehouseComponent } from './modals/edit-global-warehouse/edit-global-warehouse.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { EditGlobalWarehouseComponent } from './modals/edit-global-warehouse/edi
     GlobalWarehouseComponent,
     EditWarehouseComponent,
     EditGlobalWarehouseComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -21,7 +21,9 @@
           itemsPerPage: 10,
           currentPage: page}">
             <th>{{ll.idWarehouse}}</th>
-            <th>{{ll.idGlobalWarehouse}}</th>
+            <th>{{ll.idGlobalWarehouse}}
+            <i class="fas fa-info-circle info" (click)="setGlobalWarehouse(ll.idGlobalWarehouse,info)"></i>
+            </th>
             <th>{{ll.city}}</th>
             <th>{{ll.street}}</th>
             <th>{{ll.number}}</th>
@@ -84,6 +86,43 @@
       <img src="assets/img/delete.gif" alt="" class="gif">
       <p>to delete local warehouse with ID: {{warehouse.idWarehouse}}</p>
       <button class="btn btn-danger btn-lg" (click)="deleteWarehouse(warehouse.idWarehouse)">Delete</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #info let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text" id="add-warehouse">Global warehouse info</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="globalWarehouse">
+      <table class="tg">
+        <tbody>
+          <tr>
+            <th class="tg-0lax">ID: </th>
+            <th class="tg-0lax">{{globalWarehouse.idWarehouse}}</th>
+          </tr>
+          <tr>
+            <td class="tg-0lax">City</td>
+            <td class="tg-0lax">{{globalWarehouse.city}}</td>
+          </tr>
+          <tr>
+            <td class="tg-0lax">Street:</td>
+            <td class="tg-0lax">{{globalWarehouse.street}}</td>
+          </tr>
+          <tr>
+            <td class="tg-0lax">Number:</td>
+            <td class="tg-0lax">{{globalWarehouse.number}}</td>
+          </tr>
+          <tr>
+            <td class="tg-0lax">Postal Code: </td>
+            <td class="tg-0lax">{{globalWarehouse.postalCode}}</td>
+          </tr>
+        </tbody>
+        </table>
     </div>
   </div>
 </ng-template>

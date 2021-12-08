@@ -14,7 +14,11 @@ export class GlobalWarehouseService {
   localUrl = "https://localhost:8080/api/warehouse/global";
 
   getData(): Observable<IGlobalWarehouse[]>{
-    return this.http.get<IGlobalWarehouse[]>("https://localhost:8080/api/warehouse/global")
+    return this.http.get<IGlobalWarehouse[]>(this.localUrl)
+  }
+
+  getDataById(id: number): Observable<IGlobalWarehouse>{
+    return this.http.get<IGlobalWarehouse>(this.localUrl + `/${id}`)
   }
 
   putData(localwarehouse: IGlobalWarehouse): Observable<IGlobalWarehouse>{
