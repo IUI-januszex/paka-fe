@@ -20,7 +20,8 @@ import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component';
-import { EditWarehouseComponent } from './modals/edit-warehouse/edit-warehouse.component'
+import { EditWarehouseComponent } from './modals/edit-warehouse/edit-warehouse.component';
+import { EditGlobalWarehouseComponent } from './modals/edit-global-warehouse/edit-global-warehouse.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditWarehouseComponent } from './modals/edit-warehouse/edit-warehouse.c
     TrackingInfoComponent,
     LocalWarehouseComponent,
     GlobalWarehouseComponent,
-    EditWarehouseComponent
+    EditWarehouseComponent,
+    EditGlobalWarehouseComponent
   ],
   imports: [
     BrowserModule,

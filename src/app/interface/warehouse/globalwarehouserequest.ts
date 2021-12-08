@@ -1,5 +1,4 @@
-export interface IGlobalWarehouse{
-    idWarehouse: number,
+export interface IGlobalWarehouseRequest{
     city: string,
     street: string,
     number: number,

@@ -1,0 +1,30 @@
+.table-containter{
+    width: 80%;
+    position: relative;
+    margin: auto;
+}
+
+.gif{
+    height: 20vh;
+}
+
+.centered{
+position: absolute;
+top: 50%;
+left: 15%;
+margin: -35px 0 0 -35px;
+}
+table{
+    width: 100%;
+}
+tr:nth-child(odd) {
+    background: rgb(236, 216, 216)
+}
+
+.my-pagination {
+    color: black;
+  }
+
+.my-pagination:disabled{
+    color:black;
+}

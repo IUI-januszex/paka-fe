@@ -1,9 +1,5 @@
 <div class="warehouse-containter">
-    <form [formGroup]="globalWarehouseForm" (ngSubmit)="onSubmit()" novalidate>
-        <div class="data">
-            <label for="idLocalWarehouse">Werehouse ID</label>
-            <input type="text" formControlName="idLocalWarehouse" id="idLocalWarehouse" class="form-control" required>
-        </div>
+    <form [formGroup]="warehouseForm" (ngSubmit)="onSubmit(warehouseForm.value)" novalidate>
         <div class="data">
             <label for="city">City</label>
             <input type="text" formControlName="city" id="city" class="form-control" required>
@@ -19,10 +15,6 @@
         <div class="data">
             <label for="postalCode">Postal Code</label>
             <input type="text" formControlName="postalCode" id="postalCode" class="form-control" required>
-        </div>
-        <div class="data">
-            <label for="active">Active</label>
-            <input type="checkbox" fomControlName="active" id="active" class="form-check-input chk-box">
         </div>
         <button class="btn btn-primary btn-lg" type="submit">Add</button>
     </form>

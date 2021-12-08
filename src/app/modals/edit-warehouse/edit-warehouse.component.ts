@@ -19,7 +19,7 @@ export class EditWarehouseComponent implements OnInit {
 
   warehouseForm: FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private localhostService:LocalWarehouseService) {
+  constructor(private formBuilder:FormBuilder, private localWarehouseService:LocalWarehouseService) {
     this.warehouseForm = this.formBuilder.group({
       city: formBuilder.control(''),
       street: formBuilder.control(''),
@@ -37,7 +37,7 @@ export class EditWarehouseComponent implements OnInit {
     if(this.warehouseData != null){
       console.log(this.warehouseData);
       
-    this.localhostService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
+    this.localWarehouseService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
       this.succes.emit(e);
     })
   }

@@ -17,25 +17,25 @@
             <th>Active</th>
             <th>Operation</th>
         </tr>
-          <tr *ngFor="let gl of data | paginate: {
+          <tr *ngFor="let ll of data | paginate: {
           itemsPerPage: 10,
           currentPage: page}">
-            <th>{{gl.idWarehouse}}</th>
-            <th>{{gl.idGlobalWarehouse}}</th>
-            <th>{{gl.city}}</th>
-            <th>{{gl.street}}</th>
-            <th>{{gl.number}}</th>
-            <th>{{gl.postalCode}}</th>
-            <th>{{gl.active}}</th>
+            <th>{{ll.idWarehouse}}</th>
+            <th>{{ll.idGlobalWarehouse}}</th>
+            <th>{{ll.city}}</th>
+            <th>{{ll.street}}</th>
+            <th>{{ll.number}}</th>
+            <th>{{ll.postalCode}}</th>
+            <th>{{ll.active}}</th>
             <th>
 
                   <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-                      <button ngbDropdownItem (click)="open(edit);setWarehouse(gl)" >Edit</button>
-                      <button ngbDropdownItem (click)="stateChange(gl)">{{ gl.active == true ? 'Deactive' : 'Active' }}</button>
+                      <button ngbDropdownItem (click)="open(edit);setWarehouse(ll)" >Edit</button>
+                      <button ngbDropdownItem (click)="stateChange(ll)">{{ ll.active == true ? 'Deactive' : 'Active' }}</button>
                       <div class="dropdown-divider"></div>
-                      <button ngbDropdownItem (click)="open(delete); setWarehouse(gl)">Delete</button>
+                      <button ngbDropdownItem (click)="open(delete); setWarehouse(ll)">Delete</button>
                     </div>
                   </div>
 
