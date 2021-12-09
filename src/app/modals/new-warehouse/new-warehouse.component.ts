@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ILocalWarehouse } from 'src/app/interface/warehouse/localwarehouse';
 import { ILocalWarehouseRequest } from 'src/app/interface/warehouse/localwarehouserequest';
+import { IPostalCode } from 'src/app/interface/warehouse/postalcode';
 import { LocalWarehouseService } from 'src/app/services/local-warehouse.service';
 import { EventEmitter, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -42,4 +43,5 @@ export class NewWarehouseComponent implements OnInit {
     })
   
   } 
+
 }
