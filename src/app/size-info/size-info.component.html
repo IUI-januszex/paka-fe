@@ -1,9 +1,15 @@
 <div class="container">
     <div class="size-info-container">
         <owl-carousel-o [options]="customOptions">
-            <ng-template carouselSlide>Slide 1</ng-template>  
-            <ng-template carouselSlide>Slide 2</ng-template>  
-            <ng-template carouselSlide>Slide 3</ng-template>
+            <ng-container *ngFor="let parcel of data">
+                <ng-template carouselSlide>
+                    <div class="parceltype" (click)="foo">
+                        <i class="fas fa-box-open fa-5x"></i>
+                        <p>{{parcel.name | titlecase}}</p>
+                        <p>{{parcel.price}}$</p>
+                    </div>
+                </ng-template>
+              </ng-container>
           </owl-carousel-o>        
     </div>
 </div>

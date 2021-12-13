@@ -1,7 +1,17 @@
 .size-info-container{
     width: 80%;
-    height: 60vh;
+    height: 55vh;
     background-color: #90CCF4;
     position: relative;
     margin: auto;
+}
+
+.parceltype{
+    padding-top: 25px;
+    margin: auto;
+    min-width: 15%;
+    max-width: 25%;
+    cursor: pointer;
+    text-align: center;
+    font-size: 2em;
 }

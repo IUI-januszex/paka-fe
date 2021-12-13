@@ -14,7 +14,7 @@ export class ParcelTypeService {
   constructor(private http:HttpClient) {}
 
   getData(): Observable<IParcelType[]>{
-    this.http.get<IParcelType>()
+    return this.http.get<IParcelType[]>(this.localUrl+"/active");
   }
 
 
