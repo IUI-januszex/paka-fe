@@ -15,13 +15,16 @@ import { RegisterPageComponent } from './modals/register-page/register-page.comp
 import { WarehousePageComponent } from './pages/warehouse-page/warehouse-page.component';
 import { NewWarehouseComponent } from './modals/new-warehouse/new-warehouse.component';
 import { NewGlobalWarehouseComponent } from './modals/new-global-warehouse/new-global-warehouse.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component';
 import { EditWarehouseComponent } from './modals/edit-warehouse/edit-warehouse.component';
 import { EditGlobalWarehouseComponent } from './modals/edit-global-warehouse/edit-global-warehouse.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { JwtInterceptorServiceService } from './Auth/jwt-interceptor-service.service';
 
 @NgModule({
   declarations: [
@@ -49,9 +52,11 @@ import { EditGlobalWarehouseComponent } from './modals/edit-global-warehouse/edi
     NgbModule,
     HttpClientModule,
     NgxPaginationModule,
-    RouterModule    
+    RouterModule,
+    BrowserAnimationsModule,
+    CarouselModule
   ],
-  providers: [NgbActiveModal],
+  providers: [NgbActiveModal,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorServiceService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

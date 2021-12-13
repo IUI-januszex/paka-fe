@@ -33,7 +33,8 @@ export class LocalWarehouseComponent implements OnInit {
     
     getLocalWarehouses(){
       this.localWarehouseService.getData().subscribe((data: ILocalWarehouse[]) => {        
-        this.data = data        
+        data.sort((a,b) => a.idWarehouse - b.idWarehouse)
+        this.data = data   
       })
     }
   
@@ -49,6 +50,8 @@ export class LocalWarehouseComponent implements OnInit {
 
     setGlobalWarehouse(id: number,content: any){
       this.globalService.getDataById(id).subscribe((data) => {
+        console.log("info");
+        
         this.globalWarehouse = data
         this.modal = this.modalService.open(content)
       })
