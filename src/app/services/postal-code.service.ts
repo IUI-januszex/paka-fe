@@ -17,6 +17,10 @@ export class PostalCodeService {
     return this.http.get<IPostalCode[]>(this.localUrl)
   }
 
+  getDataById(postalCodeId:String): Observable<IPostalCode>{
+    return  this.http.get<IPostalCode>(this.localUrl + `/${postalCodeId}`)
+  }
+
   putDataEdit(postalcode: IPostalCode): Observable<IPostalCode>{
     return this.http.put<IPostalCode>(this.localUrl + `/${postalcode.idRangePostalCode}`,postalcode)
   }
@@ -26,7 +30,12 @@ export class PostalCodeService {
     return this.http.post<IPostalCode>(this.localUrl,postalcode)
   }
 
-  deleteData(id: number){
-    return this.http.delete(this.localUrl +`/${id}`)
+  getDataByLocalWarehouseId(id: number): Observable<IPostalCode[]>{
+    return this.http.get<IPostalCode[]>(this.localUrl+`/postal-code/${id}`)
+  }
+ 
+  deleteData(postalcode:IPostalCode){
+    console.log("delete postalcode:" + postalcode.idRangePostalCode);
+    return this.http.delete(this.localUrl + `/${postalcode.idRangePostalCode}`)
   }
 }

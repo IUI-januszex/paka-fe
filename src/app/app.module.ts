@@ -25,6 +25,10 @@ import { EditGlobalWarehouseComponent } from './modals/edit-global-warehouse/edi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { JwtInterceptorServiceService } from './Auth/jwt-interceptor-service.service';
+import { PostalCodeComponent } from './modals/postal-code/postal-code.component';
+import { SendParcelComponent } from './pages/send-parcel/send-parcel.component';
+import { AddressBookComponent } from './pages/address-book/address-book.component';
+import { NewAddressBookComponent } from './modals/new-address-book/new-address-book.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { JwtInterceptorServiceService } from './Auth/jwt-interceptor-service.ser
     LocalWarehouseComponent,
     GlobalWarehouseComponent,
     EditWarehouseComponent,
-    EditGlobalWarehouseComponent
+    EditGlobalWarehouseComponent,
+    PostalCodeComponent,
+    SendParcelComponent,
+    AddressBookComponent,
+    NewAddressBookComponent
     ],
   imports: [
     BrowserModule,

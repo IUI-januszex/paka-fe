@@ -36,6 +36,7 @@
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic">
                       <button ngbDropdownItem (click)="open(edit);setWarehouse(ll)" >Edit</button>
                       <button ngbDropdownItem (click)="stateChange(ll)">{{ ll.active == true ? 'Deactive' : 'Active' }}</button>
+                      <button ngbDropdownItem (click)="open(postalCode);setWarehouseId(ll.idWarehouse)">Postal Code</button>
                       <div class="dropdown-divider"></div>
                       <button ngbDropdownItem (click)="open(delete); setWarehouse(ll)">Delete</button>
                     </div>
@@ -71,6 +72,18 @@
   </div>
   <div class="modal-body" *ngIf="warehouse">
    <edit-warehouse (succes)="onWarehouseAdd($event)" [warehouseData]="warehouse"></edit-warehouse>
+  </div>
+</ng-template>
+
+<ng-template #postalCode let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text" id="add-warehouse">Postal codes:</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="warehouseId">
+   <postal-code  [warehouseId]="warehouseId"></postal-code>
   </div>
 </ng-template>
 

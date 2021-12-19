@@ -14,6 +14,7 @@ export class LocalWarehouseComponent implements OnInit {
   
   warehouse: ILocalWarehouse | null = null;
   globalWarehouse: IGlobalWarehouse | null = null;
+  warehouseId:number | null = null;
   data: Array<ILocalWarehouse>
   page: number = 1
   
@@ -74,6 +75,10 @@ export class LocalWarehouseComponent implements OnInit {
 
     setWarehouse(warehouse: ILocalWarehouse){
       this.warehouse = warehouse;
+    }
+
+    setWarehouseId(id:number){
+      this.warehouseId = id
     }
     
     
