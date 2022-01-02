@@ -1,3 +1,4 @@
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddressBookComponent } from './pages/address-book/address-book.component';
@@ -14,7 +15,9 @@ const routes: Routes = [
     {path: 'local-warehouse', component: LocalWarehouseComponent},
     {path: 'global-warehouse', component: GlobalWarehouseComponent}
   ]},
-  {path: 'tracker-info',component: TrackingInfoComponent}];
+  {path: 'tracking-info/:parcelId',component: TrackingInfoComponent},
+{path: 'registration', component: RegisterPageComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

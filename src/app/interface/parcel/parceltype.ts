@@ -3,6 +3,5 @@ export interface IParcelType{
     name : string;
     description : string;
     price: number;
-
     isActive : boolean;
 }

@@ -1,11 +1,9 @@
 <div class="container">
     <div class="tracking-containter">
-        <form class="row g-0 centered">
-            <div class="col-auto">
-              <input type="package" class="form-control" id="package-id" placeholder="Enter parcel number">
-            </div>
-            <div class="col-auto">
-              <button type="submit" class="btn btn-primary mb-3">Find</button>
+      <form class="centered" [formGroup]="parcelForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="input-group">
+              <input type="text" formControlName="parcelId" id="parcelId" class="form-control" placeholder="Enter parcel number">
+              <button type="submit" class="btn btn-primary" type="submit">Find</button>
             </div>
           </form>
     </div>

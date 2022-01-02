@@ -7,7 +7,7 @@
             </a>
 
             <!-- user buttons -->
-            <button *ngIf="this.user === 'client'" type="button" class="bttn">Track parcel</button>
+            <button *ngIf="this.user === 'client'" type="button" class="bttn" routerLink="tracking-info">Track parcel</button>
             <button *ngIf="this.user == 'client'" type="button" class="bttn">Send parcel</button>
             <button *ngIf="this.user == 'client'" type="button" class="bttn">My parcels</button>
             <button *ngIf="this.user == 'client'" type="button" class="bttn">Address book</button>
@@ -46,5 +46,4 @@
      <register-page></register-page>
     </div>
   </ng-template>
-
 <router-outlet></router-outlet>

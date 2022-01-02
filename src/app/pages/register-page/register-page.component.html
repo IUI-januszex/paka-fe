@@ -1,3 +1,19 @@
+<div class="register-container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <button type="button" class="bttn" routerLink="local-warehouse">Client registration</button>
+                <button type="button" class="bttn" routerLink="global-warehouse">Business client registration</button>
+                <button type="button" class="bttn" routerLink="global-warehouse">Courier registration</button>
+                <button type="button" class="bttn" routerLink="global-warehouse">Logistican registration</button>
+            </div>
+        </div>
+    </nav>  
+    
+    <router-outlet></router-outlet>
+
+
+
 <div class="register-containter">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="data">

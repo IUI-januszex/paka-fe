@@ -1,13 +1,13 @@
 <div class="login-containter">
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate>
     <div class="data">
         <label for="username">Username</label>
-        <input type="text" formControlName="username" id="username" class="form-control" required>
+        <input type="text" formControlName="userName" id="userName" class="form-control">
     
     </div>
     <div class="data">
         <label for="password">Password</label>
-        <input type="password" fomControlName="password" id="password" class="form-control">
+        <input type="password" formControlName="password" id="password" class="form-control">
     </div>
     <button class="btn btn-primary btn-lg" type="submit">Login</button>
 </form>

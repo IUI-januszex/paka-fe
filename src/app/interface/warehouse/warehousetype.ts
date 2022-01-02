@@ -1,0 +1,4 @@
+enum WarehouseType{
+    LOCAL,
+    GLOBAL
+}

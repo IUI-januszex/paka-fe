@@ -7,19 +7,85 @@
                   </svg>
             </div>
             <div class="parcel h1">
-                Parcel:ID
+                Parcel: {{data.id}}
             </div>
             <div class="arrival">
                 <p>
-                    Status: status
+                    Status: {{lastState.type}}
                 </p>
-                <p>
-                    Expected courier arrival: hh:mm dd:MM:yy
-                </p>
-
-                <button type="button" class="btn btn-primary bttn">Change</button>
+                
+                    <p>
+                        Expected courier arrival: {{data.estimatedDeliveryTime}}
+                    </p>
+    
+                    <button type="button" class="btn btn-primary" (click)="open(change)">Change date</button>
+            
             </div>
+        </div>
 
+        <div class="operations" *ngIf="this.user === 'client'">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                Operations:
+                <button type="button" class="btn btn-primary">Set as delivered</button>
+                <button type="button" class="btn btn-primary">Delivery attempt</button>
+                <button type="button" class="btn btn-primary" (click)="putPaid()">Set as paid</button>
+              </div>    
+        </div>
+
+        <div class="status-changes">
+            <p class="h1">Status changes</p>
+            <div *ngIf="states">
+                <table class="tg">
+                  <tbody>
+                    <tr *ngFor="let state of states">
+                      <th class="tg-0lax">Date: </th>
+                      <th class="tg-0lax">{{state.changeTime | date:'short'}}</th>
+                      <th class="tg-0lax">Type: </th>
+                      <th class="tg-0lax">{{state.type}} </th>
+                    </tr>
+                  </tbody>
+                  </table>
+              </div>
+        </div>
+
+        <div class="attempts">
+            <p class="h1">Attempts</p>
+            <div *ngIf="attempts">
+                <table class="tg">
+                  <tbody>
+                    <tr *ngFor="let attempt of attempts">
+                      <th class="tg-0lax">Date: </th>
+                      <th class="tg-0lax">{{attempt.dateTime | date:'short'}}</th>
+                    </tr>
+                  </tbody>
+                  </table>
+              </div>
         </div>
     </div>
 </div>
+
+
+<ng-template #change let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title text" id="add-warehouse">Change date</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">    
+        <div class="login-containter">
+            <form [formGroup]="changeDateForm" (ngSubmit)="onSubmitDate()" novalidate>
+                <div class="data">
+                    <label for="username">PIN</label>
+                    <input type="text" formControlName="pin" id="pin" class="form-control" required>
+            
+                </div>
+                <div class="data">
+                    <label for="password">Date</label>
+                    <input type="date" fomControlName="date" id="date" class="form-control">
+                </div>
+                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            </form>
+            </div>
+    </div>
+  </ng-template>

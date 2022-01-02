@@ -1,0 +1,71 @@
+
+.navbar-brand{
+    font-size: x-large;
+}
+
+.navbar-wrapper{
+    width: 80%;
+    margin: auto;
+    height: 8vh;
+    z-index: 4;
+    justify-content: center;
+    font-size: x-large;
+
+}
+
+.register-container{
+    margin: 0;
+}
+
+.bttn{
+    min-width: 10%;
+    font-size: 0.8em;
+    height: inherit;
+    border: none;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    transition: 0s background-color;
+}
+
+.content{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+table{
+    width: 100%;
+}
+tr:nth-child(odd) {
+    background: rgb(236, 216, 216)
+}
+
+.bttn:hover{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+    transition-delay: 3s;
+}
+
+.on-left{
+    float: left;
+}
+
+.on-right{
+    float: right;
+display:block;
+}
+
+
+.fixed{
+    position: fixed;
+    transition: 0.1s linear;
+    width: 100%;
+    top: 0px;
+}
+
+.nofixed{
+    transition: 0.1s linear;
+    position: static;
+    top: -50px;
+}
