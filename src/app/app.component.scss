@@ -16,6 +16,10 @@
 
 }
 
+.dropdown-item{
+    z-index: 50;
+}
+
 .bttn{
     /*width: 10%;*/
     height: inherit;
@@ -33,6 +37,7 @@
 
 .on-left{
     float: left;
+    z-index: 50;
 }
 
 .on-right{

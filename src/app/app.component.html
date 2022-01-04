@@ -11,7 +11,19 @@
             <button *ngIf="this.user == 'client'" type="button" class="bttn">Send parcel</button>
             <button *ngIf="this.user == 'client'" type="button" class="bttn">My parcels</button>
             <button *ngIf="this.user == 'client'" type="button" class="bttn">Address book</button>
-            <button *ngIf="this.user == 'client'" type="button" class="bttn on-right" (click)="open(content)">Log in</button>
+            <button *ngIf="!isLoggedIn" type="button" class="bttn on-right" (click)="open(content)">Log in</button>
+            <div class="on-right" *ngIf="isLoggedIn">
+              <div ngbDropdown>
+                <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>
+                  <i class="far fa-user fa-2x"></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                  <button ngbDropdownItem (click)="logout()" >Log out</button>
+                </div>
+              </div>
+              <p>{{userName}}</p>
+            </div>
+           
 
             <button *ngIf="this.user =='a'" type="button" class="bttn">Track parcel</button>
             <button *ngIf="this.user =='a'" type="button" class="bttn">Send parcel</button>
@@ -31,19 +43,8 @@
     </div>
     <div class="modal-body">
      <login-page></login-page>
-     <p>Don`t have an account? </p><button type="button" class="btn btn-outline-dark" (click)="modal.close('content'); open(register)">Register here</button>
+     <p>Don`t have an account? </p><button type="button" class="btn btn-outline-dark" (click)="modal.close('content')" routerLink="registration">Register here</button>
     </div>
   </ng-template>
 
-  <ng-template #register let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title text" id="register">Register</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-     <register-page></register-page>
-    </div>
-  </ng-template>
 <router-outlet></router-outlet>

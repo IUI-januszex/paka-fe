@@ -1,3 +1,5 @@
+import { IErrorResponse } from './../interface/errorresponse';
+import { IParcelDetail } from './../interface/parcel/parceldetail';
 import { IParcelPayRequest } from './../interface/parcel/parcelpayrequest';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { IParcelState } from './../interface/parcel/parcelstate';
@@ -8,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IParcelAttempt } from '../interface/parcel/parcelattempt';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BooleanLiteral } from 'typescript';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'tracking-info',
@@ -18,12 +22,15 @@ export class TrackingInfoComponent implements OnInit {
 
   changeDateForm: FormGroup
 
-  data!: IParcelBrief
+  data!: any
   states!: IParcelState[]
   lastState!: IParcelState
   attempts!: IParcelAttempt[]
   parcelId:string
   user: string;
+
+  showChangeDate: boolean = false;
+
   constructor(private formBuilder:FormBuilder, private userService: UserService,private parcelService: ParcelService, private route: ActivatedRoute,private modalService: NgbModal, private modal: NgbActiveModal) { 
     this.user = userService.getCurrentUser();
     this.parcelId = this.route.snapshot.params.parcelId
@@ -34,8 +41,13 @@ export class TrackingInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData(this.parcelId)
-    this.getState(this.parcelId)
+    this.getData(this.parcelId);
+    this.getState(this.parcelId);
+    this.userService.isClient().subscribe((result)=>{
+      this.showChangeDate = result;
+    }, (error: any) =>{
+      this.showChangeDate = error.status==403;
+    })
   }
 
   onSubmitDate(){
@@ -44,10 +56,28 @@ export class TrackingInfoComponent implements OnInit {
   }
 
   getData(parcelId:string){
-    this.parcelService.getDataById(parcelId).subscribe(data =>{
-      this.data = data      
-      console.log(this.data);
-    })
+    this.userService.isEmployee().subscribe(result =>{
+      if(result){
+        this.parcelService.getDataDetailById(parcelId).subscribe((data: IParcelDetail) => {
+          this.data = data;          
+        });
+      }
+      else{
+        this.parcelService.getDataById(parcelId).subscribe(data => {
+          this.data = data;
+        });
+      }
+    }, (error: any) => {
+      if(error.status==403){
+        this.parcelService.getDataById(parcelId).subscribe(data => {
+          this.data = data;
+        }, error =>{
+          alert(error.error.message);
+        });
+      }
+    });
+
+   //zamiast mapa integera observera i w ngifa zrobic podstawowe dla nie zalogowanego
   }
 
   getState(parcelId:string){

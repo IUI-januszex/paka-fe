@@ -1,4 +1,4 @@
-enum WarehouseType{
+export enum WarehouseType{
     LOCAL,
     GLOBAL
 }

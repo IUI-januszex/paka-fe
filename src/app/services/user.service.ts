@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { IRegisterLogistician } from './../interface/user/reguisterlogistician';
 import { IRegisterCourier } from './../interface/user/registercourier';
 import { IRegisterBusinessClientRequest } from './../interface/user/registerbusinessclientrequest';
@@ -16,57 +17,98 @@ export class UserService {
 
   localUrl = "https://localhost:8080/api/user/"
 
-  currentUser!: IUser
+  currentUser: IUser = {id: '1', userName: 'anonymus', email: 'anonymus@anonymus.com',isActive: 'true', userType: 2137}
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient) {
+    this.getUser().subscribe((result: IUser)=>{
+      this.currentUser = result
+    })
+
+    console.log(" obecny uzytkownik " + this.currentUser);
+  }
 
   loginUser(userLoginRequest: IUserLoginRequest){
     this.http.post(this.localUrl+"login",userLoginRequest).subscribe(() =>{
-      this.getUser()
-      console.log(this.currentUser);
-
-    }, (error: IErrorResponse) =>{
-      alert(error.message)
+     }, (error:any) =>{
+       console.log(error);
+       
+      alert(error.error.message)
     })
     
   }
 
+  logOut(){
+   this.http.post(this.localUrl + "logout",null).subscribe(()=>{
+     console.log("logout");
+     
+   });
+  }
+
   registerClient(clientRequest: IRegisterClientRequest){
-    this.http.post(this.localUrl + "/register/client",clientRequest).subscribe(()=>{},
+    this.http.post(this.localUrl + "register/client",clientRequest).subscribe(()=>{},
     (error: IErrorResponse) => {
       alert(error.message)
     })
   }
 
   registerBusinessClient(businessClientRequest: IRegisterBusinessClientRequest){
-    this.http.post(this.localUrl + "/register/business-client",businessClientRequest).subscribe(()=>{},
+    this.http.post(this.localUrl + "register/business-client",businessClientRequest).subscribe(()=>{},
     (error: IErrorResponse) => {
       alert(error.message)
     })
   }
 
   registerCourier(courierRequest: IRegisterCourier){
-    this.http.post(this.localUrl + "/register/courier",courierRequest).subscribe(()=>{},
+    this.http.post(this.localUrl + "register/courier",courierRequest).subscribe(()=>{},
     (error: IErrorResponse) => {
       alert(error.message)
     })
   }
 
-  registerlogistician(logisticianRequest: IRegisterLogistician){
-    this.http.post(this.localUrl + "/register/logistician",logisticianRequest).subscribe(()=>{},
+  registerLogistician(logisticianRequest: IRegisterLogistician){
+    this.http.post(this.localUrl + "register/logistician",logisticianRequest).subscribe(()=>{},
     (error: IErrorResponse) => {
       alert(error.message)
     })
   }
 
-  getUser(){
-  this.http.get<IUser>(this.localUrl + "me").subscribe((data:IUser) =>{
-    console.log("from service")
-    console.log(data);
-    
-    this.currentUser = data
-   })
+  getUser(): Observable<IUser>{
+  return this.http.get<IUser>(this.localUrl + "me")
   }
+
+  isAdmin(): Observable<boolean>{
+    return this.getUser().pipe(map(user => user && user.userType == 0));
+  }
+
+  isCourier(): Observable<boolean>{
+    return this.getUser().pipe(map(user => user && user.userType == 1));
+  }
+
+  isLogistician(): Observable<boolean>{
+    return this.getUser().pipe(map(user => user && user.userType == 2));
+  }
+
+  isEmployee(): Observable<boolean>{
+    return this.getUser().pipe(map(user => user && user.userType == 1 || user.userType == 2));
+  }
+
+  isClientIndividual(): Observable<boolean>{
+    return this.getUser().pipe(map(user => user && user.userType == 3));
+  }
+
+  isClient(): Observable<boolean>{
+    return this.getUser().pipe(map(user => user && user.userType == 3 || user.userType == 4));
+  }
+
+  isClientBusiness(): Observable<boolean>{
+    return this.getUser().pipe(map(user => user && user.userType == 4));
+  }
+
+  isAny(): Observable<boolean>{
+    return this.getUser().pipe(map(user=> user && user.userType !=-1));
+  }
+
+
 
   getCurrentUser():string{
     return "client";

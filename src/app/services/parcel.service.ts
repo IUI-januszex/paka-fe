@@ -1,3 +1,4 @@
+import { IParcelDetail } from './../interface/parcel/parceldetail';
 import { IParcelPayRequest } from './../interface/parcel/parcelpayrequest';
 import { IParcelMoveDateRequest } from './../interface/parcel/parcelmovedaterequest';
 import { IParcelBrief } from './../interface/parcel/parcelbrief';
@@ -19,6 +20,11 @@ export class ParcelService {
   getDataById(parcelId:string): Observable<IParcelBrief>{
     return this.http.get<IParcelBrief>(this.localUrl+"/"+parcelId);
   }
+
+  getDataDetailById(parcelId:string): Observable<IParcelDetail>{
+    return this.http.get<IParcelDetail>(this.localUrl+"/"+parcelId + "/detail");
+  }
+
 
   getStateById(parcelId:string): Observable<IParcelState[]>{
     return this.http.get<IParcelState[]>(this.localUrl+"/"+parcelId+"/states");

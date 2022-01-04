@@ -22,6 +22,8 @@ export class LoginPageComponent implements OnInit {
    public onSubmit(userRequest: IUserLoginRequest){
      console.log(userRequest);
     this.userService.loginUser(userRequest)
+    window.location.reload();
+
    }
 
   ngOnInit(): void {

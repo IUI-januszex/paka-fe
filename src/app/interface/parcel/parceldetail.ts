@@ -1,7 +1,8 @@
 import { IAddres } from "../address";
 import { IOperation } from "./operation";
+import { ParcelStateType } from "./parcelstatetype";
 
-export interface ParcelDetail{
+export interface IParcelDetail{
     id: number,
     senderInfo: string,
     receiverInfo: string,

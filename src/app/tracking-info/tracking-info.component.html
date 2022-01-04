@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="data">
     <div class="tracking-container">
         <div class="package">
             <div class="logo">
@@ -18,7 +18,7 @@
                         Expected courier arrival: {{data.estimatedDeliveryTime}}
                     </p>
     
-                    <button type="button" class="btn btn-primary" (click)="open(change)">Change date</button>
+                    <button type="button" class="btn btn-primary" (click)="open(change)" *ngIf="showChangeDate">Change date</button>
             
             </div>
         </div>

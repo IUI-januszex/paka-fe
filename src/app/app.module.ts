@@ -29,6 +29,10 @@ import { PostalCodeComponent } from './modals/postal-code/postal-code.component'
 import { SendParcelComponent } from './pages/send-parcel/send-parcel.component';
 import { AddressBookComponent } from './pages/address-book/address-book.component';
 import { NewAddressBookComponent } from './modals/new-address-book/new-address-book.component';
+import { ClientRegistrationComponent } from './registration/client-registration/client-registration.component';
+import { BusinessClientRegistrationComponent } from './registration/business-client-registration/business-client-registration.component';
+import { LogisticianRegistrationComponent } from './registration/logistician-registration/logistician-registration.component';
+import { CourierRegistrationComponent } from './registration/courier-registration/courier-registration.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { NewAddressBookComponent } from './modals/new-address-book/new-address-b
     PostalCodeComponent,
     SendParcelComponent,
     AddressBookComponent,
-    NewAddressBookComponent
+    NewAddressBookComponent,
+    ClientRegistrationComponent,
+    BusinessClientRegistrationComponent,
+    LogisticianRegistrationComponent,
+    CourierRegistrationComponent
     ],
   imports: [
     BrowserModule,

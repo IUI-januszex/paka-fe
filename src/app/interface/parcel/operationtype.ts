@@ -1,4 +1,4 @@
-enum OperationType{
+export enum OperationType{
     ASSIGN_TO_COURIER,
     DELIVER_TO_CLIENT,
     DELIVER_TO_WAREHOUSE,
