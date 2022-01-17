@@ -1,0 +1,161 @@
+<div class="table-containter">
+    <form [formGroup]="sendParcelForm" (ngSubmit)="onSubmit(sendParcelForm.value)"  novalidate>
+ 
+
+
+
+<div class="parcel-form">
+ 
+    <div>
+    <label for="parcelType">Type</label>
+    <select class="form-control" formControlName="parcelType">
+        <option value="" disabled> Select parcel type </option>
+        <option *ngFor="let parcelType of activeParcelTypes" [ngValue]="parcelType.id">{{parcelType.name}} {{parcelType.price}}$</option>
+    </select>
+    </div>
+    <div class="address-book">
+        <i class="fas fa-address-book" (click)="sender(getReciver)"></i>
+    </div>
+    <p class="h2">Receiver</p>
+
+            <div formGroupName="deliveryAddress">
+
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="city">city</label>
+                        <input type="text" formControlName="city" id="city" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.city.errors && ctls.city.errors.required">city required</div>
+                    </div> 
+                    <div class="form-group col">
+                        <label for="street">street</label>
+                        <input type="text" formControlName="street" id="street" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.street.errors && ctls.street.errors.required">street required</div>
+                    </div>   
+                </div>
+                
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="postalCode">postalCode</label>
+                        <input type="text" formControlName="postalCode" id="postalCode" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.postalCode.errors && ctls.postalCode.errors.required">NIP required</div>
+                        </div>  
+                    <div class="form-group col">
+                            <label for="buildingNumber">buildingNumber</label>
+                            <input type="text" formControlName="buildingNumber" id="buildingNumber" class="form-control">
+                            <div class="text-danger" *ngIf="submitted && ctls.buildingNumber.errors && ctls.buildingNumber.errors.required">buildingNumber required</div>
+                        </div>                           
+                        <div class="form-group col">
+                            <label for="flatNumber">flatNumber</label>
+                            <input type="text" formControlName="flatNumber" id="flatNumber" class="form-control">
+                            <div class="text-danger" *ngIf="submitted && ctls.flatNumber.errors && ctls.flatNumber.errors.required">flatNumber required</div>
+                    </div>
+                </div>
+ 
+                    
+            </div>
+
+            <div class="form-group">
+                <label for="receiverDetails">receiverDetails</label>
+                <input type="text" formControlName="receiverDetails" id="receiverDetails" class="form-control">
+                <div class="text-danger" *ngIf="submitted && ctls.receiverDetails.errors && ctls.receiverDetails.errors.required">receiverDetails required</div>
+            </div>
+            <div class="form-group">
+                <label for="receiverEmailAddres">receiverEmailAddres</label>
+                <input type="text" formControlName="receiverEmailAddres" id="receiverEmailAddres" class="form-control">
+                <div class="text-danger" *ngIf="submitted && ctls.receiverEmailAddres.errors && ctls.receiverEmailAddres.errors.required">receiverEmailAddres required</div>
+    
+            </div>
+            <div class="form-group">
+                <label for="receiverPhoneNumber">receiverPhoneNumber </label>
+                <input type="text" formControlName="receiverPhoneNumber" id="receiverPhoneNumber" class="form-control">
+                <div class="text-danger" *ngIf="submitted && ctls.receiverPhoneNumber.errors && ctls.receiverPhoneNumber.errors.required">receiverPhoneNumber required</div>
+            </div>
+
+            <div class="address-book">
+                <i class="fas fa-address-book" (click)="sender(getSender)"></i>
+            </div>
+            <p class="h2">Sender</p>
+
+            <div formGroupName="senderAddress">
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="city">city</label>
+                        <input type="text" formControlName="city" id="city" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.city.errors && ctls.city.errors.required">city required</div>
+                    </div> 
+                    <div class="form-group col">
+                        <label for="street">street</label>
+                        <input type="text" formControlName="street" id="street" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.street.errors && ctls.street.errors.required">street required</div>
+                    </div>   
+                </div>
+
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="postalCode">postalCode</label>
+                        <input type="text" formControlName="postalCode" id="postalCode" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.postalCode.errors && ctls.postalCode.errors.required">NIP required</div>
+                        </div>  
+                    <div class="form-group col">
+                        <label for="buildingNumber">buildingNumber</label>
+                        <input type="text" formControlName="buildingNumber" id="buildingNumber" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.buildingNumber.errors && ctls.buildingNumber.errors.required">buildingNumber required</div>
+                    </div>                           
+                    <div class="form-group col">
+                        <label for="flatNumber">flatNumber</label>
+                        <input type="text" formControlName="flatNumber" id="flatNumber" class="form-control">
+                        <div class="text-danger" *ngIf="submitted && ctls.flatNumber.errors && ctls.flatNumber.errors.required">flatNumber required</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="senderDetails">senderDetails</label>
+                <input type="text" formControlName="senderDetails" id="senderDetails" class="form-control">
+                <div class="text-danger" *ngIf="submitted && ctls.senderDetails.errors && ctls.senderDetails.errors.required">receiverDetails required</div>
+            </div>
+            <div class="form-group">
+                <label for="senderEmailAddress">senderEmailAddres</label>
+                <input type="text" formControlName="senderEmailAddress" id="senderEmailAddress" class="form-control">
+                <div class="text-danger" *ngIf="submitted && ctls.senderEmailAddress.errors && ctls.senderEmailAddress.errors.required">receiverEmailAddress required</div>
+            </div>
+            <div class="form-group">
+                <label for="senderPhoneNumber">senderPhoneNumber </label>
+                <input type="text" formControlName="senderPhoneNumber" id="senderPhoneNumber" class="form-control">
+                <div class="text-danger" *ngIf="submitted && ctls.senderPhoneNumber.errors && ctls.senderPhoneNumber.errors.required">senderPhoneNumber required</div>
+            </div>
+            <div class="form-group">
+                <label for="price">price </label>
+                <input type="text" formControlName="price" id="price" class="form-control">
+                <div class="text-danger" *ngIf="submitted && ctls.price.errors && ctls.price.errors.required">price required</div>
+            </div>
+
+            <button class="btn btn-primary btn-lg" type="submit">Add</button>
+</div>
+</form>
+</div>
+
+
+<ng-template #getSender let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title text" id="add-address-book">Get data for sender</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <get-address-book (succes)="onAddressBookGetSender($event)"></get-address-book>
+    </div>
+  </ng-template>
+
+  <ng-template #getReciver let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title text" id="add-address-book">Get data for reciever</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <get-address-book (succes)="onAddressBookGetReciver($event)"></get-address-book>
+    </div>
+  </ng-template>

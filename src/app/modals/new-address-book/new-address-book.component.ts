@@ -1,5 +1,7 @@
+import { AddresBookService } from './../../services/addres-book.service';
+import { IAddressBookRequest } from './../../interface/address-book/addressbookrequest';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'new-address-book',
@@ -8,21 +10,50 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class NewAddressBookComponent implements OnInit {
 
-  addressBook:  FormGroup;
+  addressBookForm:  FormGroup;
 
-  constructor(private formBuilder:FormBuilder) {
-    this.addressBook = this.formBuilder.group({
-      email: formBuilder.control(''),
-      city: formBuilder.control(''),
-      street: formBuilder.control(''),
-      postalCode: formBuilder.control(''),
-      buildingNumber: formBuilder.control(''),
-      flatNoumer: formBuilder.control(''),
-      phoneNumber: formBuilder.control('')
+  @Output()
+  succes = new EventEmitter<IAddressBookRequest>();
+
+  @Input()
+  addressBookData?: IAddressBookRequest | null;
+
+  submitted: boolean = false;
+
+  constructor(private formBuilder:FormBuilder, private addressBookService: AddresBookService) {
+    this.addressBookForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      city: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      postalCode: ['', [Validators.required, Validators.pattern("^([0-9]{2})-([0-9]{3})")]],
+      buildingNumber: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      flatNumber: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      personalities: ['', [Validators.required]],
+      addressName: ['', [Validators.required]]
     })
    }
 
+   get ctls() {
+    return this.addressBookForm.controls;
+  }
+
   ngOnInit(): void {
+  }
+
+  onSubmit(addresBook: IAddressBookRequest){
+    this.submitted = true;
+    console.log(addresBook);
+    if(!this.addressBookForm.valid){
+      return;
+    }else{
+      console.log(addresBook);
+        this.addressBookService.postData(addresBook).subscribe((e)=>{
+          this.succes.emit(e);
+        },error =>{
+          alert(error.error.message);
+        });
+    }
+
   }
 
 }

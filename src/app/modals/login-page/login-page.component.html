@@ -3,11 +3,14 @@
     <div class="data">
         <label for="username">Username</label>
         <input type="text" formControlName="userName" id="userName" class="form-control">
-    
+        <div class="text-danger" *ngIf="submitted && ctls.userName.errors && ctls.userName.errors.required">Login required</div>
+
     </div>
     <div class="data">
         <label for="password">Password</label>
         <input type="password" formControlName="password" id="password" class="form-control">
+        <div class="text-danger" *ngIf="submitted && ctls.password.errors && ctls.password.errors.required">Password required</div>
+
     </div>
     <button class="btn btn-primary btn-lg" type="submit">Login</button>
 </form>

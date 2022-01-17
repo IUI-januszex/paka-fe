@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'paka-fe';
   user = 'client';
 
+  userType: string = '';
   isLoggedIn: boolean = false;
   userName: string = '';
 
@@ -21,6 +22,10 @@ export class AppComponent {
       this.isLoggedIn = result;
     })
 
+    this.userService.getUserType().subscribe(result=>{
+      this.userType = result;
+    })
+    
     this.userService.getUser().subscribe(result =>{
       this.userName = result.userName
     })
@@ -32,9 +37,16 @@ export class AppComponent {
   }
 
   logout(){
-    this.userService.logOut();
-    window.location.reload();
+    this.userService.logOut().subscribe(()=>{
+      this.router.navigate([""]);
+      window.location.reload();
+    },error =>{
+     alert(error.error.message)
+   });
+
   }
+
+
 
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});    

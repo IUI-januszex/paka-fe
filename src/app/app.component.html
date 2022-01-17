@@ -1,34 +1,55 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
-        <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#">
-                <img src="assets/img/logo.jpg" class="d-inline-block align-top logo" alt="">
-                Januszex
+        <div class="navbar-wrapper d-flex">
+
+          <div class="d-flex justify-content-start">
+            <a class="navbar-brand " href="#">
+              <img src="assets/img/logo.jpg " class="d-inline-block align-top logo" alt="">
+              Januszex
             </a>
 
-            <!-- user buttons -->
-            <button *ngIf="this.user === 'client'" type="button" class="bttn" routerLink="tracking-info">Track parcel</button>
-            <button *ngIf="this.user == 'client'" type="button" class="bttn">Send parcel</button>
-            <button *ngIf="this.user == 'client'" type="button" class="bttn">My parcels</button>
-            <button *ngIf="this.user == 'client'" type="button" class="bttn">Address book</button>
-            <button *ngIf="!isLoggedIn" type="button" class="bttn on-right" (click)="open(content)">Log in</button>
-            <div class="on-right" *ngIf="isLoggedIn">
-              <div ngbDropdown>
-                <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>
-                  <i class="far fa-user fa-2x"></i>
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-                  <button ngbDropdownItem (click)="logout()" >Log out</button>
-                </div>
+              <div class="admin buttons d-flex align-items-center " *ngIf="this.userType == 'admin'" >
+                <button type="button" class="bttn "  routerLink="">Users</button>
+                <button type="button" class="bttn"  routerLink="warehouse">Warehouse</button>
+                <button type="button" class="bttn "  routerLink="parcel-type">Parcel types</button>
+                <button type="button" class="bttn "  routerLink="registration">Register</button>
               </div>
-              <p>{{userName}}</p>
-            </div>
+  
+              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 'client' || this.userType == 'business'">
+                <button  type="button" class="bttn " routerLink="send-parcel">Send parcel</button>
+                <button  type="button" class="bttn " routerLink="my-parcels">My parcels</button>
+                <button  type="button" class="bttn " routerLink="address-book">Address book</button>
+              </div>
+  
+              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 'courier'">
+                <button  type="button" class="bttn" routerLink="assigned-parcels">Asigned parcels</button>
+              </div>
+              
+              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 'logist'">
+                <button  type="button" class="bttn ">Warehouse parcels</button>
+                <button  type="button" class="bttn " routerLink="logistician-assigned-parcels">Asigned parcels</button>
+                <button  type="button" class="bttn">Parcels to return</button>
+              </div>
            
+          </div>
+            
+            <div class="d-flex justify-content-end flex-grow-1">
+              <button *ngIf="!isLoggedIn" type="button" class="bttn d-flex align-items-center on-right" (click)="open(content)">Log in</button>
 
-            <button *ngIf="this.user =='a'" type="button" class="bttn">Track parcel</button>
-            <button *ngIf="this.user =='a'" type="button" class="bttn">Send parcel</button>
-            <button *ngIf="this.user =='a'" type="button" class="bttn">My parcels</button>
-            <button *ngIf="this.user =='a'" type="button" class="bttn">Address book</button>
+              <div class="on-right " *ngIf="isLoggedIn">
+                <div ngbDropdown>
+                  <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>
+                    <i class="far fa-user fa-2x"></i>
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                    <button ngbDropdownItem (click)="logout()" >Log out</button>
+                  </div>
+                </div>
+                <p>{{userName}}</p>
+              </div>
+
+            </div>
+
 
         </div>
     </div>

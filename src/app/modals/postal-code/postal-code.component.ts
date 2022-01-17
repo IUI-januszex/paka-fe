@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IPostalCode } from 'src/app/interface/warehouse/postalcode';
 import { PostalCodeService } from 'src/app/services/postal-code.service';
@@ -18,19 +18,27 @@ export class PostalCodeComponent implements OnInit {
 
   postalCodeForm: FormGroup
 
+  submitted: boolean =false;
+
   constructor(private postalCodeService:PostalCodeService,private modalService: NgbModal,
     private modal: NgbActiveModal, private formBuilder: FormBuilder) { 
       this.data = new Array<IPostalCode>()      
       this.postalCodeForm = this.formBuilder.group({
-        idRangePostalCode: formBuilder.control(''),
-        idLocalWarehouse: formBuilder.control('')
+        idRangePostalCode: ['',Validators.required],
+        idLocalWarehouse: ['']
       })
+    }
+
+    get ctls() {
+      return this.postalCodeForm.controls;
     }
   
     getPostalCodes(){      
       if(this.warehouseId)
       this.postalCodeService.getDataByLocalWarehouseId(this.warehouseId).subscribe((data: IPostalCode[]) => {
         this.data = data
+      },error =>{
+        alert(error.error.message)
       })
     }
 
@@ -46,6 +54,10 @@ export class PostalCodeComponent implements OnInit {
     }
 
     onSubmit(postalCode: IPostalCode){      
+      this.submitted = true;
+      if (!this.postalCodeForm.valid) {
+        return;
+      }else{
       if(this.warehouseId)
       postalCode.idLocalWarehouse = this.warehouseId
 
@@ -61,6 +73,7 @@ export class PostalCodeComponent implements OnInit {
     
       })
     }
+  }
 
   ngOnInit(): void {
     this.getPostalCodes()

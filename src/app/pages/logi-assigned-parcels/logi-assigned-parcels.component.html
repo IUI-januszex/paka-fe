@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <div class="navbar-wrapper">
+      <button type="button" class="bttn" (click)="changeSite(true)" 
+      [ngStyle]="{'background-image':isAtWarehouse === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Warehouse</button>
+      <button type="button" class="bttn" (click)="changeSite(false)" 
+      [ngStyle]="{'background-image':isAtWarehouse === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Assigned</button>
+</div>
+</nav>  
+<div class="container">
+    <div *ngIf="isAtWarehouse" >
+        <table>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Source address</th>
+              <th>Destination address</th>
+              <th>Expected pick up date</th>
+              <th>Operation</th>
+          </tr>
+            <tr *ngFor="let parcel of warehouseParcels | paginate: {
+            itemsPerPage: 10,
+            currentPage: warehousePage,
+            id: 'warehouseParcel'}">
+              <th>{{parcel.id}}</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                        <button ngbDropdownItem >Edit</button>
+                        <button ngbDropdownItem ></button>
+                        <button ngbDropdownItem >Postal Code</button>
+                        <div class="dropdown-divider"></div>
+                        <button ngbDropdownItem >Delete</button>
+                      </div>
+                    </div>
+              </th>
+            </tr>
+          </table>
+           <div class="d-flex justify-content-center">
+              <pagination-controls class="my-pagination" (pageChange) ="warehousePage = $event" id="warehouseParcel"></pagination-controls>
+          </div>
+    </div>
+    <div *ngIf="!isAtWarehouse" >
+        <table>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Source address</th>
+              <th>Destination address</th>
+              <th>Expected pick up date</th>
+              <th>Operation</th>
+          </tr>
+            <tr *ngFor="let parcel of courierParcels | paginate: {
+            itemsPerPage: 10,
+            currentPage: courierPage,
+            id: 'courierParcel'}">
+            <th>{{parcel.id}}</th>
+            <th>{{parcel.type.name}}</th>
+              <th>{{parcel.sourceAddress.city}} {{parcel.sourceAddress.street}} {{parcel.sourceAddress.buildingNumber}}</th>
+              <th>{{parcel.destinationAddress.city}} {{parcel.destinationAddress.street}} {{parcel.destinationAddress.buildingNumber}}</th>
+              <th>{{parcel.expectedCourierArrivalDate}}</th>
+              <th>
+                    <div ngbDropdown class="d-inline-block">
+                        <div ngbDropdown class="d-inline-block">
+                            <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                              <button ngbDropdownItem *ngFor="let operation of parcel.operations" >{{nameOperation(operation.operationType)}}</button>
+                            </div>
+                          </div>
+                    </div>
+              </th>
+            </tr> 
+          </table>
+           <div class="d-flex justify-content-center">
+              <pagination-controls class="my-pagination" (pageChange) ="courierPage = $event" id="courierParcel"></pagination-controls>
+          </div>
+    </div>
+</div>
+
+<ng-template #setCourier let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text" id="add-warehouse">Add warehouse</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  <select (change)="updateCourierId($event)">
+    <option *ngFor="let courier of courierList">{{courier.id}} {{courier.name}} {{courier.surname}}</option>
+  </select>
+  </div>
+</ng-template>

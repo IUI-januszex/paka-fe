@@ -4,6 +4,9 @@
 
 .navbar-brand{
     font-size: x-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-wrapper{
@@ -11,13 +14,20 @@
     margin: auto;
     height: 8vh;
     z-index: 4;
-    justify-content: center;
     font-size: x-large;
 
 }
 
 .dropdown-item{
     z-index: 50;
+}
+
+.buttons{
+    height: inherit;
+}
+
+.menu-btn{
+    height: inherit;
 }
 
 .bttn{
@@ -38,9 +48,11 @@
 .on-left{
     float: left;
     z-index: 50;
+    clear: both;
 }
 
 .on-right{
+
     float: right;
 display:block;
 }

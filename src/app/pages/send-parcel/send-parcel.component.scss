@@ -1,55 +1,58 @@
-.logo{
-    height: 8vh;
-}
-
-.navbar-brand{
-    font-size: x-large;
-}
-
-.navbar-wrapper{
+.table-containter{
     width: 80%;
+    position: relative;
     margin: auto;
-    height: 8vh;
-    z-index: 4;
-    justify-content: center;
-    font-size: x-large;
-
 }
 
-.bttn{
-    width: 10%;
-    height: inherit;
-    border: none;
-    background-color: transparent;
-    justify-content: center;
-    align-items: center;
-    transition: 0s background-color;
+.address-book{
+    font-size: 4em;
+    float:right;
 }
 
-.bttn:hover{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
-    transition-delay: 3s;
+.gif{
+    height: 20vh;
 }
 
-.on-left{
-    float: left;
+.centered{
+position: absolute;
+top: 50%;
+left: 15%;
+margin: -35px 0 0 -35px;
+}
+.parcel-form{
+    width: 50%;
+}
+tr:nth-child(odd) {
+    background: rgb(236, 216, 216)
 }
 
-.on-right{
-    float: right;
-display:block;
+.my-pagination {
+    color: black;
+  }
+
+.my-pagination:disabled{
+    color:black;
+}
+
+.info{
+    padding-left: 10px;
 }
 
 
-.fixed{
-    position: fixed;
-    transition: 0.1s linear;
-    width: 100%;
-    top: 0px;
+.tracked-parcels{
+    padding-top: 10%;
 }
 
-.nofixed{
-    transition: 0.1s linear;
-    position: static;
-    top: -50px;
+.parcel{
+    font-size: 2em;
+    margin-top: 10px;
+    width:fit-content;
+}
+
+.btn{
+    margin-left: 15px;
+}
+
+.parcel:nth-child(even){
+    background: rgb(236, 216, 216)
 }

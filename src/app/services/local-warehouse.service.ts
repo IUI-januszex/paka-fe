@@ -27,7 +27,6 @@ export class LocalWarehouseService {
   }
 
   postData(localwarehouse:ILocalWarehouseRequest): Observable<ILocalWarehouse>{
-    console.log(localwarehouse);
     return this.http.post<ILocalWarehouse>(this.localUrl,localwarehouse)
   }
 

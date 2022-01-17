@@ -1,6 +1,6 @@
 import { IRegisterCourier } from './../../interface/user/registercourier';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,23 +12,34 @@ export class CourierRegistrationComponent implements OnInit {
 
   registrationForm: FormGroup
 
+  submitted: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private userService:UserService) {
     this.registrationForm = this.formBuilder.group({
-      userName: formBuilder.control(''),
-      password: formBuilder.control(''),
-      name: formBuilder.control(''),
-      surname: formBuilder.control(''),
-      email: formBuilder.control(''),
-      phoneNumber: formBuilder.control(''),
-      salary: formBuilder.control(''),
-      warehouseId: formBuilder.control(''),
-      warehouseType: formBuilder.control('')
+      userName: ['',Validators.required],
+      password: ['',Validators.required],
+      name: ['',Validators.required],
+      surname: ['',Validators.required],
+      email: ['',Validators.required,Validators.email],
+      phoneNumber: ['',Validators.required],
+      salary: ['',Validators.required, Validators.pattern("^[0-9]*$")],
+      warehouseId: ['',Validators.required, Validators.pattern("^[0-9]*$")],
+      warehouseType: ['',Validators.required]
     })
    }
 
    onSubmit(registerRequest: IRegisterCourier){
+    this.submitted = true;
+    if(!this.registrationForm.valid){
+      return
+    }else{
     this.userService.registerCourier(registerRequest)
    }
+  }
+
+   get ctls() {
+    return this.registrationForm.controls;
+  }
 
   ngOnInit(): void {
   }

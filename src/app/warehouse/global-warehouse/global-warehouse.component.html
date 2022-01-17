@@ -13,7 +13,7 @@
             <th>Street</th>
             <th>Number</th>
             <th>Postal Code</th>
-            <th>Active</th>
+            <th>Is active</th>
             <th>Operation</th>
         </tr>
           <tr *ngFor="let ll of data | paginate: {
@@ -31,7 +31,7 @@
                     <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic">
                       <button ngbDropdownItem (click)="open(edit);setWarehouse(ll)" >Edit</button>
-                      <button ngbDropdownItem (click)="stateChange(ll)">{{ ll.active == true ? 'Deactive' : 'Active' }}</button>
+                      <button ngbDropdownItem (click)="stateChange(ll)">{{ ll.active == true ? 'Deactivate' : 'Activate' }}</button>
                       <div class="dropdown-divider"></div>
                       <button ngbDropdownItem (click)="open(delete); setWarehouse(ll)">Delete</button>
                     </div>
@@ -60,13 +60,13 @@
 
 <ng-template #edit let-modal>
   <div class="modal-header">
-    <h4 class="modal-title text" id="add-warehouse">Add warehouse</h4>
+    <h4 class="modal-title text" id="Edit-warehouse">Edit warehouse</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body" *ngIf="warehouse">
-   <edit-global-warehouse (succes)="onWarehouseAdd($event)" [warehouseData]="warehouse"></edit-global-warehouse>
+   <edit-global-warehouse (succes)="onWarehouseEdit($event)" [warehouseData]="warehouse"></edit-global-warehouse>
   </div>
 </ng-template>
 

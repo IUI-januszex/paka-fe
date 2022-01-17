@@ -20,15 +20,17 @@ export class NewWarehouseComponent implements OnInit {
   @Input()
   warehouseData?: ILocalWarehouse | null;
 
+  submitted: boolean = false;
+
   warehouseForm: FormGroup;
 
   constructor(private formBuilder:FormBuilder, private localhostService:LocalWarehouseService) {
     this.warehouseForm = this.formBuilder.group({
-      city: formBuilder.control(''),
-      street: formBuilder.control(''),
-      number: formBuilder.control(''),
-      postalCode: formBuilder.control(''),
-      idGlobalWarehouse: formBuilder.control(''),
+      city: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      number: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      postalCode: ['', [Validators.required, Validators.pattern("^([0-9]{2})-([0-9]{3})")]],
+      idGlobalWarehouse: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       active: [false]
     })
    }
@@ -37,11 +39,19 @@ export class NewWarehouseComponent implements OnInit {
   }
 
   onSubmit(instance: ILocalWarehouseRequest){
+    this.submitted = true;
+    if (!this.warehouseForm.valid) {
+      return;
+    }else{
     console.log(instance);
     this.localhostService.postData(instance).subscribe((e)=>{
       this.succes.emit(e);
+    },error =>{
+      alert(error.error.message)
     })
-  
+    }
   } 
-
+  get ctls() {
+    return this.warehouseForm.controls;
+  }
 }

@@ -1,5 +1,7 @@
+import { ParcelStateType } from "./parcelstatetype";
+
 export interface IParcelState{
-    type: string,
+    type: ParcelStateType,
     changeTime: Date,
     warehouseId: number,
     warehouseType: string,

@@ -1,3 +1,10 @@
+import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi-assigned-parcels.component';
+import { AssignedParcelsComponent } from './pages/assigned-parcels/assigned-parcels.component';
+import { SendParcelComponent } from './pages/send-parcel/send-parcel.component';
+import { UsersComponent } from './pages/users/users.component';
+import { MyParcelsComponent } from './pages/my-parcels/my-parcels.component';
+import { NewParcelTypeComponent } from './modals/new-parcel-type/new-parcel-type.component';
+import { ParcelTypeComponent } from './pages/parcel-type/parcel-type.component';
 import { AdminGuard } from './Auth/AdminGuard';
 import { LogisticianRegistrationComponent } from './registration/logistician-registration/logistician-registration.component';
 import { CourierRegistrationComponent } from './registration/courier-registration/courier-registration.component';
@@ -15,7 +22,12 @@ import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-wareh
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
+  {path: 'parcel-type', component: ParcelTypeComponent},
   {path: 'address-book', component: AddressBookComponent},
+  {path: 'my-parcels', component:MyParcelsComponent},
+  {path: 'assigned-parcels', component: AssignedParcelsComponent},
+  {path: 'logistician-assigned-parcels',component: LogiAssignedParcelsComponent},
+  {path: 'send-parcel', component:SendParcelComponent},
   {path: 'warehouse', component: WarehousePageComponent, children:[
     {path: 'local-warehouse', component: LocalWarehouseComponent},
     {path: 'global-warehouse', component: GlobalWarehouseComponent}
@@ -25,7 +37,8 @@ const routes: Routes = [
   {path:'client-registration', component: ClientRegistrationComponent},
   {path:'business-client-registration', component: BusinessClientRegistrationComponent},
   {path:'courier-registration', component: CourierRegistrationComponent},
-  {path:'logistician-registration', component:LogisticianRegistrationComponent}
+  {path:'logistician-registration', component:LogisticianRegistrationComponent},
+  {path:'users',component:UsersComponent}
 ]}
 ];
 

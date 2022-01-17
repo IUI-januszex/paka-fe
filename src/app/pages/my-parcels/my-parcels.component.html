@@ -1,0 +1,52 @@
+<div class="table-containter">
+    <div class="content">
+
+
+
+
+        <div class="tracked-parcels">
+            <div>    
+                <form [formGroup]="parcelForm " class="form-inline" (ngSubmit)="observeParcel(parcelForm.value.parcelId)" novalidate>
+                    <div class="input-group w-50">
+                      <input type="text" formControlName="parcelId" id="parcelId" class="form-control" placeholder="Enter parcel number to observe">
+                      <button type="submit" class="btn btn-primary" type="submit">Track</button>
+                    </div>
+                </form>
+            </div>
+            <p class="h2">Tracked parcels</p>
+            <div class="parcel" *ngFor="let parcel of observedParcels | paginate: {
+                itemsPerPage: 2,
+                currentPage: pageTracked,
+                id: 'tracked'}">
+                <i class="fas fa-box fa-lg"></i>
+            {{parcel.id}} {{parcel.estimatedDeliveryTime}} {{ getStatus(parcel.currentState)}} 
+            <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Detail </button>
+            <button class="btn btn-primary" (click)="deleteObserveParcel(parcel.id)">Remove </button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <pagination-controls class="my-pagination" (pageChange) ="pageTracked = $event" id="tracked"></pagination-controls>
+            </div>
+        </div>
+
+
+        
+     
+        <div class="tracked-parcels">
+            <p class="h2">Sended parcels</p>
+            <div class="parcel" *ngFor="let parcel of sendedParcels | paginate: {
+                itemsPerPage: 2,
+                currentPage: pageSend,
+                id: 'send'}">
+                <i class="fas fa-box fa-lg"></i>
+                {{parcel.id}} {{parcel.estimatedDeliveryTime}} {{ getStatus(parcel.currentState)}}  
+                <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Detail </button>
+            <button class="btn btn-primary">Cancel</button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <pagination-controls class="my-pagination" (pageChange) ="pageSend = $event" id="send"></pagination-controls>
+            </div>
+        </div>
+ 
+      </div>
+</div>
+

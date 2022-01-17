@@ -3,38 +3,56 @@
         <div class="data">
             <label for="userName">User Name</label>
             <input type="text" formControlName="userName" id="userName" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.userName.errors && ctls.userName.errors.required">Username required</div>
+
         </div>
         <div class="data">
             <label for="password">Password</label>
             <input type="password" formControlName="password" id="password" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.password.errors && ctls.password.errors.required">Password required</div>
+
         </div>
         <div class="data">
             <label for="name">Name</label>
             <input type="text" formControlName="name" id="name" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.name.errors && ctls.name.errors.required">Name required</div>
+
         </div>
         <div class="data">
             <label for="surname">Surname</label>
             <input type="text" formControlName="surname" id="surname" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.surname.errors && ctls.surname.errors.required">Surname required</div>
+
         </div>
         <div class="data">
             <label for="email">E-mail</label>
             <input type="text" formControlName="email" id="email" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.email.errors && ctls.email.errors.required">Email required</div>
+            <div class="text-danger" *ngIf="submitted && ctls.email.errors && ctls.email.errors.email">Email invalid</div>
         </div>
         <div class="data">
             <label for="phoneNumber">Phone Number</label>
             <input type="text" formControlName="phoneNumber" id="phoneNumber" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.phoneNumber.errors && ctls.phoneNumber.errors.required">Phone number required</div>
+
         </div>
         <div class="data">
             <label for="phoneNumber">Salary</label>
             <input type="text" formControlName="salary" id="salary" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.salary.errors && ctls.salary.errors.required">Salary required</div>
+            <div class="text-danger" *ngIf="submitted && ctls.salary.errors && ctls.salary.errors.pattern">Invalid number </div>
         </div>
         <div class="data">
             <label for="phoneNumber">WarehouseId</label>
             <input type="text" formControlName="warehouseId" id="warehouseId" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.warehouseId.errors && ctls.warehouseId.errors.required">Warehouse ID required</div>
+            <div class="text-danger" *ngIf="submitted && ctls.warehouseId.errors && ctls.warehouseId.errors.pattern">Invalid number </div>
         </div>
         <div class="data">
             <label for="warehouseType">WarehouseType</label>
             <input type="text" formControlName="warehouseType" id="warehouseType" class="form-control">
+            <div class="text-danger" *ngIf="submitted && ctls.warehouseType.errors && ctls.warehouseType.errors.required">Warehouse type required</div>
+
         </div>
         <button class="btn btn-primary btn-lg" type="submit">Add</button>
     </form>

@@ -1,0 +1,32 @@
+<div class="table-containter">
+    <div class="content">
+        <div class="d-flex justify-content-center">
+          <pagination-controls class="my-pagination" (pageChange) ="page = $event"></pagination-controls>
+      </div>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Is active</th>
+            <th>E-mail</th>
+            <th>Username</th>
+            <th>User type</th>
+            <th>Operation</th>
+        </tr>
+          <tr *ngFor="let user of data | paginate: {
+          itemsPerPage: 10,
+          currentPage: page}">
+          <th>{{user.id}}</th>
+          <th>{{user.isActive}}</th>
+          <th>{{user.email}}</th>
+          <th>{{user.userName}}</th>
+          <th>{{getUserType(user.userType)}}</th>
+          <th>
+                    <button class="btn btn-secondary"  (click)="stateChange(user)">{{ user.isActive == true ? 'Deactivate' : 'Activate' }}</button>
+          </th>
+          </tr> 
+        </table>
+         <div class="d-flex justify-content-center">
+            <pagination-controls class="my-pagination" (pageChange) ="page = $event"></pagination-controls>
+        </div>
+      </div>
+</div>

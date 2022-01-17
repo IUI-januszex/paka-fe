@@ -22,7 +22,6 @@ export class TrackerComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.parcelForm.value);
     this.router.navigate(['/tracking-info',this.parcelForm.value.parcelId])
   }
 

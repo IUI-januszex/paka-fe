@@ -1,0 +1,24 @@
+<div class="table-containter">
+    <div class="content">
+        <div class="card" style="width: 18rem;" *ngFor="let ad of data | paginate: {
+            itemsPerPage: 2,
+            currentPage: page}">
+          <div class="card-body">
+            <h5 class="card-title">{{ad.personalities}}</h5>
+            <p class="card-text">
+              {{ad.email}}
+            </p>
+            <p class="card-text">
+             ul.{{ad.street}}
+            </p>
+            <p class="card-text">
+              {{ad.postalCode}} {{ad.city}}
+            </p>
+            <button type="button" class="btn btn-primary" (click)="onSubmit(ad)" >Use</button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <pagination-controls class="my-pagination" (pageChange) ="page = $event"></pagination-controls>
+        </div>
+      </div>
+</div>

@@ -2,7 +2,7 @@ import { IRegisterBusinessClientRequest } from './../../interface/user/registerb
 import { IRegisterLogistician } from './../../interface/user/reguisterlogistician';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 
 @Component({
@@ -14,20 +14,31 @@ export class BusinessClientRegistrationComponent implements OnInit {
 
   registrationForm: FormGroup
 
+  submitted: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private userService:UserService) {
     this.registrationForm = this.formBuilder.group({
-      userName: formBuilder.control(''),
-      password: formBuilder.control(''),
-      nip: formBuilder.control(''),
-      companyName: formBuilder.control(''),
-      email: formBuilder.control(''),
-      phoneNumber: formBuilder.control('')
+      userName:  ['',Validators.required],
+      password:  ['',Validators.required, Validators.pattern("^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}")],
+      nip:  ['',Validators.required],
+      companyName:  ['',Validators.required],
+      email:  ['',Validators.required, Validators.email],
+      phoneNumber:  ['',Validators.required]
     })
    }
 
    onSubmit(registerRequest: IRegisterBusinessClientRequest){
+    this.submitted = true;
+    if(!this.registrationForm.valid){
+      return
+    }else{
     this.userService.registerBusinessClient(registerRequest)
+    }
    }
+
+   get ctls() {
+    return this.registrationForm.controls;
+  }
 
   ngOnInit(): void {
   }

@@ -25,28 +25,33 @@ export class GlobalWarehouseComponent implements OnInit {
     }
 
     openDelete(content: any,globalWarehouse: IGlobalWarehouse) {
-      this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+      this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     }
     
     getGlobalWarehouses(){
       this.globalWarehouseService.getData().subscribe((data: IGlobalWarehouse[]) => {        
         this.data = data        
-      })
+      },error =>{
+        alert(error.error.message)
+      });
     }
   
 
     deleteWarehouse(id: number){
-      console.log("powinienem usunac " + id);
       this.globalWarehouseService.deleteData(id).subscribe(()=>{
         this.modal.close();
         this.getGlobalWarehouses();
-      }
-      );
+      },error =>{
+        alert(error.error.message)
+      });
     }
 
     stateChange(data: IGlobalWarehouse){
       data.active = !data.active
-      this.globalWarehouseService.putData(data).subscribe()
+      this.globalWarehouseService.putData(data).subscribe(()=>{},
+      error =>{
+        alert(error.error.message)
+      })
     }
 
     onWarehouseAdd(globalwarehouse: IGlobalWarehouse){

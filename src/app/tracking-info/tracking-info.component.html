@@ -11,7 +11,7 @@
             </div>
             <div class="arrival">
                 <p>
-                    Status: {{lastState.type}}
+                    Status: {{getParcelState(lastState)}}
                 </p>
                 
                     <p>
@@ -21,15 +21,6 @@
                     <button type="button" class="btn btn-primary" (click)="open(change)" *ngIf="showChangeDate">Change date</button>
             
             </div>
-        </div>
-
-        <div class="operations" *ngIf="this.user === 'client'">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                Operations:
-                <button type="button" class="btn btn-primary">Set as delivered</button>
-                <button type="button" class="btn btn-primary">Delivery attempt</button>
-                <button type="button" class="btn btn-primary" (click)="putPaid()">Set as paid</button>
-              </div>    
         </div>
 
         <div class="status-changes">
@@ -74,15 +65,15 @@
     </div>
     <div class="modal-body">    
         <div class="login-containter">
-            <form [formGroup]="changeDateForm" (ngSubmit)="onSubmitDate()" novalidate>
+            <form [formGroup]="changeDateForm" (ngSubmit)="onSubmitDate(changeDateForm.value)" novalidate>
                 <div class="data">
-                    <label for="username">PIN</label>
+                    <label for="pin">PIN</label>
                     <input type="text" formControlName="pin" id="pin" class="form-control" required>
             
                 </div>
                 <div class="data">
-                    <label for="password">Date</label>
-                    <input type="date" fomControlName="date" id="date" class="form-control">
+                    <label for="newDate">Date</label>
+                    <input type="date" formControlName="newDate" id="newDate" class="form-control">
                 </div>
                 <button class="btn btn-primary btn-lg" type="submit">Submit</button>
             </form>

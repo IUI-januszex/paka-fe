@@ -4,4 +4,5 @@ export interface IParcelType{
     description : string;
     price: number;
     isActive : boolean;
+    parcelCount: number;
 }

@@ -36,6 +36,8 @@ export class LocalWarehouseComponent implements OnInit {
       this.localWarehouseService.getData().subscribe((data: ILocalWarehouse[]) => {        
         data.sort((a,b) => a.idWarehouse - b.idWarehouse)
         this.data = data   
+      },error =>{
+        alert(error.error.message)
       })
     }
   
@@ -45,6 +47,8 @@ export class LocalWarehouseComponent implements OnInit {
       this.localWarehouseService.deleteData(id).subscribe(()=>{
         this.modal.close();
         this.getLocalWarehouses();
+      },error =>{
+        alert(error.error.message)
       }
       );
     }
@@ -55,12 +59,16 @@ export class LocalWarehouseComponent implements OnInit {
         
         this.globalWarehouse = data
         this.modal = this.modalService.open(content)
+      },error =>{
+        alert(error.error.message)
       })
     }
 
     stateChange(data: ILocalWarehouse){
       data.active = !data.active
-      this.localWarehouseService.putData(data).subscribe()
+      this.localWarehouseService.putData(data).subscribe(()=>{},error =>{
+        alert(error.error.message)
+      })
     }
 
     onWarehouseAdd(localwarehouse: ILocalWarehouse){

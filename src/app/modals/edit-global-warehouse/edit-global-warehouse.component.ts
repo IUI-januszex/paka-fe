@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IGlobalWarehouse } from 'src/app/interface/warehouse/globalwarehouse';
 import { IGlobalWarehouseRequest } from 'src/app/interface/warehouse/globalwarehouserequest';
 import { GlobalWarehouseService } from 'src/app/services/global-warehouse.service';
@@ -20,12 +20,14 @@ export class EditGlobalWarehouseComponent implements OnInit {
 
   warehouseForm: FormGroup;
 
+  submitted: boolean = false;
+
   constructor(private formBuilder:FormBuilder, private globalWarehouseService:GlobalWarehouseService) {
     this.warehouseForm = this.formBuilder.group({
-      city: formBuilder.control(''),
-      street: formBuilder.control(''),
-      number: formBuilder.control(''),
-      postalCode: formBuilder.control(''),
+      city: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      number: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      postalCode: ['', [Validators.required, Validators.pattern("^([0-9]{2})-([0-9]{3})")]],
       active: [false]
     })
    }
@@ -34,13 +36,22 @@ export class EditGlobalWarehouseComponent implements OnInit {
   }
 
   onSubmit(instance: IGlobalWarehouseRequest){
-    if(this.warehouseData != null){
-      console.log(this.warehouseData);
-      
+    this.submitted = true;
+    if (!this.warehouseForm.valid) {
+      return;
+    }else{
+    if(this.warehouseData != null){      
     this.globalWarehouseService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
       this.succes.emit(e);
+    },error =>{
+      alert(error.error.message)
     })
   }
+  }
   } 
+
+  get ctls() {
+    return this.warehouseForm.controls;
+  }
 
 }

@@ -9,6 +9,7 @@ import { IPostalCode } from '../interface/warehouse/postalcode';
 export class PostalCodeService {
 
   localUrl = "https://localhost:8080/api/warehouse/postal-rage";
+  postalRageUrl = "https://localhost:8080/api/warehouse/local/";
 
 
   constructor(private http:HttpClient) {}
@@ -31,7 +32,7 @@ export class PostalCodeService {
   }
 
   getDataByLocalWarehouseId(id: number): Observable<IPostalCode[]>{
-    return this.http.get<IPostalCode[]>(this.localUrl+`/postal-code/${id}`)
+    return this.http.get<IPostalCode[]>(this.postalRageUrl+`${id}/postal-code`)
   }
  
   deleteData(postalcode:IPostalCode){

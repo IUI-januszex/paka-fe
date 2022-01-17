@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ILocalWarehouse } from 'src/app/interface/warehouse/localwarehouse';
 import { ILocalWarehouseRequest } from 'src/app/interface/warehouse/localwarehouserequest';
 import { LocalWarehouseService } from 'src/app/services/local-warehouse.service';
@@ -19,13 +19,15 @@ export class EditWarehouseComponent implements OnInit {
 
   warehouseForm: FormGroup;
 
+  submitted: boolean = false;
+
   constructor(private formBuilder:FormBuilder, private localWarehouseService:LocalWarehouseService) {
     this.warehouseForm = this.formBuilder.group({
-      city: formBuilder.control(''),
-      street: formBuilder.control(''),
-      number: formBuilder.control(''),
-      postalCode: formBuilder.control(''),
-      idGlobalWarehouse: formBuilder.control(''),
+      city: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      number: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      postalCode: ['', [Validators.required, Validators.pattern("^([0-9]{2})-([0-9]{3})")]],
+      idGlobalWarehouse: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       active: [false]
     })
    }
@@ -34,12 +36,23 @@ export class EditWarehouseComponent implements OnInit {
   }
 
   onSubmit(instance: ILocalWarehouseRequest){
+    this.submitted = true;
+    if(!this.warehouseForm.valid) {
+      return;
+    }else{
     if(this.warehouseData != null){
       console.log(this.warehouseData);
       
     this.localWarehouseService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
       this.succes.emit(e);
+    },error =>{
+      alert(error.error.message)
     })
   }
   } 
+}
+
+get ctls() {
+  return this.warehouseForm.controls;
+}
 }

@@ -23,6 +23,8 @@ export class SizeInfoComponent implements OnInit {
   getPareclType(){
     this.parcelTypeService.getData().subscribe((data: IParcelType[])=>{
       this.data = data;
+    },error =>{
+      alert(error.error.message)
     })
   }
 

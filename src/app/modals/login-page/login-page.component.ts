@@ -12,21 +12,31 @@ export class LoginPageComponent implements OnInit {
   
   loginForm: FormGroup;
 
+  submitted: boolean = false;
+
+
   constructor(private formBuilder:FormBuilder, private userService:UserService) {
     this.loginForm = this.formBuilder.group({
-      userName: formBuilder.control(''),
-      password: formBuilder.control('')
+      userName: ['',Validators.required],
+      password: ['',Validators.required]
     })
    }
 
    public onSubmit(userRequest: IUserLoginRequest){
-     console.log(userRequest);
+     this.submitted = true;
+     if(!this.loginForm.valid){
+       return
+     }else{
     this.userService.loginUser(userRequest)
     window.location.reload();
-
+     }
    }
 
   ngOnInit(): void {
+  }
+
+  get ctls() {
+    return this.loginForm.controls;
   }
 
 }

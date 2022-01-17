@@ -33,6 +33,15 @@ import { ClientRegistrationComponent } from './registration/client-registration/
 import { BusinessClientRegistrationComponent } from './registration/business-client-registration/business-client-registration.component';
 import { LogisticianRegistrationComponent } from './registration/logistician-registration/logistician-registration.component';
 import { CourierRegistrationComponent } from './registration/courier-registration/courier-registration.component';
+import { ParcelTypeComponent } from './pages/parcel-type/parcel-type.component';
+import { NewParcelTypeComponent } from './modals/new-parcel-type/new-parcel-type.component';
+import { EditParcelTypeComponent } from './modals/edit-parcel-type/edit-parcel-type.component';
+import { GetAddressBookComponent } from './modals/get-address-book/get-address-book.component';
+import { MyParcelsComponent } from './pages/my-parcels/my-parcels.component';
+import { UsersComponent } from './pages/users/users.component';
+import { AssignedParcelsComponent } from './pages/assigned-parcels/assigned-parcels.component';
+import { OperationButtonComponent } from './pages/operation-button/operation-button.component';
+import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi-assigned-parcels.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +67,16 @@ import { CourierRegistrationComponent } from './registration/courier-registratio
     ClientRegistrationComponent,
     BusinessClientRegistrationComponent,
     LogisticianRegistrationComponent,
-    CourierRegistrationComponent
+    CourierRegistrationComponent,
+    ParcelTypeComponent,
+    NewParcelTypeComponent,
+    EditParcelTypeComponent,
+    GetAddressBookComponent,
+    MyParcelsComponent,
+    UsersComponent,
+    AssignedParcelsComponent,
+    OperationButtonComponent,
+    LogiAssignedParcelsComponent
     ],
   imports: [
     BrowserModule,

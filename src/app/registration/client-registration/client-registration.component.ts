@@ -1,6 +1,6 @@
 import { IRegisterClientRequest } from './../../interface/user/registerclientrequest';
 import { UserService } from './../../services/user.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,22 +11,31 @@ import { Component, OnInit } from '@angular/core';
 export class ClientRegistrationComponent implements OnInit {
 
   registrationForm: FormGroup
+  submitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userService:UserService) {
     this.registrationForm = this.formBuilder.group({
-      userName: formBuilder.control(''),
-      password: formBuilder.control(''),
-      name: formBuilder.control(''),
-      surname: formBuilder.control(''),
-      email: formBuilder.control(''),
-      phoneNumber: formBuilder.control('')
+      userName: ['',Validators.required],
+      password: ['',Validators.required],
+      name: ['',Validators.required],
+      surname: ['',Validators.required],
+      email: ['',Validators.required],
+      phoneNumber: ['',Validators.required]
     })
    }
 
    onSubmit(registerRequest: IRegisterClientRequest){
+    this.submitted = true;
+    if(!this.registrationForm.valid){
+      return
+    }else{
     this.userService.registerClient(registerRequest)
    }
+  }
 
+   get ctls() {
+    return this.registrationForm.controls;
+  }
   ngOnInit(): void {
   }
 

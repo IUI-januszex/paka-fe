@@ -3,22 +3,31 @@
         <div class="data">
             <label for="city">City</label>
             <input type="text" formControlName="city" id="city" class="form-control" required>
+            <div class="text-danger" *ngIf="submitted && ctls.city.errors && ctls.city.errors.required">Enter city name</div>
         </div>
         <div class="data">
             <label for="street">Street</label>
-            <input type="text" formControlName="street" id="street" class="form-control" required>
+            <input type="text" formControlName="street" id="street" class="form-control" required >
+            <div class="text-danger" *ngIf="submitted && ctls.street.errors && ctls.street.errors.required">Enter street name</div>
         </div>
         <div class="data">
             <label for="number">Number</label>
             <input type="text" formControlName="number" id="number" class="form-control" required>
+            <div class="text-danger" *ngIf="submitted && ctls.number.errors && ctls.number.errors.required">Enter number</div>
+            <div class="text-danger" *ngIf="submitted && ctls.number.errors && ctls.number.errors.pattern">Invalid number</div>
+
         </div>
         <div class="data">
             <label for="postalCode">Postal Code</label>
             <input type="text" formControlName="postalCode" id="postalCode" class="form-control" required>
+            <div class="text-danger" *ngIf="submitted && ctls.postalCode.errors && ctls.postalCode.errors.required">Enter postal code</div>
+            <div class="text-danger" *ngIf="submitted && ctls.postalCode.errors && ctls.postalCode.errors.pattern">Invalid postal code</div>
         </div>
         <div class="data">
             <label for="idGlobalWarehouse">Global Werehouse ID</label>
             <input type="text" formControlName="idGlobalWarehouse" id="idGlobalWarehouse" class="form-control" required>
+            <div class="text-danger" *ngIf="submitted && ctls.idGlobalWarehouse.errors && ctls.idGlobalWarehouse.errors.required">Enter Global Warehouse ID</div>
+            <div class="text-danger" *ngIf="submitted && ctls.idGlobalWarehouse.errors && ctls.idGlobalWarehouse.errors.pattern">Invalid Global Warehouse ID</div>
         </div>
         <button class="btn btn-primary btn-lg" type="submit">Add</button>
     </form>
