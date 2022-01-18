@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -10,9 +11,10 @@ export class WarehousePageComponent implements OnInit {
 
   globalWarehouses:any = []
 
-  constructor() {}
+  constructor(private router:Router) {}
 
   ngOnInit(): void {
+    this.router.navigate(['/warehouse/local-warehouse']);
   }
 }
 

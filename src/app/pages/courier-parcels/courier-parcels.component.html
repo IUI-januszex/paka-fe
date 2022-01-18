@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="navbar-wrapper">
         <button type="button" class="bttn" (click)="changeSite(true)" 
-        [ngStyle]="{'background-image':  isAssigned === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Warehouse</button>
+        [ngStyle]="{'background-image':  isAssigned === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Assigned</button>
         <button type="button" class="bttn" (click)="changeSite(false)" 
-        [ngStyle]="{'background-image':  isAssigned === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Assigned</button>
+        [ngStyle]="{'background-image':  isAssigned === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Picked up</button>
   </div>
   </nav> 
   
@@ -19,9 +19,7 @@
           <th>Type</th>
           <th>Source address</th>
           <th>Destination address</th>
-          <th>Fee paid</th>
-          <th>Parcel paid</th>
-          <th>Operation</th>
+
   
       </tr>
         <tr *ngFor="let assignedParcel of assignedParcels | paginate: {
@@ -32,16 +30,6 @@
           <th>{{assignedParcel.type.name}}</th>
           <th>{{assignedParcel.sourceAddress.city}} {{assignedParcel.sourceAddress.street}} {{assignedParcel.sourceAddress.buildingNumber}}</th>
           <th>{{assignedParcel.destinationAddress.city}} {{assignedParcel.destinationAddress.street}} {{assignedParcel.destinationAddress.buildingNumber}}</th>
-          <th>
-              {{assignedParcel.parcelFee}}
-              <i class="fas fa-check" *ngIf="assignedParcel.isFeePaid"></i>
-              <i class="fas fa-times" *ngIf="!assignedParcel.isFeePaid"></i>
-          </th>
-          <th>
-            {{assignedParcel.parcelPrice}}
-              <i class="fas fa-check" *ngIf="assignedParcel.isParcelPaid"></i>
-              <i class="fas fa-times" *ngIf="!assignedParcel.isParcelPaid"></i>
-          </th>
         </tr> 
       </table>
   

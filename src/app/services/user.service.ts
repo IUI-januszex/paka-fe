@@ -20,7 +20,7 @@ export class UserService {
 
   localUrl = "https://localhost:8080/api/user/"
 
-  currentUser: IUser = {id: '1', userName: 'anonymus', email: 'anonymus@anonymus.com',isActive: true, userType: 2137}
+  currentUser: IUser | null = null;
 
   constructor(private http:HttpClient) {
     this.getUser().subscribe((result: IUser)=>{
@@ -53,7 +53,9 @@ export class UserService {
   }
 
   logOut(){
-   return this.http.post(this.localUrl + "logout",null);
+    this.currentUser = null;
+    return this.http.post(this.localUrl + "logout",null);
+
   }
 
   getUserParcels(): Observable<IUserParcel>{
@@ -156,8 +158,10 @@ export class UserService {
   }
 
 
-  getCurrentUser():string{
-    return "client";
+  getCurrentUser(): IUser | null{
+    return this.currentUser;
   }
+
+
 
 }

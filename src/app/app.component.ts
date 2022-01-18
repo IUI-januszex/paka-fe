@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { map } from 'rxjs/operators';
+import { map, timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -13,23 +13,20 @@ export class AppComponent {
   title = 'paka-fe';
   user = 'client';
 
-  userType: string = '';
-  isLoggedIn: boolean = false;
-  userName: string = '';
+  get userType(){
+    return this.userService.getCurrentUser()?.userType;
+  }
+
+  get isLoggedIn(): boolean{
+    return this.userService.getCurrentUser() != null;
+  }
+
+  get userName(): string{
+    return this.userService.getCurrentUser()?.userName || '';
+  };
 
   constructor(private modalService: NgbModal, private userService: UserService, private router: Router) {
-    this.userService.isAny().subscribe((result)=>{
-      this.isLoggedIn = result;
-    })
-
-    this.userService.getUserType().subscribe(result=>{
-      this.userType = result;
-    })
-    
-    this.userService.getUser().subscribe(result =>{
-      this.userName = result.userName
-    })
-    
+   
   }
   
   ngOnInit(): void {
@@ -38,14 +35,15 @@ export class AppComponent {
 
   logout(){
     this.userService.logOut().subscribe(()=>{
-      this.router.navigate([""]);
-      window.location.reload();
+      this.router.navigate(["/logout"]);
     },error =>{
      alert(error.error.message)
    });
-
   }
 
+  getType(){
+    return
+  }
 
 
   open(content: any) {

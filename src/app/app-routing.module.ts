@@ -1,3 +1,4 @@
+import { LogoutComponent } from './pages/logout/logout.component';
 import { CourierParcelsComponent } from './pages/courier-parcels/courier-parcels.component';
 import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi-assigned-parcels.component';
 import { AssignedParcelsComponent } from './pages/assigned-parcels/assigned-parcels.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'assigned-parcels', component: AssignedParcelsComponent},
   {path: 'logistician-assigned-parcels',component: LogiAssignedParcelsComponent},
   {path: 'send-parcel', component:SendParcelComponent},
+  {path: 'logout', component: LogoutComponent},
   {path: 'warehouse', component: WarehousePageComponent, children:[
     {path: 'local-warehouse', component: LocalWarehouseComponent},
     {path: 'global-warehouse', component: GlobalWarehouseComponent}

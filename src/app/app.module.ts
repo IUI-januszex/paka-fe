@@ -1,3 +1,4 @@
+import { ToastsContainer } from './toast-container.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -44,6 +45,8 @@ import { OperationButtonComponent } from './pages/operation-button/operation-but
 import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi-assigned-parcels.component';
 import { CourierListComponent } from './pages/courier-list/courier-list.component';
 import { CourierParcelsComponent } from './pages/courier-parcels/courier-parcels.component';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +83,9 @@ import { CourierParcelsComponent } from './pages/courier-parcels/courier-parcels
     OperationButtonComponent,
     LogiAssignedParcelsComponent,
     CourierListComponent,
-    CourierParcelsComponent
+    ToastsContainer,
+    CourierParcelsComponent,
+    LogoutComponent
     ],
   imports: [
     BrowserModule,
@@ -92,7 +97,8 @@ import { CourierParcelsComponent } from './pages/courier-parcels/courier-parcels
     NgxPaginationModule,
     RouterModule,
     BrowserAnimationsModule,
-    CarouselModule
+    CarouselModule,
+    LoadingBarHttpClientModule
   ],
   providers: [NgbActiveModal,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorServiceService, multi: true }],
   bootstrap: [AppComponent]

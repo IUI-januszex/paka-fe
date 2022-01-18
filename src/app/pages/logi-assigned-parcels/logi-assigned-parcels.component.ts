@@ -1,3 +1,4 @@
+import { ToastService } from './../../services/toast.service';
 import { IOperation } from './../../interface/parcel/operation';
 import { IWarehouseParcel } from './../../interface/parcel/warehouseparcels';
 import { ILogisticianData } from './../../interface/user/logisticianuser';
@@ -19,7 +20,7 @@ export class LogiAssignedParcelsComponent implements OnInit {
   @ViewChild("setCourier")
   modalContent!: TemplateRef<any>;
 
-  constructor(private modalService: NgbModal,
+  constructor(private modalService: NgbModal,private toastService: ToastService,
     private modal: NgbActiveModal,private userService:UserService, private parcelService: ParcelService) { 
       this.isAtWarehouse = true;
     }
@@ -57,7 +58,7 @@ export class LogiAssignedParcelsComponent implements OnInit {
   }
 
   open(content: any) {
-    this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+    this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'})
   }
 
   setParcel(parcel: IParcelDetail){
@@ -107,7 +108,7 @@ export class LogiAssignedParcelsComponent implements OnInit {
 
   doOperation(operation: IOperation, parcelId:number){   
     if(operation.operationType.toString() == "ASSIGN_TO_COURIER" ){
-      this.assignCourier();
+      this.assignCourier( parcelId);
     }else{
       this.parcelService.doOperation(operation,parcelId);
     }
@@ -125,14 +126,18 @@ export class LogiAssignedParcelsComponent implements OnInit {
 
 
 
-  assignCourier(){
-    if(this.parcelForOperation && this.courier)
-    
-      this.parcelService.assigneToCourier(this.parcelForOperation.id,this.courier.id).subscribe(()=>{
-        alert("Success");
+  assignCourier(parcelId:number){   
+    if(this.courier){
+      this.parcelService.assigneToCourier(parcelId,this.courier.id).subscribe(()=>{
+        this.toastService.showSuccess();
+        this.getData();        
       },error=>{
-        alert(error.error.message);
+        this.toastService.showError(error);
       });
+    }else{
+      this.toastService.show("Aaaaaaaaa")
+    }
+ 
   }
 
 }

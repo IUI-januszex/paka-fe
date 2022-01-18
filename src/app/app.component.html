@@ -1,3 +1,5 @@
+<ngx-loading-bar ref="http" [includeSpinner]="false" [height]="'5px'" [color]="'rgb(124, 78, 34)'"></ngx-loading-bar>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
         <div class="navbar-wrapper d-flex">
@@ -8,27 +10,25 @@
               Januszex
             </a>
 
-              <div class="admin buttons d-flex align-items-center " *ngIf="this.userType == 'admin'" >
+              <div class="admin buttons d-flex align-items-center " *ngIf="this.userType == 0" >
                 <button type="button" class="bttn "  routerLink="">Users</button>
                 <button type="button" class="bttn"  routerLink="warehouse">Warehouse</button>
                 <button type="button" class="bttn "  routerLink="parcel-type">Parcel types</button>
                 <button type="button" class="bttn "  routerLink="registration">Register</button>
               </div>
   
-              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 'client' || this.userType == 'business'">
+              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 3 || this.userType == 4">
                 <button  type="button" class="bttn " routerLink="send-parcel">Send parcel</button>
                 <button  type="button" class="bttn " routerLink="my-parcels">My parcels</button>
                 <button  type="button" class="bttn " routerLink="address-book">Address book</button>
               </div>
   
-              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 'courier'">
-                <button  type="button" class="bttn" routerLink="assigned-parcels">Asigned parcels</button>
+              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 1">
+                <button  type="button" class="bttn" routerLink="assigned-parcels">My parcels</button>
               </div>
               
-              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 'logist'">
-                <button  type="button" class="bttn ">Warehouse parcels</button>
-                <button  type="button" class="bttn " routerLink="logistician-assigned-parcels">Asigned parcels</button>
-                <button  type="button" class="bttn">Parcels to return</button>
+              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 2">
+                <button  type="button" class="bttn " routerLink="logistician-assigned-parcels">Asign parcels</button>
               </div>
            
           </div>

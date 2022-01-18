@@ -72,7 +72,7 @@
                         <div ngbDropdown class="d-inline-block">
                             <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-                              <button ngbDropdownItem *ngFor="let operation of parcel.operations" (click)="doOperation(operation,parcel.id); setParcel(parcel)" >{{nameOperation(operation.operationType)}}</button>
+                              <button ngbDropdownItem *ngFor="let operation of parcel.operations" (click)="doOperation(operation, parcel.id); setParcel(parcel)" >{{nameOperation(operation.operationType)}}</button>
                             </div>
                           </div>
                     </div>

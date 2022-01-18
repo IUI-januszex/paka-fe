@@ -2,24 +2,26 @@
     <div class="content">
         <table>
           <tr>
-            <th>Warehouse ID</th>
+            <th>Courier ID</th>
+            <th>Type</th>
             <th>Name</th>
             <th>Surname</th>
-            <th>Type</th>
-            <th>Parcels</th>
+            <th>Operations</th>
         </tr>
           <tr *ngFor="let courier of courierList | paginate: {
           itemsPerPage: 5,
           currentPage: page}">
-            <th>{{courier.warehouseId}}</th>
+            <th>{{courier.id}}</th>
+            <th>{{courier.warehouseType}}</th>
             <th>{{courier.name}}</th>
             <th>{{courier.surname}}</th>
-            <th>{{courier.warehouseType}}</th>
+
             <th>
-                <button class="btn btn-primary" (click)="onSubmitInfo(courier)">Info</button>
-            </th>
-            <th>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-primary" (click)="onSubmitInfo(courier)">Parcels</button>
+                <div class="separator"></div>
                 <button class="btn btn-primary" (click)="onSubmit(courier)" >Select</button>
+              </div>
             </th>
           </tr> 
         </table>
