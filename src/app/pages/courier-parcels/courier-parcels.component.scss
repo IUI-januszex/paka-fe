@@ -1,0 +1,64 @@
+.table-containter{
+    width: 80%;
+    position: relative;
+    margin: auto;
+}
+
+.gif{
+    height: 20vh;
+}
+
+.container{
+    width: 80%;
+}
+
+.centered{
+position: absolute;
+top: 50%;
+left: 15%;
+margin: -35px 0 0 -35px;
+}
+table{
+    width: 100%;
+}
+tr:nth-child(odd) {
+    background: rgb(236, 216, 216)
+}
+
+.my-pagination {
+    color: black;
+  }
+
+.my-pagination:disabled{
+    color:black;
+}
+
+.info{
+    padding-left: 10px;
+}
+.navbar-brand{
+    font-size: x-large;
+}
+
+.bttn{
+    min-width: 10%;
+    font-size: 0.8em;
+    height: inherit;
+    border: none;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    transition: 0s background-color;
+}
+.navbar-wrapper{
+    margin: auto;
+    height: 8vh;
+    z-index: 4;
+    justify-content: center;
+    font-size: x-large;
+
+}
+.bttn:hover{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+    transition-delay: 3s;
+}

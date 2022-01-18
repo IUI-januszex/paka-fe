@@ -9,6 +9,9 @@
 
 <div class="table-containter">
   <div *ngIf="isAssigned">
+    <div class="d-flex justify-content-center">
+      <pagination-controls class="my-pagination" (pageChange) ="pagePickedUp = $event" id="assigned"></pagination-controls>
+  </div>
 
     <table *ngIf="assignedParcels">
       <tr>

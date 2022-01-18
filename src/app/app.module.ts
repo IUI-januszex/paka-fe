@@ -42,6 +42,8 @@ import { UsersComponent } from './pages/users/users.component';
 import { AssignedParcelsComponent } from './pages/assigned-parcels/assigned-parcels.component';
 import { OperationButtonComponent } from './pages/operation-button/operation-button.component';
 import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi-assigned-parcels.component';
+import { CourierListComponent } from './pages/courier-list/courier-list.component';
+import { CourierParcelsComponent } from './pages/courier-parcels/courier-parcels.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi
     UsersComponent,
     AssignedParcelsComponent,
     OperationButtonComponent,
-    LogiAssignedParcelsComponent
+    LogiAssignedParcelsComponent,
+    CourierListComponent,
+    CourierParcelsComponent
     ],
   imports: [
     BrowserModule,

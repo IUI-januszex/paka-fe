@@ -1,0 +1,31 @@
+<div class="table-containter">
+    <div class="content">
+        <table>
+          <tr>
+            <th>Warehouse ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Type</th>
+            <th>Parcels</th>
+        </tr>
+          <tr *ngFor="let courier of courierList | paginate: {
+          itemsPerPage: 5,
+          currentPage: page}">
+            <th>{{courier.warehouseId}}</th>
+            <th>{{courier.name}}</th>
+            <th>{{courier.surname}}</th>
+            <th>{{courier.warehouseType}}</th>
+            <th>
+                <button class="btn btn-primary" (click)="onSubmitInfo(courier)">Info</button>
+            </th>
+            <th>
+                <button class="btn btn-primary" (click)="onSubmit(courier)" >Select</button>
+            </th>
+          </tr> 
+        </table>
+         <div class="d-flex justify-content-center">
+            <pagination-controls class="my-pagination" (pageChange) ="page = $event"></pagination-controls>
+        </div>
+      </div>
+</div>
+

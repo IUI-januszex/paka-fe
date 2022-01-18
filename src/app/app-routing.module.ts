@@ -1,3 +1,4 @@
+import { CourierParcelsComponent } from './pages/courier-parcels/courier-parcels.component';
 import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi-assigned-parcels.component';
 import { AssignedParcelsComponent } from './pages/assigned-parcels/assigned-parcels.component';
 import { SendParcelComponent } from './pages/send-parcel/send-parcel.component';
@@ -33,7 +34,8 @@ const routes: Routes = [
     {path: 'global-warehouse', component: GlobalWarehouseComponent}
   ], canActivate: [AdminGuard]},
   {path: 'tracking-info/:parcelId',component: TrackingInfoComponent},
-{path: 'registration', component: RegisterPageComponent, children:[
+  {path: 'courier-parcels/:courierId', component: CourierParcelsComponent},
+  {path: 'registration', component: RegisterPageComponent, children:[
   {path:'client-registration', component: ClientRegistrationComponent},
   {path:'business-client-registration', component: BusinessClientRegistrationComponent},
   {path:'courier-registration', component: CourierRegistrationComponent},

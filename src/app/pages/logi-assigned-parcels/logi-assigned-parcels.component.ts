@@ -1,12 +1,13 @@
+import { IOperation } from './../../interface/parcel/operation';
 import { IWarehouseParcel } from './../../interface/parcel/warehouseparcels';
 import { ILogisticianData } from './../../interface/user/logisticianuser';
 import { ParcelService } from './../../services/parcel.service';
 import { UserService } from './../../services/user.service';
 import { IParcelDetail } from './../../interface/parcel/parceldetail';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { OperationType } from 'src/app/interface/parcel/operationtype';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { IParcelState } from 'src/app/interface/parcel/parcelstate';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'logi-assigned-parcels',
@@ -14,6 +15,9 @@ import { IParcelState } from 'src/app/interface/parcel/parcelstate';
   styleUrls: ['./logi-assigned-parcels.component.scss']
 })
 export class LogiAssignedParcelsComponent implements OnInit {
+
+  @ViewChild("setCourier")
+  modalContent!: TemplateRef<any>;
 
   constructor(private modalService: NgbModal,
     private modal: NgbActiveModal,private userService:UserService, private parcelService: ParcelService) { 
@@ -24,7 +28,11 @@ export class LogiAssignedParcelsComponent implements OnInit {
 
   courierId: string = "";
 
+  parcelForOperation: IParcelDetail | null = null;
+
   courierList: ILogisticianData[] = [];
+
+  courier = <ILogisticianData>{};
 
   courierParcels: IParcelDetail[] = [];
   warehouseParcels: IParcelDetail[] = [];
@@ -40,8 +48,9 @@ export class LogiAssignedParcelsComponent implements OnInit {
 
   getUser(){
     this.userService.getLogistician().subscribe((data: ILogisticianData) =>{
-      this.logisticianData = data;
+      this.logisticianData = data;      
       this.getData();
+      this.getListOfCouriers();
     },error =>{
       alert(error.error.message);
     });
@@ -51,12 +60,16 @@ export class LogiAssignedParcelsComponent implements OnInit {
     this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
   }
 
-
+  setParcel(parcel: IParcelDetail){
+    this.parcelForOperation = parcel;
+  }
   
   getListOfCouriers(){
     if(this.logisticianData)
     this.userService.getCourierList(this.logisticianData.warehouseType, this.logisticianData.warehouseId).subscribe((data: ILogisticianData[])=>{
       this.courierList = data;
+      console.log(data);
+      
     },error=>{
       alert(error.error.message);
     })
@@ -92,13 +105,34 @@ export class LogiAssignedParcelsComponent implements OnInit {
    return this.parcelService.nameOperation(operationType);  
   }
 
-  doOperation(operationType: OperationType, parcelId:number,curierId:string, currentState: IParcelState){
-    this.parcelService.doOperation(operationType,parcelId,curierId,currentState);
+  doOperation(operation: IOperation, parcelId:number){   
+    if(operation.operationType.toString() == "ASSIGN_TO_COURIER" ){
+      this.assignCourier();
+    }else{
+      this.parcelService.doOperation(operation,parcelId);
+    }
   }
 
-  updateCourierId(e: any){
+  onGetCourier(courier: ILogisticianData){
+    this.courier = courier;
+    this.modal.close();
+  }
+
+  updateCourierId(e: any){    
     console.log(e.target.value);
     this.courierId = e.target.value
+  }
+
+
+
+  assignCourier(){
+    if(this.parcelForOperation && this.courier)
+    
+      this.parcelService.assigneToCourier(this.parcelForOperation.id,this.courier.id).subscribe(()=>{
+        alert("Success");
+      },error=>{
+        alert(error.error.message);
+      });
   }
 
 }

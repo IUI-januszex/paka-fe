@@ -1,3 +1,4 @@
+import { IOperation } from './../interface/parcel/operation';
 import { ICourierParcels } from './../interface/parcel/courierparcels';
 import { IParcelSendRequest } from './../interface/parcel/parcelsendrequest';
 import { IParcelDetail } from './../interface/parcel/parceldetail';
@@ -63,8 +64,8 @@ export class ParcelService {
     }
   }
 
-  doOperation(operationType: OperationType,parcelId: number, courierId: string,currentState: IParcelState){        
-    switch(operationType.toString()){
+  doOperation(operation: IOperation,parcelId: number){        
+    switch(operation.operationType.toString()){
     case "PICKUP":
       this.parcelPickUp(parcelId).subscribe(()=>{
         alert("Success");
@@ -82,11 +83,11 @@ export class ParcelService {
     break;
 
     case "ASSIGN_TO_COURIER":
-      this.assigneToCourier(parcelId,courierId).subscribe(()=>{
-        alert("Success");
-      },error=>{
-        alert(error.error.message);
-      });
+      // this.assigneToCourier(parcelId,courierId).subscribe(()=>{
+      //   alert("Success");
+      // },error=>{
+      //   alert(error.error.message);
+      // });
       break;
 
     case "DELETE":
@@ -114,7 +115,7 @@ export class ParcelService {
       break;
 
     case "DELIVER_TO_WAREHOUSE":
-      this.deliveryToWarehouse(parcelId,currentState).subscribe(()=>{
+      this.deliveryToWarehouse(parcelId,operation).subscribe(()=>{
         alert("Success");
       },error=>{
         alert(error.error.message);
@@ -137,8 +138,8 @@ export class ParcelService {
     }
   }
 
-  deliveryToWarehouse(parcelId:number, state: IParcelState): Observable<void>{
-    return this.http.post<void>(this.localUrl + `${parcelId}/deliver-to-warehouse`,{warehouseId: state.warehouseId, warehouseType: state.warehouseType});
+  deliveryToWarehouse(parcelId:number, operation: IOperation): Observable<void>{
+    return this.http.post<void>(this.localUrl + `${parcelId}/deliver-to-warehouse`,{warehouseId: operation.warehouseId, warehouseType: operation.warehouseType});
   }
 
   assigneToCourier(parcelId:number,courierId: string): Observable<void>{
@@ -155,6 +156,10 @@ export class ParcelService {
 
   getParcelsForCourier(): Observable<ICourierParcels>{
     return this.http.get<ICourierParcels>("https://localhost:8080/api/courier/parcels");
+  }
+
+  getParcelsForCourierById(courierId:string): Observable<ICourierParcels>{
+    return this.http.get<ICourierParcels>(`https://localhost:8080/api/courier/parcels/${courierId}`);
   }
 
   observeParcel(id: number): Observable<void>{
