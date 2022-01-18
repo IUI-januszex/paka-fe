@@ -11,10 +11,9 @@
             </a>
 
               <div class="admin buttons d-flex align-items-center " *ngIf="this.userType == 0" >
-                <button type="button" class="bttn "  routerLink="">Users</button>
-                <button type="button" class="bttn"  routerLink="warehouse">Warehouse</button>
-                <button type="button" class="bttn "  routerLink="parcel-type">Parcel types</button>
-                <button type="button" class="bttn "  routerLink="registration">Register</button>
+                <button type="button" class="bttn"  routerLink="warehouse" routerLinkActive="active-root">Warehouse</button>
+                <button type="button" class="bttn "  routerLink="parcel-type" routerLinkActive="active-root">Parcel types</button>
+                <button type="button" class="bttn "  routerLink="registration" routerLinkActive="active-root">User managment</button>
               </div>
   
               <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 3 || this.userType == 4">

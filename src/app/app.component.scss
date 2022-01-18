@@ -45,6 +45,10 @@
     transition-delay: 3s;
 }
 
+.active-root{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 .on-left{
     float: left;
     z-index: 50;
