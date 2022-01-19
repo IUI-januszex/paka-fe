@@ -4,6 +4,7 @@ import { IParcelType } from 'src/app/interface/parcel/parceltype';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventEmitter, Input,Output } from '@angular/core';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'new-parcel-type',
@@ -18,11 +19,13 @@ export class NewParcelTypeComponent implements OnInit {
   @Input()
   warehouseData?: IParcelTypeRequest | null;
 
-  constructor(private formBuilder:FormBuilder, private parcelTypeService: ParcelTypeService) { 
+  constructor(private formBuilder:FormBuilder,
+     private parcelTypeService: ParcelTypeService,
+     private toastService: ToastService) { 
     this.parcelForm = this. formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      price: ['',Validators.required]
+      price: ['', [Validators.required, Validators.min(0)]]
     })
   }
 
@@ -46,8 +49,9 @@ export class NewParcelTypeComponent implements OnInit {
     }else{
       this.parcelTypeService.postData(instance).subscribe((e)=>{
         this.succes.emit(e);
+        this.toastService.showSuccess();
       },error =>{
-        alert(error.error.message);
+        this.toastService.showError(error);
       }
       )
   }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ILocalWarehouse } from 'src/app/interface/warehouse/localwarehouse';
 import { ILocalWarehouseRequest } from 'src/app/interface/warehouse/localwarehouserequest';
 import { LocalWarehouseService } from 'src/app/services/local-warehouse.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'edit-warehouse',
@@ -21,7 +22,9 @@ export class EditWarehouseComponent implements OnInit {
 
   submitted: boolean = false;
 
-  constructor(private formBuilder:FormBuilder, private localWarehouseService:LocalWarehouseService) {
+  constructor(private formBuilder:FormBuilder,
+     private localWarehouseService:LocalWarehouseService,
+     private toastService: ToastService) {
     this.warehouseForm = this.formBuilder.group({
       city: ['', [Validators.required]],
       street: ['', [Validators.required]],
@@ -46,7 +49,7 @@ export class EditWarehouseComponent implements OnInit {
     this.localWarehouseService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
       this.succes.emit(e);
     },error =>{
-      alert(error.error.message)
+      this.toastService.showError(error);
     })
   }
   } 

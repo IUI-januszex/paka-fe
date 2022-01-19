@@ -8,3 +8,45 @@ body { margin: 0;
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+.data-table {
+    margin: 15px 0;
+}
+
+.current {
+    background: #E84545!important;
+}
+
+.btn-add-new {
+    font-size: 16pt!important;
+    margin: 10px 0;
+}
+
+.separated {
+    margin: 10px 0;
+}
+
+.btn-primary {
+    background-color: #9e7665!important;
+    border-color: #a3735f!important;
+
+    &:hover {
+        background-color: #8b614f!important;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+    }
+}
+
+.dropdown-item {
+    &:active {
+        background-color: #9e7665!important;
+    }
+}
+
+input {
+    &:focus {
+        box-shadow: none!important;
+    }
+}

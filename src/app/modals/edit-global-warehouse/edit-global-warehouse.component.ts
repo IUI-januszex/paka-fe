@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IGlobalWarehouse } from 'src/app/interface/warehouse/globalwarehouse';
 import { IGlobalWarehouseRequest } from 'src/app/interface/warehouse/globalwarehouserequest';
 import { GlobalWarehouseService } from 'src/app/services/global-warehouse.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'edit-global-warehouse',
@@ -22,7 +23,9 @@ export class EditGlobalWarehouseComponent implements OnInit {
 
   submitted: boolean = false;
 
-  constructor(private formBuilder:FormBuilder, private globalWarehouseService:GlobalWarehouseService) {
+  constructor(private formBuilder:FormBuilder,
+     private globalWarehouseService:GlobalWarehouseService,
+     private toastService: ToastService) {
     this.warehouseForm = this.formBuilder.group({
       city: ['', [Validators.required]],
       street: ['', [Validators.required]],
@@ -44,7 +47,7 @@ export class EditGlobalWarehouseComponent implements OnInit {
     this.globalWarehouseService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
       this.succes.emit(e);
     },error =>{
-      alert(error.error.message)
+      this.toastService.showError(error);
     })
   }
   }

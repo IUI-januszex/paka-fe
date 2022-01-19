@@ -12,6 +12,7 @@ import { IUserLoginRequest } from '../interface/user/userloginrequest';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class UserService {
 
   currentUser: IUser | null = null;
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,
+    private toastService: ToastService) {
     this.getUser().subscribe((result: IUser)=>{
       this.currentUser = result
     })
@@ -44,12 +46,8 @@ export class UserService {
     return this.http.put<void>(this.localUrl + `activate/${id}`, userStatusRequest);
   }
 
-  loginUser(userLoginRequest: IUserLoginRequest){
-    this.http.post(this.localUrl+"login",userLoginRequest).subscribe(() =>{
-     }, (error:any) =>{    
-      alert(error.error.message)
-    })
-    
+  loginUser(userLoginRequest: IUserLoginRequest): Observable<any>{
+    return this.http.post(this.localUrl+"login",userLoginRequest);
   }
 
   logOut(){
@@ -62,39 +60,29 @@ export class UserService {
     return this.http.get<IUserParcel>(this.localUrl + "me/parcels");
   }
 
-  registerClient(clientRequest: IRegisterClientRequest){
-    this.http.post(this.localUrl + "register/client",clientRequest).subscribe(()=>{
-      alert("Registration was successful");
-    },
-    (error: IErrorResponse) => {
-      alert(error.message)
-    })
+  registerClient(clientRequest: IRegisterClientRequest): Observable<any>{
+    return this.http.post(this.localUrl + "register/client",clientRequest);
   }
 
-  registerBusinessClient(businessClientRequest: IRegisterBusinessClientRequest){
-    this.http.post(this.localUrl + "register/business-client",businessClientRequest).subscribe(()=>{
-      alert("Registration was successful");
-    },
-    (error: IErrorResponse) => {
-      alert(error.message)
-    })
+  registerBusinessClient(businessClientRequest: IRegisterBusinessClientRequest): Observable<any>{
+    return this.http.post(this.localUrl + "register/business-client",businessClientRequest);
   }
 
   registerCourier(courierRequest: IRegisterCourier){
     this.http.post(this.localUrl + "register/courier",courierRequest).subscribe(()=>{
-      alert("Registration was successful");
+      this.toastService.showSuccess();
     },
     (error: IErrorResponse) => {
-      alert(error.message)
+      this.toastService.showError(error);
     })
   }
 
   registerLogistician(logisticianRequest: IRegisterLogistician){
     this.http.post(this.localUrl + "register/logistician",logisticianRequest).subscribe(()=>{
-      alert("Registration was successful");
+      this.toastService.showSuccess();
     },
     (error: IErrorResponse) => {
-      alert(error.message)
+      this.toastService.showError(error);
     })
   }
 

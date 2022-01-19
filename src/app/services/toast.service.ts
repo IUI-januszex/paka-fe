@@ -8,8 +8,8 @@ export class ToastService {
     this.toasts.push({ textOrTpl, ...options });
   }
 
-  showSuccess(){
-    this.show("Operation completed", { classname: 'bg-success text-light', delay: 5000 })
+  showSuccess(msg: string = 'Operation completed'){
+    this.show(msg, { classname: 'bg-success text-light', delay: 5000 })
   }
 
   showError(response: any){

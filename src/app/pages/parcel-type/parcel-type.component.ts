@@ -6,6 +6,7 @@ import { ParcelTypeService } from './../../services/parcel-type.service';
 import { Component, OnInit } from '@angular/core';
 import { IParcelType } from 'src/app/interface/parcel/parceltype';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'parcel-type',
@@ -20,7 +21,9 @@ export class ParcelTypeComponent implements OnInit {
   parcelType: IParcelType | null = null;
 
   constructor(private modalService: NgbModal,
-    private modal: NgbActiveModal,private parcelTypeService: ParcelTypeService) { 
+    private modal: NgbActiveModal,
+    private parcelTypeService: ParcelTypeService,
+    private toastService: ToastService) { 
       this.data = new Array<IParcelType>();
     }
 
@@ -32,8 +35,6 @@ export class ParcelTypeComponent implements OnInit {
     this.parcelTypeService.getAllData().subscribe((data: IParcelType[])=>{
       data.sort((a,b) => a.id - b.id)
       this.data = data
-      console.log(this.data);
-      
     },error =>{
       alert(error.error.message)
     });
@@ -43,10 +44,11 @@ export class ParcelTypeComponent implements OnInit {
     var parcelState: IParcelStatus = {isActive: !parcelType.isActive}
 
     this.parcelTypeService.putStatus(parcelState,parcelType.id).subscribe(()=>{
-      this.getParcelsType()
+      this.getParcelsType();
+      this.toastService.showSuccess();
     },
     error=>{
-      alert(error.error.message);
+      this.toastService.showError(error);
     })
   }
 
@@ -55,7 +57,7 @@ export class ParcelTypeComponent implements OnInit {
       this.modal.close();
       this.getParcelsType();
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error);
     });
   }
 
