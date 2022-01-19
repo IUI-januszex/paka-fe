@@ -10,52 +10,61 @@
             <div class="parcel h1 d-flex ">
                 Parcel: {{data.id}}
             </div>
-            
                 <p>
-                    Status: {{getParcelState(lastState)}}
+                  Status: {{getParcelState(lastState)}}
                 </p>
-                
-                    <p>
-                        Expected courier arrival: {{data.estimatedDeliveryTime}}
-                    </p>
-    
+                <p>
+                  Expected courier arrival: {{data.estimatedDeliveryTime}}
+                </p>
+                <p>
+                  Sender info: {{data.senderInfo}}
+                </p>
+                <p>
+                  Reciver info: {{data.receiverInfo}}
+                </p>
                     <button type="button" class="btn btn-primary" (click)="open(change)" *ngIf="showChangeDate">Change date</button>
             
             </div>
         </div>
 
         <div class="status-changes">
-            <div class="title d-flex justify-content-center ">
-              <p class="h1">Status changes</p>
-            </div>
-            <div *ngIf="states">
-                <table class="tg">
-                  <tbody>
-                    <tr *ngFor="let state of states">
-                      <th class="tg-0lax">Date: </th>
-                      <th class="tg-0lax">{{state.changeTime | date:'short'}}</th>
-                      <th class="tg-0lax">Type: </th>
-                      <th class="tg-0lax"> {{getParcelState(state)}} </th>
-                    </tr>
-                  </tbody>
-                  </table>
-              </div>
+          <div class="title d-flex justify-content-center ">
+            <p class="h1">Status changes</p>
+          </div>
+          <div class="table-container">
+            <table>
+            <thead>
+              <tr>
+                <th class="tg-0lax">State: </th>
+                <th class="tg-0lax">Date:</th>
+              </tr>
+            </thead>
+            <tr *ngFor="let state of states">
+              <td class="tg-0lax"> {{getParcelState(state)}} </td>
+              <td class="tg-0lax">{{state.changeTime | date:'short'}}</td>
+            </tr>
+            </table>
+          </div>
         </div>
 
         <div class="attempts">
           <div class="title d-flex justify-content-center ">
             <p class="h1">Attempts</p>
           </div>
-            <div *ngIf="attempts">
-                <table class="tg">
-                  <tbody>
-                    <tr *ngFor="let attempt of attempts">
-                      <th class="tg-0lax">Date: </th>
-                      <th class="tg-0lax">{{attempt.dateTime | date:'short'}}</th>
-                    </tr>
-                  </tbody>
-                  </table>
-              </div>
+
+          <div class="table-container">
+            <table>
+            <thead>
+              <tr>
+                <th class="tg-0lax">Date:</th>
+              </tr>
+            </thead>
+            <tr *ngFor="let attempt of attempts">
+              <td class="tg-0lax">{{attempt.dateTime | date:'short'}}</td>
+            </tr>
+            </table>
+          </div>
+
         </div>
     </div>
 </div>
