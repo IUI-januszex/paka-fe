@@ -47,9 +47,9 @@
           </div>
         </div>
 
-        <div class="attempts">
+        <div class="attempts" *ngIf="attempts">
           <div class="title d-flex justify-content-center ">
-            <p class="h1">Attempts</p>
+            <p class="h1">Delivery attempts</p>
           </div>
 
           <div class="table-container">
@@ -101,7 +101,9 @@
                     <label for="newDate">Date</label>
                     <input type="date" formControlName="newDate" id="newDate" class="form-control">
                 </div>
-                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                <div class="d-flex justify-content-center separated">
+                  <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                </div>
             </form>
             </div>
     </div>

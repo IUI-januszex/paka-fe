@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="size-info-container ">
-        <div class="h2 d-flex justify-content-center ">
-            Available parcel sizes
-        </div>
+    <div class="h1 offer-header">
+       Our offer
+    </div>
+    <div class="container size-offer-container">
         <owl-carousel-o [options]="customOptions">
             <ng-container *ngFor="let parcel of data">
                 <ng-template carouselSlide>
@@ -12,7 +12,7 @@
                         <p>{{parcel.price}}🧅</p>
                     </div>
                 </ng-template>
-              </ng-container>
-          </owl-carousel-o>        
+            </ng-container>
+        </owl-carousel-o>
     </div>
 </div>

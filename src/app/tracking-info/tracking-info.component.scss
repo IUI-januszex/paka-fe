@@ -1,18 +1,11 @@
 .tracking-container{
     width: 80%;
-    height: 50vh;
-    position: relative;
     margin: auto;
-    
+    padding: 10px;
     font-size: 1.5em;
 }
 
-.centered{
-position: absolute;
-top: 50%;
-left: 15%;
-margin: -35px 0 0 -35px;
-}
+
 
 .title{
   margin-top: 15px;
@@ -28,6 +21,7 @@ margin: -35px 0 0 -35px;
     height: 35vh;
     background-color: #f8f4ec;
     position: relative;
+    padding: 10px;
   }
   
 
