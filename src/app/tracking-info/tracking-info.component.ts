@@ -1,3 +1,4 @@
+import { ToastService } from './../services/toast.service';
 import { IErrorResponse } from './../interface/errorresponse';
 import { IParcelDetail } from './../interface/parcel/parceldetail';
 import { IParcelPayRequest } from './../interface/parcel/parcelpayrequest';
@@ -25,6 +26,10 @@ export class TrackingInfoComponent implements OnInit {
 
   changeDateForm: FormGroup
 
+  counter: number = 0;
+
+  noParcel:boolean = false;
+
   data!: any
   states!: IParcelState[]
   lastState!: IParcelState
@@ -33,7 +38,7 @@ export class TrackingInfoComponent implements OnInit {
 
   showChangeDate: boolean = false;
 
-  constructor(private parcelTypeService: ParcelTypeService, private formBuilder:FormBuilder, private userService: UserService,private parcelService: ParcelService, private route: ActivatedRoute,private modalService: NgbModal, private modal: NgbActiveModal) { 
+  constructor(private toastService:ToastService ,private parcelTypeService: ParcelTypeService, private formBuilder:FormBuilder, private userService: UserService,private parcelService: ParcelService, private route: ActivatedRoute,private modalService: NgbModal, private modal: NgbActiveModal) { 
     this.parcelId = this.route.snapshot.params.parcelId
     this.changeDateForm = this.formBuilder.group({
       pin: ['',Validators.required],
@@ -50,6 +55,7 @@ export class TrackingInfoComponent implements OnInit {
     }, (error: any) =>{
       this.showChangeDate = error.status==403;
     })
+
   }
 
   onSubmitDate(parcelMoveDataRequest : IParcelMoveDateRequest){
@@ -58,7 +64,7 @@ export class TrackingInfoComponent implements OnInit {
       this.modal.close();
       this.getData(this.parcelId);
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error);
     })
   }
 
@@ -68,22 +74,40 @@ export class TrackingInfoComponent implements OnInit {
         this.parcelService.getDataDetailById(parcelId).subscribe((data: IParcelDetail) => {
           this.data = data;          
         },error =>{
-          alert(error.error.message)
+          if(this.counter === 0){
+            this.counter++;
+            this.toastService.showError(error);
+          }
+          if(error.status==404){
+            this.noParcel = true;
+          }
         });
       }
       else{
         this.parcelService.getDataById(parcelId).subscribe(data => {
           this.data = data;
         },error =>{
-          alert(error.error.message)
-        });
+          if(this.counter === 0){
+            this.counter++;
+            this.toastService.showError(error);
+          }
+          if(error.status==404){
+            this.noParcel = true;
+          }
+         });
       }
     }, (error: any) => {
       if(error.status==403){
         this.parcelService.getDataById(parcelId).subscribe(data => {
           this.data = data;
         }, error =>{
-          alert(error.error.message);
+          if(this.counter === 0){
+            this.counter++;
+            this.toastService.showError(error);
+          }
+          if(error.status==404){
+            this.noParcel = true;
+          }
         });
       }
     });
@@ -97,7 +121,13 @@ export class TrackingInfoComponent implements OnInit {
       console.log(this.states);
       this.lastState = this.states[this.states.length -1]
     }, error=>{
-      alert(error.error.message);
+      if(this.counter === 0){
+        this.counter++;
+        this.toastService.showError(error);
+      }
+      if(error.status==404){
+        this.noParcel = true;
+      }
     })
   }
 
@@ -105,7 +135,13 @@ export class TrackingInfoComponent implements OnInit {
     this.parcelService.getParcelAttempts(parcelId).subscribe(data =>{
       this.attempts = data
     }, error=>{
-      alert(error.error.message);
+      if(this.counter === 0){
+        this.counter++;
+        this.toastService.showError(error)
+      }
+      if(error.status==404){
+        this.noParcel = true;
+      }
     })
   }
 
