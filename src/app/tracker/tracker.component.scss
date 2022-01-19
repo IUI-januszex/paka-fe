@@ -1,24 +1,32 @@
-.tracking-containter{
-    width: 80%;
-    height: 40vh;
-    background-color: #F3d250;
-    position: relative;
-    margin: auto;
+.tracking-containter {
+  background-color: #ecddd4;
+  position: relative;
+  margin: auto;
+  padding: 50px 0;
 }
 
-.centered{
-position: absolute;
-top: 50%;
-left: 15%;
-margin: -35px 0 0 -35px;
-}
-.btn{
-    margin-left: 5px;
-    height: 70px;
-    min-width: 120px;
+.tracking-header {
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, rgba(48, 21, 21, 1), #ecddd4);
+  margin: 0;
 }
 
-#package-id{
-    width: 60ch;
-    height: 70px;
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  margin: -35px 0 0 -35px;
+}
+
+.btn {
+  margin-left: 5px;
+  height: 70px;
+  min-width: 120px;
+}
+
+#package-id {
+  width: 60ch;
+  height: 70px;
 }

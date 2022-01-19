@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { IParcelType } from '../interface/parcel/parceltype';
 import { ParcelTypeService } from '../services/parcel-type.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'size-info',
@@ -12,7 +13,8 @@ export class SizeInfoComponent implements OnInit {
 
   data: Array<IParcelType>
   
-  constructor(private parcelTypeService:ParcelTypeService) { 
+  constructor(private parcelTypeService:ParcelTypeService,
+    private toastService: ToastService) { 
     this.data = new Array<IParcelType>()
   }
 
@@ -24,7 +26,7 @@ export class SizeInfoComponent implements OnInit {
     this.parcelTypeService.getData().subscribe((data: IParcelType[])=>{
       this.data = data;
     },error =>{
-      alert(error.error.message)
+      this.toastService.showError(error);
     })
   }
 
