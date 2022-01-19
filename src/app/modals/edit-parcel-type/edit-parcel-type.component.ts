@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { IParcelType } from 'src/app/interface/parcel/parceltype';
 import { IParcelTypeRequest } from 'src/app/interface/parcel/parceltyperequest';
 import { ParcelTypeService } from 'src/app/services/parcel-type.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'edit-parcel-type',
@@ -17,10 +18,12 @@ export class EditParcelTypeComponent implements OnInit {
   @Input()
   parcelData?: IParcelType | null;
 
-  constructor(private formBuilder:FormBuilder, private parcelTypeService: ParcelTypeService) { 
+  constructor(private formBuilder:FormBuilder,
+     private parcelTypeService: ParcelTypeService,
+     private toastService: ToastService) { 
     this.parcelForm = this. formBuilder.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['',[Validators.required, Validators.min(0)]],
       price: ['',Validators.required]
     })
   }
@@ -45,8 +48,9 @@ export class EditParcelTypeComponent implements OnInit {
       if(this.parcelData !=null){
       this.parcelTypeService.putData(instance,this.parcelData.id).subscribe((e)=>{
         this.succes.emit(e);
+        this.toastService.showSuccess();
       },error =>{
-        alert(error.error.message);
+        this.toastService.showError(error);
       }
       );
   }

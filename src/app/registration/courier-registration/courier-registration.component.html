@@ -43,20 +43,21 @@
             <div class="text-danger" *ngIf="submitted && ctls.salary.errors && ctls.salary.errors.pattern">Invalid number </div>
         </div>
         <div class="data">
-            <label for="phoneNumber">WarehouseId</label>
+            <label for="warehouseType">WarehouseType</label>
+            <select class="form-select" formControlName="warehouseType">
+                <option value="LOCAL"> Local </option>
+                <option value="GLOBAL"> Global </option>
+            </select>
+            <div class="text-danger" *ngIf="submitted && ctls.warehouseType.errors && ctls.warehouseType.errors.required">Warehouse type required</div>
+        </div>
+        <div class="data">
+            <label for="phoneNumber">Warehouse id</label>
             <input type="text" formControlName="warehouseId" id="warehouseId" class="form-control">
             <div class="text-danger" *ngIf="submitted && ctls.warehouseId.errors && ctls.warehouseId.errors.required">Warehouse ID required</div>
             <div class="text-danger" *ngIf="submitted && ctls.warehouseId.errors && ctls.warehouseId.errors.pattern">Invalid number </div>
         </div>
-        <div class="data">
-            <label for="warehouseType">WarehouseType</label>
-            <select class="form-control" formControlName="warehouseType">
-                <option value="LOCAL"> Lokalny </option>
-                <option value="GLOBAL"> Globalny </option>
-            </select>
-            <div class="text-danger" *ngIf="submitted && ctls.warehouseType.errors && ctls.warehouseType.errors.required">Warehouse type required</div>
-
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary btn-lg" type="submit">Register</button>
         </div>
-        <button class="btn btn-primary btn-lg" type="submit">Add</button>
     </form>
 </div>

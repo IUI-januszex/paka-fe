@@ -22,8 +22,8 @@ export class CourierRegistrationComponent implements OnInit {
       surname: ['',Validators.required],
       email: ['',Validators.required,Validators.email],
       phoneNumber: ['',Validators.required],
-      salary: ['',Validators.required, Validators.pattern("^[0-9]*$")],
-      warehouseId: ['',Validators.required, Validators.pattern("^[0-9]*$")],
+      salary: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      warehouseId: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       warehouseType: ['',Validators.required]
     })
    }
@@ -33,7 +33,7 @@ export class CourierRegistrationComponent implements OnInit {
     if(!this.registrationForm.valid){
       return
     }else{
-    this.userService.registerCourier(registerRequest)
+    this.userService.registerCourier(registerRequest);
    }
   }
 

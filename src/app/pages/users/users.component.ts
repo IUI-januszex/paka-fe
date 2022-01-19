@@ -2,6 +2,7 @@ import { IUserStatus } from './../../interface/user/userStatus';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { IUser } from 'src/app/interface/user/user';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'users',
@@ -15,7 +16,8 @@ export class UsersComponent implements OnInit {
   data: Array<IUser>;
 
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+    private toastService: ToastService) {
     this.data = new Array<IUser>();
    }
 
@@ -27,16 +29,17 @@ export class UsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe((data: IUser[])=>{
       this.data = data
     }, error=>{
-      alert(error.error.message);
+      this.toastService.showError(error);
     })
   }
 
   stateChange(data: IUser){
     var status: IUserStatus = {isActive: !data.isActive};
     this.userService.changeUserStatus(status,data.id).subscribe(()=>{
+      this.toastService.showSuccess();
       this.getData();
     },error =>{
-      alert(error.error.message)
+      this.toastService.showError(error);
     })
   }
 

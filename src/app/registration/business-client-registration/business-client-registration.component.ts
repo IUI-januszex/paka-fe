@@ -41,7 +41,6 @@ export class BusinessClientRegistrationComponent implements OnInit {
   onSubmit(registerRequest: IRegisterBusinessClientRequest) {
     this.submitted = true;
     if (!this.registrationForm.valid) {
-      console.log('xD');
       return;
     } else {
       this.userService.registerBusinessClient(registerRequest).subscribe(() => {

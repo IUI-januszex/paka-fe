@@ -6,6 +6,7 @@ import { IPostalCode } from 'src/app/interface/warehouse/postalcode';
 import { LocalWarehouseService } from 'src/app/services/local-warehouse.service';
 import { EventEmitter, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'new-warehouse',
@@ -24,7 +25,9 @@ export class NewWarehouseComponent implements OnInit {
 
   warehouseForm: FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private localhostService:LocalWarehouseService) {
+  constructor(private formBuilder:FormBuilder,
+     private localhostService:LocalWarehouseService,
+     private toastService: ToastService) {
     this.warehouseForm = this.formBuilder.group({
       city: ['', [Validators.required]],
       street: ['', [Validators.required]],
@@ -47,7 +50,7 @@ export class NewWarehouseComponent implements OnInit {
     this.localhostService.postData(instance).subscribe((e)=>{
       this.succes.emit(e);
     },error =>{
-      alert(error.error.message)
+     this.toastService.showError(error);
     })
     }
   } 
