@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/services/toast.service';
 import { IParcelState } from './../../interface/parcel/parcelstate';
 import { ParcelTypeService } from 'src/app/services/parcel-type.service';
 import { ParcelService } from './../../services/parcel.service';
@@ -26,9 +27,16 @@ export class MyParcelsComponent implements OnInit {
   {id:"2",sendDate: "2022-01-23",state: "AT_SENDER"},
   {id:"2",sendDate: "2021-11-10",state: "AT_SENDER"}]
 
+
+  isTraced:boolean = true;
+
   parcelForm: FormGroup
 
-  constructor(private parcelStateService:ParcelTypeService, private userService: UserService,private formBuilder: FormBuilder,private parcelService:ParcelService) {
+  changeSite(bool: boolean){
+    this.isTraced = bool;
+  }
+
+  constructor(private toastService:ToastService,private parcelStateService:ParcelTypeService, private userService: UserService,private formBuilder: FormBuilder,private parcelService:ParcelService) {
     this.parcelForm = formBuilder.group({
       parcelId: formBuilder.control('')
     })
@@ -44,7 +52,7 @@ export class MyParcelsComponent implements OnInit {
     this.parcelService.observeParcel(parcelId).subscribe(()=>{
       this.getUserParcels();
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error);
     })
   }
 
@@ -52,7 +60,7 @@ export class MyParcelsComponent implements OnInit {
     this.parcelService.deleteObserveParcel(parcelId).subscribe(()=>{
       this.getUserParcels();
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error);
     })
   }
 

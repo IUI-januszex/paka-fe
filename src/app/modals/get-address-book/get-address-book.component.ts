@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/services/toast.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAddressBook } from 'src/app/interface/address-book/addressbook';
@@ -21,7 +22,7 @@ export class GetAddressBookComponent implements OnInit {
   @Input()
   addressBookData?: IAddressBookRequest | null;
 
-  constructor(private addressBookService: AddresBookService,private modalService: NgbModal,
+  constructor(private toastService: ToastService,private addressBookService: AddresBookService,private modalService: NgbModal,
     private modal: NgbActiveModal) {
       this.data = new Array<IAddressBook>();
      }
@@ -38,7 +39,7 @@ export class GetAddressBookComponent implements OnInit {
     this.addressBookService.getData().subscribe((data: IAddressBook[])=>{
       this.data = data
     },error=>{
-     alert(error.error.message); 
+      this.toastService.showError(error);
     });
   }
 

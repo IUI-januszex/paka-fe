@@ -30,6 +30,8 @@ export class TrackingInfoComponent implements OnInit {
 
   noParcel:boolean = false;
 
+  submitted: boolean = false;
+
   data!: any
   states!: IParcelState[]
   lastState!: IParcelState
@@ -46,6 +48,10 @@ export class TrackingInfoComponent implements OnInit {
     })
   }
 
+  get ctls() {
+    return this.changeDateForm.controls;
+  }
+
   ngOnInit(): void {
     this.getData(this.parcelId);
     this.getState(this.parcelId);
@@ -59,13 +65,17 @@ export class TrackingInfoComponent implements OnInit {
   }
 
   onSubmitDate(parcelMoveDataRequest : IParcelMoveDateRequest){
-    console.log(parcelMoveDataRequest);
+    this.submitted = true;
+    if (!this.changeDateForm.valid) {
+      return;
+    }else{
     this.parcelService.postMoveDate(this.parcelId,parcelMoveDataRequest).subscribe(()=>{
       this.modal.close();
       this.getData(this.parcelId);
     },error=>{
       this.toastService.showError(error);
     })
+  }
   }
 
   getData(parcelId:string){

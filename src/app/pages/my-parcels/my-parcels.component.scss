@@ -8,6 +8,7 @@
     height: 20vh;
 }
 
+
 .centered{
 position: absolute;
 top: 50%;
@@ -34,10 +35,6 @@ tr:nth-child(odd) {
 }
 
 
-.tracked-parcels{
-    padding-top: 10%;
-}
-
 .parcel{
     font-size: 2em;
     margin-top: 10px;
@@ -50,4 +47,32 @@ tr:nth-child(odd) {
 
 .parcel:nth-child(even){
     background: rgb(236, 216, 216)
+}
+.navbar-brand{
+    font-size: x-large;
+}
+
+
+
+.bttn{
+    min-width: 10%;
+    font-size: 0.8em;
+    height: inherit;
+    border: none;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    transition: 0s background-color;
+}
+.navbar-wrapper{
+    margin: auto;
+    height: 8vh;
+    z-index: 4;
+    justify-content: center;
+    font-size: x-large;
+
+}
+.bttn:hover{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+    transition-delay: 3s;
 }
