@@ -1,59 +1,85 @@
 <div class="container" *ngIf="data">
     <div class="tracking-container">
-        <div class="package">
+        <div class="package d-flex align-items-center ">
             <div class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
                     <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
                   </svg>
             </div>
-            <div class="parcel h1">
+            <div class="arrival">
+            <div class="parcel h1 d-flex ">
                 Parcel: {{data.id}}
             </div>
-            <div class="arrival">
                 <p>
-                    Status: {{getParcelState(lastState)}}
+                  Status: {{getParcelState(lastState)}}
                 </p>
-                
-                    <p>
-                        Expected courier arrival: {{data.estimatedDeliveryTime}}
-                    </p>
-    
+                <p>
+                  Expected courier arrival: {{data.estimatedDeliveryTime}}
+                </p>
+                <p>
+                  Sender info: {{data.senderInfo}}
+                </p>
+                <p>
+                  Reciver info: {{data.receiverInfo}}
+                </p>
                     <button type="button" class="btn btn-primary" (click)="open(change)" *ngIf="showChangeDate">Change date</button>
             
             </div>
         </div>
 
         <div class="status-changes">
+          <div class="title d-flex justify-content-center ">
             <p class="h1">Status changes</p>
-            <div *ngIf="states">
-                <table class="tg">
-                  <tbody>
-                    <tr *ngFor="let state of states">
-                      <th class="tg-0lax">Date: </th>
-                      <th class="tg-0lax">{{state.changeTime | date:'short'}}</th>
-                      <th class="tg-0lax">Type: </th>
-                      <th class="tg-0lax">{{state.type}} </th>
-                    </tr>
-                  </tbody>
-                  </table>
-              </div>
+          </div>
+          <div class="table-container">
+            <table>
+            <thead>
+              <tr>
+                <th class="tg-0lax">State: </th>
+                <th class="tg-0lax">Date:</th>
+              </tr>
+            </thead>
+            <tr *ngFor="let state of states">
+              <td class="tg-0lax"> {{getParcelState(state)}} </td>
+              <td class="tg-0lax">{{state.changeTime | date:'short'}}</td>
+            </tr>
+            </table>
+          </div>
         </div>
 
         <div class="attempts">
+          <div class="title d-flex justify-content-center ">
             <p class="h1">Attempts</p>
-            <div *ngIf="attempts">
-                <table class="tg">
-                  <tbody>
-                    <tr *ngFor="let attempt of attempts">
-                      <th class="tg-0lax">Date: </th>
-                      <th class="tg-0lax">{{attempt.dateTime | date:'short'}}</th>
-                    </tr>
-                  </tbody>
-                  </table>
-              </div>
+          </div>
+
+          <div class="table-container">
+            <table>
+            <thead>
+              <tr>
+                <th class="tg-0lax">Date:</th>
+              </tr>
+            </thead>
+            <tr *ngFor="let attempt of attempts">
+              <td class="tg-0lax">{{attempt.dateTime | date:'short'}}</td>
+            </tr>
+            </table>
+          </div>
+
         </div>
     </div>
 </div>
+
+<div class="container  " *ngIf="noParcel">
+  <div class="h1 title d-flex justify-content-center">
+    Parcel not found
+  </div>
+
+  <div class=" d-flex justify-content-center">
+  <img src="assets/img/nimo.jpg" alt="">
+</div>
+
+</div>
+
 
 
 <ng-template #change let-modal>

@@ -5,6 +5,7 @@ import { ParcelService } from './../../services/parcel.service';
 import { ICourierParcels } from './../../interface/parcel/courierparcels';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { IOperation } from 'src/app/interface/parcel/operation';
 
 @Component({
   selector: 'assigned-parcels',
@@ -82,50 +83,9 @@ export class AssignedParcelsComponent implements OnInit {
     return this.parcelService.nameOperation(operationType);  
    }
 
-  doOperation(operationType: OperationType, parcel: IParcelDetail){       
-    console.log("operation:" + operationType);
-     
-    switch(operationType.toString()){
-    case "PICKUP":
-       "Pick up"
-      break;
-
-    case "PAY_FEE":
-      this.setFeePaid(parcel);
-    break;
-
-    case "ASSIGN_TO_COURIER":
-       "Assign to courier"
-      break;
-
-    case "DELETE":
-       "Delete"
-      break;
-
-    case "DELIVERY_ATTEMPT":
-      this.deliveryAttempt(parcel);
-      break;
-    case "DELIVER_TO_CLIENT":
-      this.setParcelDelivered(parcel);
-      break;
-    case "DELIVER_TO_WAREHOUSE":
-       "Deliver to warehouse"
-       break;
-
-    case "EDIT":
-       "Eddit"
-       break;
-
-    case "NO_OPERATION":
-      break;
-
-    case "PAY_PARCEL":
-      this.setParcelPaid(parcel)
-      break;
-
-    default:
-      break;
-    }
+  doOperation(operationType: IOperation, parcel: IParcelDetail){       
+    this.parcelService.doOperation(operationType,parcel.id)
+    
   }
 
   checkOperation(parcel:IParcelDetail, operation: OperationType){
