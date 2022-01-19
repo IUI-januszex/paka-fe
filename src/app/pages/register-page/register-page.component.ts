@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'register-page',
@@ -8,15 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterPageComponent implements OnInit {
 
-  registerForm: FormGroup;
-
-  constructor(private formBuilder:FormBuilder) {
-    this.registerForm = this.formBuilder.group({
-      email: ['',Validators.required, Validators.email],
-      username: ['',Validators.required],
-      phone: ['',Validators.required],
-      password: ['',Validators.required]
-    })
+  constructor(private router: Router,
+    private userService: UserService) {
    }
 
    onSubmit(){
@@ -24,6 +19,13 @@ export class RegisterPageComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if(this.userService.getCurrentUser()?.userType == 0 ){
+      this.router.navigate(['registration/users']);
+    }
+  };
+
+  get isAdmin(): boolean {
+    return this.userService.getCurrentUser()?.userType === 0;
   }
 
 }

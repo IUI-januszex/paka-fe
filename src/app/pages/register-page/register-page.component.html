@@ -2,13 +2,17 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <div class="container">
             <div class="navbar-wrapper">
-                <button type="button" class="bttn" routerLink="client-registration">Client registration</button>
-                <button type="button" class="bttn" routerLink="business-client-registration">Business client registration</button>
-                <button type="button" class="bttn" routerLink="courier-registration">Courier registration</button>
-                <button type="button" class="bttn" routerLink="logistician-registration">Logistican registration</button>
-                <button type="button" class="bttn" routerLink="users">Users</button>
+                <button *ngIf="isAdmin" type="button" class="bttn" routerLink="users" routerLinkActive="active-root">Users</button>
+                <button *ngIf="isAdmin" type="button" class="bttn" routerLink="courier-registration"
+                    routerLinkActive="active-root">Courier registration</button>
+                <button *ngIf="isAdmin" type="button" class="bttn" routerLink="logistician-registration"
+                    routerLinkActive="active-root">Logistican registration</button>
+                <button type="button" class="bttn" routerLink="client-registration"
+                    routerLinkActive="active-root">Client registration</button>
+                <button type="button" class="bttn" routerLink="business-client-registration"
+                    routerLinkActive="active-root">Business client registration</button>
             </div>
         </div>
-    </nav>  
-    
+    </nav>
+
     <router-outlet></router-outlet>

@@ -8,3 +8,11 @@ body { margin: 0;
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+.data-table {
+    margin: 15px 0;
+}
+
+.current {
+    background: #E84545!important;
+}

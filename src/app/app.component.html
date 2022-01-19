@@ -10,23 +10,23 @@
               Januszex
             </a>
 
-              <div class="admin buttons d-flex align-items-center " *ngIf="this.userType == 0" >
+              <div class="admin buttons d-flex align-items-stretch " *ngIf="this.userType == 0" >
                 <button type="button" class="bttn"  routerLink="warehouse" routerLinkActive="active-root">Warehouse</button>
                 <button type="button" class="bttn "  routerLink="parcel-type" routerLinkActive="active-root">Parcel types</button>
                 <button type="button" class="bttn "  routerLink="registration" routerLinkActive="active-root">User managment</button>
               </div>
   
-              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 3 || this.userType == 4">
+              <div class="user buttons d-flex align-items-stretch" *ngIf="this.userType == 3 || this.userType == 4">
                 <button  type="button" class="bttn " routerLink="send-parcel">Send parcel</button>
                 <button  type="button" class="bttn " routerLink="my-parcels">My parcels</button>
                 <button  type="button" class="bttn " routerLink="address-book">Address book</button>
               </div>
   
-              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 1">
+              <div class="user buttons d-flex align-items-stretch" *ngIf="this.userType == 1">
                 <button  type="button" class="bttn" routerLink="assigned-parcels">My parcels</button>
               </div>
               
-              <div class="user buttons d-flex align-items-center" *ngIf="this.userType == 2">
+              <div class="user buttons d-flex align-items-stretch" *ngIf="this.userType == 2">
                 <button  type="button" class="bttn " routerLink="logistician-assigned-parcels">Asign parcels</button>
               </div>
            
@@ -35,16 +35,16 @@
             <div class="d-flex justify-content-end flex-grow-1">
               <button *ngIf="!isLoggedIn" type="button" class="bttn d-flex align-items-center on-right" (click)="open(content)">Log in</button>
 
-              <div class="on-right " *ngIf="isLoggedIn">
+              <div class="on-right  d-flex align-items-center" *ngIf="isLoggedIn">
                 <div ngbDropdown>
                   <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>
                     <i class="far fa-user fa-2x"></i>
                   </button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                    <button ngbDropdownItem>{{userName}}</button>
                     <button ngbDropdownItem (click)="logout()" >Log out</button>
                   </div>
                 </div>
-                <p>{{userName}}</p>
               </div>
 
             </div>

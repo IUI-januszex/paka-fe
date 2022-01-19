@@ -10,9 +10,6 @@ import { map, timeout } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'paka-fe';
-  user = 'client';
-
   get userType(){
     return this.userService.getCurrentUser()?.userType;
   }

@@ -71,13 +71,8 @@ export class UserService {
     })
   }
 
-  registerBusinessClient(businessClientRequest: IRegisterBusinessClientRequest){
-    this.http.post(this.localUrl + "register/business-client",businessClientRequest).subscribe(()=>{
-      alert("Registration was successful");
-    },
-    (error: IErrorResponse) => {
-      alert(error.message)
-    })
+  registerBusinessClient(businessClientRequest: IRegisterBusinessClientRequest): Observable<any>{
+    return this.http.post(this.localUrl + "register/business-client",businessClientRequest);
   }
 
   registerCourier(courierRequest: IRegisterCourier){

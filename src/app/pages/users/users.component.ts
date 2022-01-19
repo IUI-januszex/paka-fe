@@ -11,15 +11,16 @@ import { IUser } from 'src/app/interface/user/user';
 export class UsersComponent implements OnInit {
 
 
-  page: number = 1
-  data: Array<IUser>
+  page: number = 1;
+  data: Array<IUser>;
+
 
   constructor(private userService: UserService) {
     this.data = new Array<IUser>();
    }
 
   ngOnInit(): void {
-    this.getData()
+    this.getData();
   }
 
   getData(){
