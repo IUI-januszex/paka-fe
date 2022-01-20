@@ -1,4 +1,4 @@
-<div class="table-containter">
+<div class="table-containter d-flex justify-content-center">
     <div class="content">
         <div class="card" style="width: 18rem;" *ngFor="let ad of data | paginate: {
             itemsPerPage: 2,
@@ -15,10 +15,8 @@
               {{ad.postalCode}} {{ad.city}}
             </p>
             <button type="button" class="btn btn-primary" (click)="onSubmit(ad)" >Use</button>
-          </div>
-        </div>
-        <div class="d-flex justify-content-center">
+          </div>     
+        </div>   
             <pagination-controls class="my-pagination" (pageChange) ="page = $event"></pagination-controls>
-        </div>
       </div>
 </div>

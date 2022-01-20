@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/services/toast.service';
 import { ParcelService } from './../../services/parcel.service';
 import { IParcelSendRequest } from './../../interface/parcel/parcelsendrequest';
 import { IAddressBook } from './../../interface/address-book/addressbook';
@@ -49,7 +50,7 @@ export class SendParcelComponent implements OnInit {
 
   submitted: boolean = false;
 
-  constructor(private modalService: NgbModal, private parcelService: ParcelService, private router:Router,
+  constructor(private toastService: ToastService,private modalService: NgbModal, private parcelService: ParcelService, private router:Router,
     private modal: NgbActiveModal,private formBuilder: FormBuilder,private parcelTypeService: ParcelTypeService) {
     this.sendParcelForm = this.formBuilder.group({
       deliveryAddress: this.formBuilder.group({
@@ -79,13 +80,19 @@ export class SendParcelComponent implements OnInit {
 
     }
 
-    get ctls() {
+    get deliverForm() {
+      return this.sendParcelForm.controls.deliveryAddress as FormGroup
+    }
+
+    get ctls() {      
       return this.sendParcelForm.controls;
     }
    
     getActiveParcelTypes(){
       this.parcelTypeService.getData().subscribe((data: IParcelType[])=>{
         this.activeParcelTypes = data
+      }, error=>{
+        this.toastService.showError(error);
       })
     }
 
@@ -93,14 +100,17 @@ export class SendParcelComponent implements OnInit {
     this.getActiveParcelTypes()
   }
 
-  onSubmit(parcelRequest:IParcelSendRequest){
-    console.log(parcelRequest);
-    
+  onSubmit(parcelRequest:IParcelSendRequest){    
+    this.submitted = true;
+    if (!this.sendParcelForm.valid) {
+      return;
+    }else{
     this.parcelService.sendParcel(parcelRequest).subscribe(()=>{
       this.router.navigate(['my-parcels']);
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error);
     })
+  }
   }
 
   sender(content: any) {

@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/services/toast.service';
 import { IAddressBookRequest } from './../../interface/address-book/addressbookrequest';
 import { AddresBookService } from './../../services/addres-book.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,7 @@ export class AddressBookComponent implements OnInit {
   addressBookId: number | null = null;
 
 
-  constructor(private modalService: NgbModal,
+  constructor(private toastService:ToastService,private modalService: NgbModal,
     private modal: NgbActiveModal, private addressBookService: AddresBookService) { 
       this.data = new Array<IAddressBook>();
     }
@@ -31,7 +32,7 @@ export class AddressBookComponent implements OnInit {
     this.addressBookService.getData().subscribe((data: IAddressBook[])=>{
       this.data = data
     },error=>{
-     alert(error.error.message); 
+      this.toastService.showError(error);
     });
   }
 
@@ -39,7 +40,7 @@ export class AddressBookComponent implements OnInit {
     this.addressBookService.deleteData(addresbook.id).subscribe(()=>{
     this.getAddressBooks();
     },error => {
-      alert(error.error.message);
+      this.toastService.showError(error);
     })
   }
 
