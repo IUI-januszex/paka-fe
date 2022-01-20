@@ -20,7 +20,7 @@ export class CourierRegistrationComponent implements OnInit {
       password: ['',Validators.required],
       name: ['',Validators.required],
       surname: ['',Validators.required],
-      email: ['',Validators.required,Validators.email],
+      email: ['',[Validators.required,Validators.email]],
       phoneNumber: ['',Validators.required],
       salary: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       warehouseId: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
