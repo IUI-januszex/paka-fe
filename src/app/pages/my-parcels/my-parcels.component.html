@@ -1,59 +1,63 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="navbar-wrapper">
-        <button type="button" class="bttn" (click)="changeSite(true)" 
-        [ngStyle]="{'background-image':  isTraced === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Tracked</button>
-        <button type="button" class="bttn" (click)="changeSite(false)" 
-        [ngStyle]="{'background-image':  isTraced === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Sended</button>
-  </div>
-  </nav> 
+        <button type="button" class="bttn" (click)="changeSite(true)"
+            [ngStyle]="{'background-image':  isTraced === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Tracked</button>
+        <button type="button" class="bttn" (click)="changeSite(false)"
+            [ngStyle]="{'background-image':  isTraced === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Sended</button>
+    </div>
+</nav>
 
 <div class="table-containter">
     <div class="content ">
         <div *ngIf="isTraced">
-        <div class="tracked-parcels">
-            <div>     
-                    <form [formGroup]="parcelForm " class="form-inline d-flex justify-content-center" (ngSubmit)="observeParcel(parcelForm.value.parcelId)" novalidate>
+            <div class="tracked-parcels">
+                <div>
+                    <form [formGroup]="parcelForm " class="form-inline d-flex justify-content-center"
+                        (ngSubmit)="observeParcel(parcelForm.value.parcelId)" novalidate>
                         <div class="input-group w-50">
-                            <input type="text" formControlName="parcelId" id="parcelId" class="form-control" placeholder="Enter parcel number to track">
+                            <input type="text" formControlName="parcelId" id="parcelId" class="form-control"
+                                placeholder="Enter parcel number to track">
                             <button type="submit" class="btn btn-primary" type="submit">Track</button>
                         </div>
-                </form>
-            </div>
-            <div class="d-flex justify-content-center">
+                    </form>
+                </div>
+                <div class="d-flex justify-content-center separated">
 
-                <div class="parcel " *ngFor="let parcel of observedParcels | paginate: {
+                    <div class="parcel " *ngFor="let parcel of observedParcels | paginate: {
                     itemsPerPage: 2,
                     currentPage: pageTracked,
                     id: 'tracked'}">
-                    <i class="fas fa-box fa-lg"></i>
-                    {{parcel.id}} {{parcel.estimatedDeliveryTime}} {{ getStatus(parcel.currentState)}} 
-                    <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Detail </button>
-                    <button class="btn btn-primary" (click)="deleteObserveParcel(parcel.id)">Remove </button>
+                        <i class="fas fa-box fa-lg"></i>
+                        ID: {{parcel.id}}
+                        {{ getStatus(parcel.currentState)}} <span class="date">({{parcel.estimatedDeliveryTime}})</span>
+                        <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Details </button>
+                        <button class="btn btn-primary" (click)="deleteObserveParcel(parcel.id)">Remove </button>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <pagination-controls class="my-pagination" (pageChange)="pageTracked = $event" id="tracked">
+                    </pagination-controls>
                 </div>
             </div>
-                
-            <div class="d-flex justify-content-center">
-                <pagination-controls class="my-pagination" (pageChange) ="pageTracked = $event" id="tracked"></pagination-controls>
-            </div>
         </div>
-    </div>
 
-    <div *ngIf="!isTraced">
-        <div class="tracked-parcels ">
-            <div class="parcel" *ngFor="let parcel of sendedParcels | paginate: {
+        <div *ngIf="!isTraced">
+            <div class="tracked-parcels ">
+                <div class="parcel" *ngFor="let parcel of sendedParcels | paginate: {
                 itemsPerPage: 2,
                 currentPage: pageSend,
                 id: 'send'}">
-                <i class="fas fa-box fa-lg"></i>
-                {{parcel.id}} {{parcel.estimatedDeliveryTime}} {{ getStatus(parcel.currentState)}}  
-                <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Detail </button>
-            <button class="btn btn-primary">Cancel</button>
-            </div>
-            <div class="d-flex justify-content-center">
-                <pagination-controls class="my-pagination" (pageChange) ="pageSend = $event" id="send"></pagination-controls>
+                    <i class="fas fa-box fa-lg"></i>
+                    {{parcel.id}} {{parcel.estimatedDeliveryTime}} {{ getStatus(parcel.currentState)}}
+                    <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Detail </button>
+                    <button class="btn btn-primary">Cancel</button>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls class="my-pagination" (pageChange)="pageSend = $event" id="send">
+                    </pagination-controls>
+                </div>
             </div>
         </div>
-      </div>
-    </div>   
+    </div>
 </div>

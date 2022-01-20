@@ -38,7 +38,8 @@ export class AddressBookComponent implements OnInit {
 
   deleteAddressBook(addresbook: IAddressBook){
     this.addressBookService.deleteData(addresbook.id).subscribe(()=>{
-    this.getAddressBooks();
+      this.toastService.showSuccess();
+      this.getAddressBooks();
     },error => {
       this.toastService.showError(error);
     })

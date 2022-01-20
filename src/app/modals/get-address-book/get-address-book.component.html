@@ -6,6 +6,9 @@
           <div class="card-body">
             <h5 class="card-title">{{ad.personalities}}</h5>
             <p class="card-text">
+              ({{ad.addressName}})
+            </p>
+            <p class="card-text">
               {{ad.email}}
             </p>
             <p class="card-text">
@@ -14,7 +17,9 @@
             <p class="card-text">
               {{ad.postalCode}} {{ad.city}}
             </p>
-            <button type="button" class="btn btn-primary" (click)="onSubmit(ad)" >Use</button>
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-primary" (click)="onSubmit(ad)">Use</button>
+            </div>
           </div>     
         </div>   
             <pagination-controls class="my-pagination" (pageChange) ="page = $event"></pagination-controls>

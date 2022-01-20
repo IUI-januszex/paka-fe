@@ -57,7 +57,7 @@ export class SendParcelComponent implements OnInit {
         buildingNumber: ['',Validators.required],
         city: ['',Validators.required],
         flatNumber: ['',Validators.required],
-        postalCode: ['', Validators.required],
+        postalCode: ['', [Validators.required, Validators.pattern("^([0-9]{2})-([0-9]{3})")]],
         street: ['', Validators.required]
       }),
       parcelType: ['',Validators.required],
@@ -69,7 +69,7 @@ export class SendParcelComponent implements OnInit {
         buildingNumber: ['',Validators.required],
         city: ['',Validators.required],
         flatNumber: ['',Validators.required],
-        postalCode: ['', Validators.required],
+        postalCode:[,[Validators.required, Validators.pattern("^([0-9]{2})-([0-9]{3})")]],
         street: ['', Validators.required]
       }),
     senderDetails: ['', Validators.required],
@@ -80,8 +80,20 @@ export class SendParcelComponent implements OnInit {
 
     }
 
-    get deliverForm() {
-      return this.sendParcelForm.controls.deliveryAddress as FormGroup
+    deiliveryHasError(field: string | number, type: string | number = 'required'): boolean {
+      const errors = this.sendParcelForm.get(['deliveryAddress', field])?.errors;
+      if(!errors) {
+        return false;
+      }
+      return errors[type];
+    }
+
+    senderHasError(field: string | number, type: string | number = 'required'): boolean {
+      const errors = this.sendParcelForm.get(['senderAddress', field])?.errors;
+      if(!errors) {
+        return false;
+      }
+      return errors[type];
     }
 
     get ctls() {      
@@ -119,7 +131,6 @@ export class SendParcelComponent implements OnInit {
 
   onAddressBookGet(addres: IAddressBook){
     this.modal.close();
-    console.log("Data:");
     console.log(addres);
   }
 
