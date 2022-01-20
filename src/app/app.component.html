@@ -17,17 +17,17 @@
               </div>
   
               <div class="user buttons d-flex align-items-stretch" *ngIf="this.userType == 3 || this.userType == 4">
-                <button  type="button" class="bttn " routerLink="send-parcel">Send parcel</button>
-                <button  type="button" class="bttn " routerLink="my-parcels">My parcels</button>
-                <button  type="button" class="bttn " routerLink="address-book">Address book</button>
+                <button  type="button" class="bttn " routerLink="send-parcel" routerLinkActive="active-root">Send parcel</button>
+                <button  type="button" class="bttn " routerLink="my-parcels" routerLinkActive="active-root">My parcels</button>
+                <button  type="button" class="bttn " routerLink="address-book" routerLinkActive="active-root">Address book</button>
               </div>
   
               <div class="user buttons d-flex align-items-stretch" *ngIf="this.userType == 1">
-                <button  type="button" class="bttn" routerLink="assigned-parcels">My parcels</button>
+                <button  type="button" class="bttn" routerLink="assigned-parcels" routerLinkActive="active-root">My parcels</button>
               </div>
               
               <div class="user buttons d-flex align-items-stretch" *ngIf="this.userType == 2">
-                <button  type="button" class="bttn " routerLink="logistician-assigned-parcels">Asign parcels</button>
+                <button  type="button" class="bttn " routerLink="logistician-assigned-parcels" routerLinkActive="active-root">Asign parcels</button>
               </div>
            
           </div>

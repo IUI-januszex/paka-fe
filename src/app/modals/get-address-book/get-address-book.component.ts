@@ -37,7 +37,7 @@ export class GetAddressBookComponent implements OnInit {
 
   getAddressBooks(){
     this.addressBookService.getData().subscribe((data: IAddressBook[])=>{
-      this.data = data
+      this.data = data;
     },error=>{
       this.toastService.showError(error);
     });
