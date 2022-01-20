@@ -7,7 +7,7 @@
     </div>
 </nav>
 
-<div class="table-containter">
+<div class="table-containter d-flex justify-content-center">
     <div class="content ">
         <div *ngIf="isTraced">
             <div class="tracked-parcels">
@@ -43,13 +43,14 @@
         </div>
 
         <div *ngIf="!isTraced">
-            <div class="tracked-parcels ">
+            <div class="tracked-parcels  ">
                 <div class="parcel" *ngFor="let parcel of sendedParcels | paginate: {
                 itemsPerPage: 2,
                 currentPage: pageSend,
                 id: 'send'}">
                     <i class="fas fa-box fa-lg"></i>
-                    {{parcel.id}} {{parcel.estimatedDeliveryTime}} {{ getStatus(parcel.currentState)}}
+                    ID: {{parcel.id}}  
+                    {{ getStatus(parcel.currentState)}} <span class="date">({{parcel.estimatedDeliveryTime}})</span>
                     <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Detail </button>
                     <button class="btn btn-primary">Cancel</button>
                 </div>
