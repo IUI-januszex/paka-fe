@@ -1,3 +1,4 @@
+import { ToastService } from './services/toast.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
@@ -22,7 +23,7 @@ export class AppComponent {
     return this.userService.getCurrentUser()?.userName || '';
   };
 
-  constructor(private modalService: NgbModal, private userService: UserService, private router: Router) {
+  constructor(private modalService: NgbModal, private userService: UserService, private router: Router, private toastService: ToastService) {
    
   }
   
@@ -34,7 +35,7 @@ export class AppComponent {
     this.userService.logOut().subscribe(()=>{
       this.router.navigate(["/logout"]);
     },error =>{
-     alert(error.error.message)
+      this.toastService.showError(error)
    });
   }
 

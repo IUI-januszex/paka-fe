@@ -43,9 +43,7 @@ export class EditWarehouseComponent implements OnInit {
     if(!this.warehouseForm.valid) {
       return;
     }else{
-    if(this.warehouseData != null){
-      console.log(this.warehouseData);
-      
+    if(this.warehouseData != null){      
     this.localWarehouseService.putDataEdit(instance,this.warehouseData.idWarehouse).subscribe((e)=>{
       this.succes.emit(e);
     },error =>{

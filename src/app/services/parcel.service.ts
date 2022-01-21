@@ -1,3 +1,4 @@
+import { ToastService } from './toast.service';
 import { IOperation } from './../interface/parcel/operation';
 import { ICourierParcels } from './../interface/parcel/courierparcels';
 import { IParcelSendRequest } from './../interface/parcel/parcelsendrequest';
@@ -20,7 +21,7 @@ export class ParcelService {
 
   localUrl = "https://localhost:8080/api/parcel";
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient, private toastService: ToastService) {}
 
 
   nameOperation(operationType: OperationType): string{        
@@ -68,57 +69,52 @@ export class ParcelService {
     switch(operation.operationType.toString()){
     case "PICKUP":
       this.parcelPickUp(parcelId).subscribe(()=>{
-        alert("Success");
+        this.toastService.show("Success");
       },error=>{
-        alert(error.error.message);
+        this.toastService.showError(error)
       });
     break;
 
     case "PAY_FEE":
     this.putPayFee(parcelId).subscribe(()=>{
-      alert("Success");
+      this.toastService.show("Success");
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     });
     break;
 
     case "ASSIGN_TO_COURIER":
-      // this.assigneToCourier(parcelId,courierId).subscribe(()=>{
-      //   alert("Success");
-      // },error=>{
-      //   alert(error.error.message);
-      // });
       break;
 
     case "DELETE":
       this.deleteObserveParcel(parcelId).subscribe(()=>{
-        alert("Success");
+        this.toastService.show("Success");
       },error=>{
-        alert(error.error.message);
+        this.toastService.showError(error)
       });
       break;
 
     case "DELIVERY_ATTEMPT":
       this.postAttempts(parcelId).subscribe(()=>{
-        alert("Success");
+        this.toastService.show("Success");
       },error=>{
-        alert(error.error.message);
+        this.toastService.showError(error)
       });
       break;
 
     case "DELIVER_TO_CLIENT":
       this.postDeliverToClient(parcelId).subscribe(()=>{
-        alert("Success");
+        this.toastService.show("Success");
       },error=>{
-        alert(error.error.message);
+        this.toastService.showError(error)
       });
       break;
 
     case "DELIVER_TO_WAREHOUSE":
       this.deliveryToWarehouse(parcelId,operation).subscribe(()=>{
-        alert("Success");
+        this.toastService.show("Success");
       },error=>{
-        alert(error.error.message);
+        this.toastService.showError(error)
       });
     break;
 
@@ -129,9 +125,9 @@ export class ParcelService {
 
     case "PAY_PARCEL":
       this.putPayParcel(parcelId).subscribe(()=>{
-        alert("Success");
+        this.toastService.show("Success");
       },error=>{
-        alert(error.error.message);
+        this.toastService.showError(error)
       });
       break;
     default:

@@ -22,15 +22,16 @@ import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
 import { CourierGuard } from './Auth/courier.guard';
+import { ClientGuard } from './Auth/client.guard';
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
   {path: 'parcel-type', component: ParcelTypeComponent, canActivate: [AdminGuard]},
-  {path: 'address-book', component: AddressBookComponent},
-  {path: 'my-parcels', component:MyParcelsComponent},
+  {path: 'address-book', component: AddressBookComponent, canActivate: [ClientGuard]},
+  {path: 'my-parcels', component:MyParcelsComponent, canActivate: [ClientGuard]},
   {path: 'assigned-parcels', component: AssignedParcelsComponent, canActivate: [CourierGuard]},
   {path: 'logistician-assigned-parcels',component: LogiAssignedParcelsComponent, canActivate: [CourierGuard]},
-  {path: 'send-parcel', component:SendParcelComponent},
+  {path: 'send-parcel', component:SendParcelComponent, canActivate: [ClientGuard]},
   {path: 'logout', component: LogoutComponent},
   {path: 'warehouse', component: WarehousePageComponent, children:[
     {path: 'local-warehouse', component: LocalWarehouseComponent},
@@ -43,7 +44,7 @@ const routes: Routes = [
   {path:'business-client-registration', component: BusinessClientRegistrationComponent},
   {path:'courier-registration', component: CourierRegistrationComponent, canActivate:[AdminGuard]},
   {path:'logistician-registration', component:LogisticianRegistrationComponent, canActivate:[AdminGuard]},
-  {path:'users',component:UsersComponent}
+  {path:'users',component:UsersComponent, canActivate: [AdminGuard]}
 ]}
 ];
 

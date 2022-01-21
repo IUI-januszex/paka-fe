@@ -27,7 +27,6 @@ export class PostalCodeService {
   }
 
   postData(postalcode:IPostalCode): Observable<IPostalCode>{
-    console.log(postalcode);
     return this.http.post<IPostalCode>(this.localUrl,postalcode)
   }
 
@@ -36,7 +35,6 @@ export class PostalCodeService {
   }
  
   deleteData(postalcode:IPostalCode){
-    console.log("delete postalcode:" + postalcode.idRangePostalCode);
     return this.http.delete(this.localUrl + `/${postalcode.idRangePostalCode}`)
   }
 }

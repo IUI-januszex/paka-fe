@@ -31,7 +31,6 @@ export class SizeInfoComponent implements OnInit {
   }
 
   foo(){
-    console.log("clicked");
     
   }
   customOptions: OwlOptions = {

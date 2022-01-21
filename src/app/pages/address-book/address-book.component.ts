@@ -52,8 +52,7 @@ export class AddressBookComponent implements OnInit {
 
   onAddressBookGet(addres: IAddressBook){
     this.modal.close();
-    console.log("Data:");
-    console.log(addres);
+
   }
 
   ngOnInit(): void {

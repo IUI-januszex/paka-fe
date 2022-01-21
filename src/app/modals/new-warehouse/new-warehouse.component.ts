@@ -46,7 +46,6 @@ export class NewWarehouseComponent implements OnInit {
     if (!this.warehouseForm.valid) {
       return;
     }else{
-    console.log(instance);
     this.localhostService.postData(instance).subscribe((e)=>{
       this.succes.emit(e);
     },error =>{

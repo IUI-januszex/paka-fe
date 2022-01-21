@@ -1,3 +1,4 @@
+import { ToastService } from './../../services/toast.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +21,7 @@ export class PostalCodeComponent implements OnInit {
 
   submitted: boolean =false;
 
-  constructor(private postalCodeService:PostalCodeService,private modalService: NgbModal,
+  constructor(private postalCodeService:PostalCodeService,private modalService: NgbModal, private toastService: ToastService,
     private modal: NgbActiveModal, private formBuilder: FormBuilder) { 
       this.data = new Array<IPostalCode>()      
       this.postalCodeForm = this.formBuilder.group({
@@ -38,7 +39,7 @@ export class PostalCodeComponent implements OnInit {
       this.postalCodeService.getDataByLocalWarehouseId(this.warehouseId).subscribe((data: IPostalCode[]) => {
         this.data = data
       },error =>{
-        alert(error.error.message)
+      this.toastService.showError(error)
       })
     }
 

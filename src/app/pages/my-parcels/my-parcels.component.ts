@@ -46,9 +46,7 @@ export class MyParcelsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  observeParcel(parcelId: number){
-    console.log(parcelId);
-    
+  observeParcel(parcelId: number){   
     this.parcelService.observeParcel(parcelId).subscribe(()=>{
       this.getUserParcels();
     },error=>{
@@ -65,9 +63,7 @@ export class MyParcelsComponent implements OnInit {
   }
 
   getUserParcels(){
-    this.userService.getUserParcels().subscribe((data: IUserParcel)=>{
-      console.log(data);
-      
+    this.userService.getUserParcels().subscribe((data: IUserParcel)=>{      
       this.observedParcels = data.observedParcels;
       this.sendedParcels = data.sentParcels
     })
