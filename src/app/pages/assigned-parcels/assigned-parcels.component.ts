@@ -49,6 +49,7 @@ export class AssignedParcelsComponent implements OnInit {
 
   setParcelPaid(parcel: IParcelDetail){
     this.parcelService.putPayParcel(parcel.id).subscribe(()=>{
+      this.toastService.showSuccess();
     },error=>{
       this.toastService.showError(error)
     })
@@ -56,7 +57,7 @@ export class AssignedParcelsComponent implements OnInit {
 
   setFeePaid(parcel: IParcelDetail){
     this.parcelService.putPayFee(parcel.id).subscribe(()=>{
-      
+      this.toastService.showSuccess();
     },error=>{
       this.toastService.showError(error)
     })
@@ -64,7 +65,7 @@ export class AssignedParcelsComponent implements OnInit {
 
   setParcelDelivered(parcel: IParcelDetail){
     this.parcelService.postDeliverToClient(parcel.id).subscribe(()=>{
-
+      this.toastService.showSuccess();
     },error=>{
       this.toastService.showError(error)
     })
@@ -72,7 +73,7 @@ export class AssignedParcelsComponent implements OnInit {
   
   deliveryAttempt(parcel: IParcelDetail){
     this.parcelService.postAttempts(parcel.id).subscribe(()=>{
-
+      this.toastService.showSuccess();
     },error=>{
       this.toastService.showError(error)
     })

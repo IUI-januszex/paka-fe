@@ -69,7 +69,7 @@ export class ParcelService {
     switch(operation.operationType.toString()){
     case "PICKUP":
       this.parcelPickUp(parcelId).subscribe(()=>{
-        this.toastService.show("Success");
+        this.toastService.showSuccess();
       },error=>{
         this.toastService.showError(error)
       });
@@ -77,7 +77,7 @@ export class ParcelService {
 
     case "PAY_FEE":
     this.putPayFee(parcelId).subscribe(()=>{
-      this.toastService.show("Success");
+      this.toastService.showSuccess();
     },error=>{
       this.toastService.showError(error)
     });
@@ -88,7 +88,7 @@ export class ParcelService {
 
     case "DELETE":
       this.deleteObserveParcel(parcelId).subscribe(()=>{
-        this.toastService.show("Success");
+        this.toastService.showSuccess();
       },error=>{
         this.toastService.showError(error)
       });
@@ -96,7 +96,7 @@ export class ParcelService {
 
     case "DELIVERY_ATTEMPT":
       this.postAttempts(parcelId).subscribe(()=>{
-        this.toastService.show("Success");
+        this.toastService.showSuccess();
       },error=>{
         this.toastService.showError(error)
       });
@@ -104,7 +104,7 @@ export class ParcelService {
 
     case "DELIVER_TO_CLIENT":
       this.postDeliverToClient(parcelId).subscribe(()=>{
-        this.toastService.show("Success");
+        this.toastService.showSuccess();
       },error=>{
         this.toastService.showError(error)
       });
@@ -112,7 +112,7 @@ export class ParcelService {
 
     case "DELIVER_TO_WAREHOUSE":
       this.deliveryToWarehouse(parcelId,operation).subscribe(()=>{
-        this.toastService.show("Success");
+        this.toastService.showSuccess();
       },error=>{
         this.toastService.showError(error)
       });
@@ -125,7 +125,7 @@ export class ParcelService {
 
     case "PAY_PARCEL":
       this.putPayParcel(parcelId).subscribe(()=>{
-        this.toastService.show("Success");
+        this.toastService.showSuccess();
       },error=>{
         this.toastService.showError(error)
       });

@@ -85,14 +85,17 @@ export class LogiAssignedParcelsComponent implements OnInit {
         this.parcelService.getGlobalWarehouseParcels(this.logisticianData.warehouseId).subscribe((data: IWarehouseParcel)=>{          
           this.courierParcels = data.parcelsAssigned;
           this.warehouseParcels = data.parcelAtWarehouse;
+        }, error=>{
+          this.toastService.showError(error)
         })
       }if (this.logisticianData.warehouseType == "LOCAL") {
         this.parcelService.getLocalWarehouseParcels(this.logisticianData.warehouseId).subscribe((data: IWarehouseParcel)=>{
           this.courierParcels = data.parcelsAssigned;
           this.warehouseParcels = data.parcelAtWarehouse;
+        }, error=>{
+          this.toastService.showError(error)
         })
       } else {
-        this.toastService.showError(error)
       }
     }
   }
@@ -129,7 +132,6 @@ export class LogiAssignedParcelsComponent implements OnInit {
         this.toastService.showError(error);
       });
     }else{
-      this.toastService.show("Aaaaaaaaa")
     }
  
   }
