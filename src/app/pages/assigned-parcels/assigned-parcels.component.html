@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="navbar-wrapper">
       <button type="button" class="bttn" (click)="changeSite(true)" 
-      [ngStyle]="{'background-image':  isAssigned === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Warehouse</button>
+      [ngStyle]="{'background-image':  isAssigned === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Assigned</button>
       <button type="button" class="bttn" (click)="changeSite(false)" 
-      [ngStyle]="{'background-image':  isAssigned === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Assigned</button>
+      [ngStyle]="{'background-image':  isAssigned === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Picked up</button>
 </div>
 </nav> 
 
@@ -19,8 +19,8 @@
         <th>Type</th>
         <th>Source address</th>
         <th>Destination address</th>
-        <th>Fee paid</th>
-        <th>Parcel paid</th>
+        <th>Parcel fee</th>
+        <th>Parcel price</th>
         <th>Operation</th>
 
     </tr>
@@ -33,14 +33,16 @@
         <th>{{assignedParcel.sourceAddress.city}} {{assignedParcel.sourceAddress.street}} {{assignedParcel.sourceAddress.buildingNumber}}</th>
         <th>{{assignedParcel.destinationAddress.city}} {{assignedParcel.destinationAddress.street}} {{assignedParcel.destinationAddress.buildingNumber}}</th>
         <th>
-            {{assignedParcel.parcelFee}}
-            <i class="fas fa-check" *ngIf="assignedParcel.isFeePaid"></i>
-            <i class="fas fa-times" *ngIf="!assignedParcel.isFeePaid"></i>
+          <i class="fas fa-check" style="color: green;" *ngIf="assignedParcel.isFeePaid"></i>
+          <i class="fas fa-times" style="color: Tomato;" *ngIf="!assignedParcel.isFeePaid"></i>
+            {{assignedParcel.parcelFee}} 🧅
+
+            
         </th>
         <th>
-          {{assignedParcel.parcelPrice}}
-            <i class="fas fa-check" *ngIf="assignedParcel.isParcelPaid"></i>
-            <i class="fas fa-times" *ngIf="!assignedParcel.isParcelPaid"></i>
+          <i class="fas fa-check" style="color: green;" *ngIf="assignedParcel.isParcelPaid"></i>
+          <i class="fas fa-times" style="color: Tomato;" *ngIf="!assignedParcel.isParcelPaid"></i>
+          {{assignedParcel.parcelPrice}} 🧅  
         </th>
         <th>
               <div ngbDropdown class="d-inline-block">
@@ -65,8 +67,8 @@
         <th>Type</th>
         <th>Source address</th>
         <th>Destination address</th>
-        <th>Fee paid</th>
-        <th>Parcel paid</th>
+        <th>Parcel fee</th>
+        <th>Parcel price</th>
         <th>Operation</th>
 
     </tr>
@@ -79,28 +81,23 @@
         <th>{{pickedUpParcel.sourceAddress.city}} {{pickedUpParcel.sourceAddress.street}} {{pickedUpParcel.sourceAddress.buildingNumber}}</th>
         <th>{{pickedUpParcel.destinationAddress.city}} {{pickedUpParcel.destinationAddress.street}} {{pickedUpParcel.destinationAddress.buildingNumber}}</th>
         <th>
-          {{pickedUpParcel.parcelFee}}
 
-            <i class="fas fa-check" *ngIf="pickedUpParcel.isFeePaid"></i>
-            <i class="fas fa-times" *ngIf="!pickedUpParcel.isFeePaid"></i>
+          <i class="fas fa-check" style="color: green;" *ngIf="pickedUpParcel.isFeePaid"></i>
+          <i class="fas fa-times" style="color: Tomato;" *ngIf="!pickedUpParcel.isFeePaid"></i>
+          {{pickedUpParcel.parcelFee}} 🧅
         </th>
         <th>
-          {{pickedUpParcel.parcelPrice}}
-
-            <i class="fas fa-check" *ngIf="pickedUpParcel.isParcelPaid"></i>
-            <i class="fas fa-times" *ngIf="!pickedUpParcel.isParcelPaid"></i>
+          <i class="fas fa-check" style="color: green;" *ngIf="pickedUpParcel.isParcelPaid"></i>
+          <i class="fas fa-times" style="color: Tomato;" *ngIf="!pickedUpParcel.isParcelPaid"></i>
+          {{pickedUpParcel.parcelPrice}} 🧅
         </th>
         <th>
-              <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-                  <button ngbDropdownItem [routerLink]="['/tracking-info', pickedUpParcel.id]">Show details</button>
-                  <button ngbDropdownItem (click)="setParcelPaid(pickedUpParcel)">Set parcel paid</button>
-                  <button ngbDropdownItem (click)="setFeePaid(pickedUpParcel)">Set parcel paid</button>
-                  <button ngbDropdownItem (click)="setParcelDelivered(pickedUpParcel)">Parcel delivered</button>
-                  <button ngbDropdownItem (click)="deliveryAttempt(pickedUpParcel)">Add delivery attempt</button>
-                </div>
-              </div>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+              <button ngbDropdownItem *ngFor="let operation of pickedUpParcel.operations" (click)="doOperation(operation,pickedUpParcel)">{{nameOperation(operation.operationType)}}</button>
+            </div>
+          </div>
         </th>
       </tr> 
     </table>
