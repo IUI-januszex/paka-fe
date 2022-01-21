@@ -49,7 +49,6 @@ export class ClientRegistrationComponent implements OnInit {
           this.router.navigate(['/']);
         }
       }, (error) => {
-        console.log(this.errorMessageModal);
         this.errorMessage = (error?.error?.message) ? error.error.message : 'Unknown error, please contact the administator';
         this.modalService.open(this.errorMessageModal);
       });

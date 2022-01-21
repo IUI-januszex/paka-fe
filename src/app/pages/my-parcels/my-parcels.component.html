@@ -1,15 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="navbar-wrapper">
         <button type="button" class="bttn" (click)="changeSite(true)"
-            [ngStyle]="{'background-image':  isTraced === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Tracked</button>
+            [ngStyle]="{'background-image':  isSended ? 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Sended</button>
         <button type="button" class="bttn" (click)="changeSite(false)"
-            [ngStyle]="{'background-image':  isTraced === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Sended</button>
+            [ngStyle]="{'background-image':  isSended ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Tracked</button>
+
     </div>
 </nav>
 
 <div class="table-containter d-flex justify-content-center">
     <div class="content ">
-        <div *ngIf="isTraced">
+        <div *ngIf="!isSended">
             <div class="tracked-parcels">
                 <div>
                     <form [formGroup]="parcelForm " class="form-inline d-flex justify-content-center"
@@ -22,7 +23,6 @@
                     </form>
                 </div>
                 <div class="d-flex justify-content-center separated">
-
                     <div class="parcel " *ngFor="let parcel of observedParcels | paginate: {
                     itemsPerPage: 2,
                     currentPage: pageTracked,
@@ -35,28 +35,29 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center separated">
                     <pagination-controls class="my-pagination" (pageChange)="pageTracked = $event" id="tracked">
                     </pagination-controls>
                 </div>
             </div>
         </div>
-
-        <div *ngIf="!isTraced">
-            <div class="tracked-parcels  ">
-                <div class="parcel" *ngFor="let parcel of sendedParcels | paginate: {
+        <div *ngIf="isSended">
+            <div class="d-flex justify-content-center separated">
+                <div class="tracked-parcels">
+                    <div class="parcel" *ngFor="let parcel of sendedParcels | paginate: {
                 itemsPerPage: 2,
                 currentPage: pageSend,
                 id: 'send'}">
-                    <i class="fas fa-box fa-lg"></i>
-                    ID: {{parcel.id}}  
-                    {{ getStatus(parcel.currentState)}} <span class="date">({{parcel.estimatedDeliveryTime}})</span>
-                    <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Detail </button>
-                    <button class="btn btn-primary">Cancel</button>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <pagination-controls class="my-pagination" (pageChange)="pageSend = $event" id="send">
-                    </pagination-controls>
+                        <i class="fas fa-box fa-lg"></i>
+                        ID: {{parcel.id}}
+                        {{ getStatus(parcel.currentState)}} <span class="date">({{parcel.estimatedDeliveryTime}})</span>
+                        <button class="btn btn-primary" [routerLink]="['/tracking-info', parcel.id]">Details </button>
+                        <button class="btn btn-primary">Cancel</button>
+                    </div>
+                    <div class="d-flex justify-content-center separated">
+                        <pagination-controls class="my-pagination" (pageChange)="pageSend = $event" id="send">
+                        </pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
