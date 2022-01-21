@@ -1,3 +1,4 @@
+import { LogisticianGuard } from './Auth/logistician.guard';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { CourierParcelsComponent } from './pages/courier-parcels/courier-parcels.component';
 import { LogiAssignedParcelsComponent } from './pages/logi-assigned-parcels/logi-assigned-parcels.component';
@@ -5,7 +6,6 @@ import { AssignedParcelsComponent } from './pages/assigned-parcels/assigned-parc
 import { SendParcelComponent } from './pages/send-parcel/send-parcel.component';
 import { UsersComponent } from './pages/users/users.component';
 import { MyParcelsComponent } from './pages/my-parcels/my-parcels.component';
-import { NewParcelTypeComponent } from './modals/new-parcel-type/new-parcel-type.component';
 import { ParcelTypeComponent } from './pages/parcel-type/parcel-type.component';
 import { AdminGuard } from './Auth/AdminGuard';
 import { LogisticianRegistrationComponent } from './registration/logistician-registration/logistician-registration.component';
@@ -21,14 +21,15 @@ import { WarehousePageComponent } from './pages/warehouse-page/warehouse-page.co
 import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { GlobalWarehouseComponent } from './warehouse/global-warehouse/global-warehouse.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
+import { CourierGuard } from './Auth/courier.guard';
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
-  {path: 'parcel-type', component: ParcelTypeComponent},
+  {path: 'parcel-type', component: ParcelTypeComponent, canActivate: [AdminGuard]},
   {path: 'address-book', component: AddressBookComponent},
   {path: 'my-parcels', component:MyParcelsComponent},
-  {path: 'assigned-parcels', component: AssignedParcelsComponent},
-  {path: 'logistician-assigned-parcels',component: LogiAssignedParcelsComponent},
+  {path: 'assigned-parcels', component: AssignedParcelsComponent, canActivate: [CourierGuard]},
+  {path: 'logistician-assigned-parcels',component: LogiAssignedParcelsComponent, canActivate: [CourierGuard]},
   {path: 'send-parcel', component:SendParcelComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'warehouse', component: WarehousePageComponent, children:[
@@ -36,12 +37,12 @@ const routes: Routes = [
     {path: 'global-warehouse', component: GlobalWarehouseComponent}
   ], canActivate: [AdminGuard]},
   {path: 'tracking-info/:parcelId',component: TrackingInfoComponent},
-  {path: 'courier-parcels/:courierId', component: CourierParcelsComponent},
+  {path: 'courier-parcels/:courierId', component: CourierParcelsComponent, canActivate:[LogisticianGuard]},
   {path: 'registration', component: RegisterPageComponent, children:[
   {path:'client-registration', component: ClientRegistrationComponent},
   {path:'business-client-registration', component: BusinessClientRegistrationComponent},
-  {path:'courier-registration', component: CourierRegistrationComponent},
-  {path:'logistician-registration', component:LogisticianRegistrationComponent},
+  {path:'courier-registration', component: CourierRegistrationComponent, canActivate:[AdminGuard]},
+  {path:'logistician-registration', component:LogisticianRegistrationComponent, canActivate:[AdminGuard]},
   {path:'users',component:UsersComponent}
 ]}
 ];
