@@ -52,7 +52,7 @@ export class LocalWarehouseComponent implements OnInit {
       this.getLocalWarehouses();
       this.toastService.showSuccess();
     }, error => {
-      alert(error.error.message)
+      this.toastService.showError(error);
     }
     );
   }

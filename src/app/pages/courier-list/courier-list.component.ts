@@ -1,3 +1,4 @@
+import { ToastService } from './../../services/toast.service';
 import { UserService } from './../../services/user.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ILogisticianData } from 'src/app/interface/user/logisticianuser';
@@ -20,7 +21,7 @@ export class CourierListComponent implements OnInit {
 
   page: number = 1;
 
-  constructor(private userService: UserService,private router:Router) { }
+  constructor(private userService: UserService,private router:Router, private toastService: ToastService) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -31,7 +32,7 @@ export class CourierListComponent implements OnInit {
       this.logisticianData = data;  
       this.getCourierList();    
     },error =>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     });
   }
 
@@ -40,7 +41,7 @@ export class CourierListComponent implements OnInit {
         this.userService.getCourierList(this.logisticianData.warehouseType, this.logisticianData.warehouseId).subscribe((data: ILogisticianData[])=>{
           this.courierList = data
         },error=>{
-          alert(error.error.message);
+          this.toastService.showError(error)
         })
     }
 }

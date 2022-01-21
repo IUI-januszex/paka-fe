@@ -36,7 +36,7 @@ export class ParcelTypeComponent implements OnInit {
       data.sort((a,b) => a.id - b.id)
       this.data = data
     },error =>{
-      alert(error.error.message)
+      this.toastService.showError(error);
     });
   }
 

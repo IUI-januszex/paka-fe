@@ -53,7 +53,7 @@ export class LogiAssignedParcelsComponent implements OnInit {
       this.getData();
       this.getListOfCouriers();
     },error =>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     });
   }
 
@@ -68,11 +68,9 @@ export class LogiAssignedParcelsComponent implements OnInit {
   getListOfCouriers(){
     if(this.logisticianData)
     this.userService.getCourierList(this.logisticianData.warehouseType, this.logisticianData.warehouseId).subscribe((data: ILogisticianData[])=>{
-      this.courierList = data;
-      console.log(data);
-      
+      this.courierList = data;      
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     })
   }
 
@@ -84,20 +82,20 @@ export class LogiAssignedParcelsComponent implements OnInit {
   getData(){
     if(this.logisticianData){
       if(this.logisticianData.warehouseType == "GLOBAL"){
-        this.parcelService.getGlobalWarehouseParcels(this.logisticianData.warehouseId).subscribe((data: IWarehouseParcel)=>{
-          console.log(data);
-          
+        this.parcelService.getGlobalWarehouseParcels(this.logisticianData.warehouseId).subscribe((data: IWarehouseParcel)=>{          
           this.courierParcels = data.parcelsAssigned;
           this.warehouseParcels = data.parcelAtWarehouse;
+        }, error=>{
+          this.toastService.showError(error)
         })
       }if (this.logisticianData.warehouseType == "LOCAL") {
         this.parcelService.getLocalWarehouseParcels(this.logisticianData.warehouseId).subscribe((data: IWarehouseParcel)=>{
-          console.log(data);
           this.courierParcels = data.parcelsAssigned;
           this.warehouseParcels = data.parcelAtWarehouse;
+        }, error=>{
+          this.toastService.showError(error)
         })
       } else {
-        alert("Undefined");
       }
     }
   }
@@ -120,7 +118,6 @@ export class LogiAssignedParcelsComponent implements OnInit {
   }
 
   updateCourierId(e: any){    
-    console.log(e.target.value);
     this.courierId = e.target.value
   }
 
@@ -135,7 +132,6 @@ export class LogiAssignedParcelsComponent implements OnInit {
         this.toastService.showError(error);
       });
     }else{
-      this.toastService.show("Aaaaaaaaa")
     }
  
   }

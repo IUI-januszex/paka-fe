@@ -30,7 +30,6 @@ export class GlobalWarehouseService {
   }
 
   postData(localwarehouse:IGlobalWarehouseRequest): Observable<IGlobalWarehouse>{
-    console.log(localwarehouse);
     return this.http.post<IGlobalWarehouse>(this.localUrl,localwarehouse)
   }
 

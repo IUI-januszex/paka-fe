@@ -1,3 +1,4 @@
+import { ToastService } from './../../services/toast.service';
 import { OperationType } from './../../interface/parcel/operationtype';
 import { IParcelPayRequest } from './../../interface/parcel/parcelpayrequest';
 import { IParcelDetail } from './../../interface/parcel/parceldetail';
@@ -23,7 +24,7 @@ export class AssignedParcelsComponent implements OnInit {
   pagePickedUp: number = 1
 
   constructor(private modalService: NgbModal,
-    private modal: NgbActiveModal, private parcelService: ParcelService) {
+    private modal: NgbActiveModal, private parcelService: ParcelService, private toastService: ToastService) {
       this.isAssigned = true;
      }
 
@@ -40,42 +41,41 @@ export class AssignedParcelsComponent implements OnInit {
   getData(){
     this.parcelService.getParcelsForCourier().subscribe((data: ICourierParcels)=>{
       this.pickedUpParcels = data.pickedUpParcels;
-      this.assignedParcels = data.assignedParcels;
-      console.log(data);
-      
+      this.assignedParcels = data.assignedParcels;      
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     })
   }
 
   setParcelPaid(parcel: IParcelDetail){
     this.parcelService.putPayParcel(parcel.id).subscribe(()=>{
+      this.toastService.showSuccess();
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     })
   }
 
   setFeePaid(parcel: IParcelDetail){
     this.parcelService.putPayFee(parcel.id).subscribe(()=>{
-      alert("Oplacono fee");
+      this.toastService.showSuccess();
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     })
   }
 
   setParcelDelivered(parcel: IParcelDetail){
     this.parcelService.postDeliverToClient(parcel.id).subscribe(()=>{
-
+      this.toastService.showSuccess();
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     })
   }
   
   deliveryAttempt(parcel: IParcelDetail){
     this.parcelService.postAttempts(parcel.id).subscribe(()=>{
-
+      this.toastService.showSuccess();
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     })
   }
 

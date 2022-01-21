@@ -43,7 +43,6 @@ export class NewGlobalWarehouseComponent implements OnInit {
     if (!this.warehouseForm.valid) {
       return;
     }else{
-    console.log(instance);
     this.globalhostService.postData(instance).subscribe((e)=>{
       this.succes.emit(e);
     },error =>{

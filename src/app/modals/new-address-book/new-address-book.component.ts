@@ -45,11 +45,9 @@ export class NewAddressBookComponent implements OnInit {
 
   onSubmit(addresBook: IAddressBookRequest) {
     this.submitted = true;
-    console.log(addresBook);
     if (!this.addressBookForm.valid) {
       return;
     } else {
-      console.log(addresBook);
       this.addressBookService.postData(addresBook).subscribe((e) => {
         this.toastService.showSuccess();
         this.succes.emit(e);

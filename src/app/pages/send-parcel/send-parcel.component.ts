@@ -137,7 +137,6 @@ export class SendParcelComponent implements OnInit {
 
   onAddressBookGet(addres: IAddressBook) {
     this.modal.close();
-    console.log(addres);
   }
 
   onAddressBookGetReciver(addres: IAddressBook) {

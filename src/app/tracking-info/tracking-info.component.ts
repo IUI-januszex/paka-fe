@@ -128,7 +128,6 @@ export class TrackingInfoComponent implements OnInit {
   getState(parcelId:string){
     this.parcelService.getStateById(parcelId).subscribe(data =>{
       this.states = data      
-      console.log(this.states);
       this.lastState = this.states[this.states.length -1]
     }, error=>{
       if(this.counter === 0){

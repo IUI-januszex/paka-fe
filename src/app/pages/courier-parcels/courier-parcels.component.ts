@@ -1,3 +1,4 @@
+import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ICourierParcels } from 'src/app/interface/parcel/courierparcels';
@@ -21,7 +22,7 @@ export class CourierParcelsComponent implements OnInit {
   pageAssigned: number = 1
   pagePickedUp: number = 1
 
-  constructor(private route: ActivatedRoute, private parcelService: ParcelService) { 
+  constructor(private route: ActivatedRoute, private parcelService: ParcelService, private toastService: ToastService) { 
     this.courierId = this.route.snapshot.params.courierId;
     this.isAssigned = true;
   }
@@ -36,12 +37,10 @@ export class CourierParcelsComponent implements OnInit {
 
   getData(){
     this.parcelService.getParcelsForCourierById(this.courierId).subscribe((data: ICourierParcels)=>{
-     console.log(data);
       this.pickedUpParcels = data.pickedUpParcels;
       this.assignedParcels = data.assignedParcels;
-      console.log(data);
     },error=>{
-      alert(error.error.message);
+      this.toastService.showError(error)
     })
   }
 
