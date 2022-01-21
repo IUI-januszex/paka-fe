@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="navbar-wrapper">
       <button type="button" class="bttn" (click)="changeSite(true)" 
       [ngStyle]="{'background-image':isAtWarehouse === true ? ' linear-gradient(rgba(0, 0, 0, 0.1) 0 0)' : ''}">Warehouse</button>
@@ -6,8 +6,8 @@
       [ngStyle]="{'background-image':isAtWarehouse === true ? '' : 'linear-gradient(rgba(0, 0, 0, 0.1) 0 0)'}">Assigned</button>
   </div>
 </nav>
-<div class="d-flex justify-content-center">
-  <p class="h3">Selected courier: {{courier.name}} {{courier.surname}} </p>
+<div class="courier d-flex justify-content-center">
+  <p class="h3">Selected courier: <span class="details">{{courier.name}} {{courier.surname}}</span> </p>
   <button class="btn btn-primary btn-lg" (click)="open(setCourier)">Select</button>
 </div>
 <div class="container">
@@ -26,21 +26,19 @@
             currentPage: warehousePage,
             id: 'warehouseParcel'}">
               <th>{{parcel.id}}</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th>{{parcel.type.name}}</th>
+              <th>{{parcel.sourceAddress.city}} {{parcel.sourceAddress.street}} {{parcel.sourceAddress.buildingNumber}}</th>
+              <th>{{parcel.destinationAddress.city}} {{parcel.destinationAddress.street}} {{parcel.destinationAddress.buildingNumber}}</th>
+              <th>{{parcel.expectedCourierArrivalDate}}</th>
               <th>
-                    <div ngbDropdown class="d-inline-block">
+                <div ngbDropdown class="d-inline-block">
+                  <div ngbDropdown class="d-inline-block">
                       <button class="btn btn-primary" id="dropdownBasic" ngbDropdownToggle>Option</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-                        <button ngbDropdownItem >Edit</button>
-                        <button ngbDropdownItem ></button>
-                        <button ngbDropdownItem >Postal Code</button>
-                        <div class="dropdown-divider"></div>
-                        <button ngbDropdownItem >Delete</button>
+                        <button ngbDropdownItem *ngFor="let operation of parcel.operations" (click)="doOperation(operation, parcel.id); setParcel(parcel)" >{{nameOperation(operation.operationType)}}</button>
                       </div>
                     </div>
+              </div>
               </th>
             </tr>
           </table>
