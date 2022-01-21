@@ -28,12 +28,12 @@ export class MyParcelsComponent implements OnInit {
   {id:"2",sendDate: "2021-11-10",state: "AT_SENDER"}]
 
 
-  isTraced:boolean = true;
+  isSended:boolean = true;
 
   parcelForm: FormGroup
 
   changeSite(bool: boolean){
-    this.isTraced = bool;
+    this.isSended = bool;
   }
 
   constructor(private toastService:ToastService,private parcelStateService:ParcelTypeService, private userService: UserService,private formBuilder: FormBuilder,private parcelService:ParcelService) {

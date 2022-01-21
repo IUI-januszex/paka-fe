@@ -143,7 +143,7 @@
 
 
 <ng-template #getSender let-modal>
-    <div class="modal-header">
+    <div class="m'odal-header">
       <h4 class="modal-title text" id="add-address-book">Get data for sender</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
         <span aria-hidden="true">&times;</span>
@@ -165,3 +165,18 @@
      <get-address-book (succes)="onAddressBookGetReciver($event)"></get-address-book>
     </div>
   </ng-template>
+
+  <ng-template #errorMessageModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title text" id="modal-basic-title">An error has occured</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss();">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div style="text-align: center;">
+            <img src="assets/img/serror.png" alt="Sad box.jpg">
+        </div>
+        <p class="alert alert-danger separated">{{ errorMessage }}</p>
+    </div>
+</ng-template>
