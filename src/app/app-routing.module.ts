@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'address-book', component: AddressBookComponent, canActivate: [ClientGuard]},
   {path: 'my-parcels', component:MyParcelsComponent, canActivate: [ClientGuard]},
   {path: 'assigned-parcels', component: AssignedParcelsComponent, canActivate: [CourierGuard]},
-  {path: 'logistician-assigned-parcels',component: LogiAssignedParcelsComponent, canActivate: [CourierGuard]},
+  {path: 'logistician-assigned-parcels',component: LogiAssignedParcelsComponent, canActivate: [LogisticianGuard]},
   {path: 'send-parcel', component:SendParcelComponent, canActivate: [ClientGuard]},
   {path: 'logout', component: LogoutComponent},
   {path: 'warehouse', component: WarehousePageComponent, children:[

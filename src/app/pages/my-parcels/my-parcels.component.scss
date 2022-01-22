@@ -1,6 +1,5 @@
 .table-containter {
-  width: 80%;
-  position: relative;
+  width: 60%;
   margin: auto;
 }
 
@@ -14,6 +13,8 @@
 
 table {
   width: 100%;
+  font-size: 1.5em;
+
 }
 tr:nth-child(odd) {
   background: rgb(236, 216, 216);
@@ -32,16 +33,14 @@ tr:nth-child(odd) {
 }
 
 .parcel {
-  font-size: 2em;
   margin-top: 10px;
-  width: fit-content;
 }
 
 .btn {
   margin-left: 15px;
 }
 
-.parcel:nth-child(even) {
+.table:nth-child(even) {
   background: rgb(236, 216, 216);
 }
 .navbar-brand {
