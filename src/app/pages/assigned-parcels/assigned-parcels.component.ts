@@ -84,8 +84,7 @@ export class AssignedParcelsComponent implements OnInit {
    }
 
   doOperation(operationType: IOperation, parcel: IParcelDetail){       
-    this.parcelService.doOperation(operationType,parcel.id)
-    
+    this.parcelService.doOperation(operationType,parcel.id, ()=> this.getData())
   }
 
   checkOperation(parcel:IParcelDetail, operation: OperationType){

@@ -16,7 +16,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { WarehousePageComponent } from './pages/warehouse-page/warehouse-page.component';
 import { NewWarehouseComponent } from './modals/new-warehouse/new-warehouse.component';
 import { NewGlobalWarehouseComponent } from './modals/new-global-warehouse/new-global-warehouse.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { TrackingInfoComponent } from './tracking-info/tracking-info.component';
 import { LocalWarehouseComponent } from './warehouse/local-warehouse/local-warehouse.component';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -91,6 +91,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientXsrfModule,
     FontAwesomeModule,
     NgbModule,
     HttpClientModule,

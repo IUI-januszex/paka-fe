@@ -65,11 +65,12 @@ export class ParcelService {
     }
   }
 
-  doOperation(operation: IOperation,parcelId: number){        
+  doOperation(operation: IOperation,parcelId: number,callback: any){        
     switch(operation.operationType.toString()){
     case "PICKUP":
       this.parcelPickUp(parcelId).subscribe(()=>{
         this.toastService.showSuccess();
+        callback();
       },error=>{
         this.toastService.showError(error)
       });
@@ -78,6 +79,7 @@ export class ParcelService {
     case "PAY_FEE":
     this.putPayFee(parcelId).subscribe(()=>{
       this.toastService.showSuccess();
+      callback();
     },error=>{
       this.toastService.showError(error)
     });
@@ -89,6 +91,8 @@ export class ParcelService {
     case "DELETE":
       this.deleteObserveParcel(parcelId).subscribe(()=>{
         this.toastService.showSuccess();
+        callback();
+
       },error=>{
         this.toastService.showError(error)
       });
@@ -97,6 +101,8 @@ export class ParcelService {
     case "DELIVERY_ATTEMPT":
       this.postAttempts(parcelId).subscribe(()=>{
         this.toastService.showSuccess();
+        callback();
+
       },error=>{
         this.toastService.showError(error)
       });
@@ -105,6 +111,8 @@ export class ParcelService {
     case "DELIVER_TO_CLIENT":
       this.postDeliverToClient(parcelId).subscribe(()=>{
         this.toastService.showSuccess();
+        callback();
+
       },error=>{
         this.toastService.showError(error)
       });
@@ -113,6 +121,8 @@ export class ParcelService {
     case "DELIVER_TO_WAREHOUSE":
       this.deliveryToWarehouse(parcelId,operation).subscribe(()=>{
         this.toastService.showSuccess();
+        callback();
+
       },error=>{
         this.toastService.showError(error)
       });
@@ -126,6 +136,8 @@ export class ParcelService {
     case "PAY_PARCEL":
       this.putPayParcel(parcelId).subscribe(()=>{
         this.toastService.showSuccess();
+        callback();
+
       },error=>{
         this.toastService.showError(error)
       });
@@ -135,7 +147,7 @@ export class ParcelService {
   }
 
   deliveryToWarehouse(parcelId:number, operation: IOperation): Observable<void>{
-    return this.http.post<void>(this.localUrl + `${parcelId}/deliver-to-warehouse`,{warehouseId: operation.warehouseId, warehouseType: operation.warehouseType});
+    return this.http.post<void>(this.localUrl + `/${parcelId}/deliver-to-warehouse`,{warehouseId: operation.warehouseId, warehouseType: operation.warehouseType});
   }
 
   assigneToCourier(parcelId:number,courierId: string): Observable<void>{

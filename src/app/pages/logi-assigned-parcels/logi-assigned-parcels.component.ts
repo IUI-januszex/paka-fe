@@ -84,14 +84,14 @@ export class LogiAssignedParcelsComponent implements OnInit {
       if(this.logisticianData.warehouseType == "GLOBAL"){
         this.parcelService.getGlobalWarehouseParcels(this.logisticianData.warehouseId).subscribe((data: IWarehouseParcel)=>{          
           this.courierParcels = data.parcelsAssigned;
-          this.warehouseParcels = data.parcelAtWarehouse;
+          this.warehouseParcels = data.parcelsAtWarehouse;
         }, error=>{
           this.toastService.showError(error)
         })
       }if (this.logisticianData.warehouseType == "LOCAL") {
         this.parcelService.getLocalWarehouseParcels(this.logisticianData.warehouseId).subscribe((data: IWarehouseParcel)=>{
           this.courierParcels = data.parcelsAssigned;
-          this.warehouseParcels = data.parcelAtWarehouse;
+          this.warehouseParcels = data.parcelsAtWarehouse;
         }, error=>{
           this.toastService.showError(error)
         })
@@ -104,11 +104,13 @@ export class LogiAssignedParcelsComponent implements OnInit {
    return this.parcelService.nameOperation(operationType);  
   }
 
+
+
   doOperation(operation: IOperation, parcelId:number){   
     if(operation.operationType.toString() == "ASSIGN_TO_COURIER" ){
       this.assignCourier( parcelId);
     }else{
-      this.parcelService.doOperation(operation,parcelId);
+      this.parcelService.doOperation(operation,parcelId,()=> this.getData());
     }
   }
 

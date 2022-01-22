@@ -11,7 +11,7 @@
                 Parcel: {{data.id}}
             </div>
                 <p>
-                  Status: {{getParcelState(lastState)}}
+                  Status: {{getParcelState(data.currentState)}}
                 </p>
                 <p>
                   Expected courier arrival: {{data.estimatedDeliveryTime}}
@@ -22,7 +22,19 @@
                 <p>
                   Reciver info: {{data.receiverInfo}}
                 </p>
-                    <button type="button" class="btn btn-primary" (click)="open(change)" *ngIf="showChangeDate">Change date</button>
+                <p>
+                  Fee:
+                  <i class="fas fa-check" style="color: green;" *ngIf="data.isFeePaid"></i>
+                  <i class="fas fa-times" style="color: Tomato;" *ngIf="!data.isFeePaid"></i>
+                  {{data.parcelFee}} 🧅
+                </p>
+                <p>
+                  Price:
+                  <i class="fas fa-check" style="color: green;" *ngIf="data.isParcelPaid"></i>
+                  <i class="fas fa-times" style="color: Tomato;" *ngIf="!data.isParcelPaid"></i>
+                  {{data.parcelPrice}} 🧅
+                </p>
+                    <button type="button" class="btn btn-primary" (click)="open(change)" *ngIf="showChangeDate && data?.isMoveable">Change date</button>
             
             </div>
         </div>

@@ -67,7 +67,7 @@ export class SendParcelComponent implements OnInit {
       parcelType: ['', Validators.required],
       price: ['', Validators.required],
       receiverDetails: ['', Validators.required],
-      receiverEmailAddres: ['', Validators.required],
+      receiverEmailAddress: ['', Validators.required],
       receiverPhoneNumber: ['', Validators.required],
       senderAddress: this.formBuilder.group({
         buildingNumber: ['', Validators.required],
@@ -148,7 +148,7 @@ export class SendParcelComponent implements OnInit {
     this.sendParcelForm.get(['deliveryAddress', 'flatNumber'])?.setValue(this.reciverAddress.flatNumber);
     this.sendParcelForm.get(['deliveryAddress', 'postalCode'])?.setValue(this.reciverAddress.postalCode);
     this.sendParcelForm.get(['deliveryAddress', 'street'])?.setValue(this.reciverAddress.street);
-    this.sendParcelForm.controls['receiverEmailAddres'].setValue(this.reciverAddress.email);
+    this.sendParcelForm.controls['receiverEmailAddress'].setValue(this.reciverAddress.email);
   }
   onAddressBookGetSender(addres: IAddressBook) {
     this.modal.close();
